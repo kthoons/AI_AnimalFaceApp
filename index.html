@@ -163,7 +163,7 @@
         </div>
         <h1 id="title">Animal Face Test</h1>
 
-        <div id="gender-toggle">
+        <div id="gender-toggle" style="margin-bottom: 80px;">
             <span>Male</span>
             <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
             <label for="gender-switch"></label>
@@ -173,7 +173,7 @@
         <div id="upload-area" onclick="document.getElementById('file-input').click();">
             Click or touch to upload
         </div>
-        <img id="previewImg" style="width: 200px;" alt=""/>
+        <img id="previewImg" style="width: 300px;" alt=""/>
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
         <div id="label-container"></div>
     </div>
@@ -187,7 +187,6 @@
     // the link to your model provided by Teachable Machine export panel
     const URL = "./my_model_male/";
     let model, webcam, labelContainer, maxPredictions;
-    start();
 
     async function start() {
         try {
@@ -225,7 +224,7 @@
         }
     }
     
-    function handleFileUpload(event) {
+    async function handleFileUpload(event) {
         const file = event.target.files[0];
         const fileReader = new FileReader();
 
@@ -234,7 +233,21 @@
             document.getElementById('upload-area').style.display = 'none';
             document.getElementById("previewImg").src = fileReader.result;
         }
-        predict();
+        
+        try {
+            // 로딩 페이지 표시
+            document.getElementById('loading-page').style.display = 'flex';
+
+            await init();
+            predict();
+
+            // 로딩 페이지 숨기기
+            document.getElementById('loading-page').style.display = 'none';
+            // otherFunction();
+        } catch (error) {
+            console.error(error);
+        }
+        
     }
 
     function handleGenderChange(event) {
