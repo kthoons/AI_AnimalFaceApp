@@ -151,7 +151,7 @@
     </style>
 </head>
 <body>
-    <div id="loading-page">
+    <div id="loading-page" hidden>
         <div class="loading-indicator">Loading...</div>
     </div>
     <div id="page-container">
@@ -233,7 +233,7 @@
             document.getElementById('upload-area').style.display = 'none';
             document.getElementById("previewImg").src = fileReader.result;
         }
-        
+
         try {
             // 로딩 페이지 표시
             document.getElementById('loading-page').style.display = 'flex';
