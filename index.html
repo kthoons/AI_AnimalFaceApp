@@ -149,7 +149,7 @@
             background-color: #e0e0e0;
         }
 
-        .gauge {
+        .label-container {
             height: 20px; 
             width: 100%;
             background-color: #f3f3f3;
@@ -192,9 +192,7 @@
         </div>
         <img id="previewImg" style="width: 300px;" alt=""/>
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-        <div class="gauge">
-            <div class="gauge_fill" id="gauge_fill"></div>
-        </div>
+        <div id="label-container"></div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -239,7 +237,8 @@
         // append elements to the DOM
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
-            labelContainer.appendChild(document.createElement("div"));
+            let newElement = document.createElement("div"); // 새로운 div 요소를 생성
+            newElement.className = "gauge_fill"; // 생성된 요소에 "myClass"라는 클래스 이름을 지정
         }
     }
     
