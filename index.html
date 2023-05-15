@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Face Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+        #loading-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000; /* 로딩 페이지가 다른 요소 위에 나타나도록 함 */
+        }
+
+        .loading-indicator {
+            /* 로딩 인디케이터 디자인 */
+        }
+        #title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4a4a4a;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+
+        #gender-toggle {
+            margin: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #4a4a4a;
+            padding: 10px;
+            border-radius: 50px;
+        }
+
+        #gender-toggle span {
+            font-size: 18px;
+            color: #fff;
+            margin: 0 15px;
+        }
+
+        #gender-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        #gender-toggle label {
+            display: block;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        #gender-toggle label::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            width: 26px;
+            height: 26px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        #gender-toggle input[type="checkbox"]:checked + label::before {
+            transform: translateX(30px);
+        }
+
+        #upload-area {
+            width: 300px;
+            height: 300px;
+            border: 2px dashed #4a4a4a;
+            margin: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        #side-menu {
+            position: fixed;
+            left: -25%;
+            top: 0;
+            width: 25%;
+            height: 100%;
+            background-color: #f1f1f1;
+            transition: left 0.5s;
+            padding: 20px;
+        }
+
+        #menu-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #63aff2;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: left 0.5s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #page-container {
+            position: relative;
+            left: 0;
+            width: 100%;
+            transition: left 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #side-menu p {
+            font-size: 18px;
+            color: #4a4a4a;
+            padding: 10px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #side-menu p:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-page">
+        <div class="loading-indicator">Loading...</div>
+    </div>
+    <div id="page-container">
+        <button id="menu-button">-------</button>
+        <div id="side-menu">
+            <!-- 메뉴 항목을 여기에 추가하세요. -->
+            <p>Copyright</p>
+            <p>Description</p>
+        </div>
+        <h1 id="title">Animal Face Test</h1>
+
+        <div id="gender-toggle">
+            <span>Male</span>
+            <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
+            <label for="gender-switch"></label>
+            <span>Female</span>
+        </div>
+
+        <div id="upload-area" onclick="document.getElementById('file-input').click();">
+            Click or touch to upload
+        </div>
+        <img id="previewImg" style="width: 500px; height: 500px;" alt=""/>
+        <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
+        <div id="label-container"></div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+<script>
+    // More API functions here:
+    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+    // the link to your model provided by Teachable Machine export panel
+    const URL = "./my_model_male/";
+    let model, webcam, labelContainer, maxPredictions;
+    start();
+
+    async function start() {
+        try {
+            // 로딩 페이지 표시
+            document.getElementById('loading-page').style.display = 'flex';
+
+            await init();
+
+            // 로딩 페이지 숨기기
+            document.getElementById('loading-page').style.display = 'none';
+
+            // otherFunction();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    // Load the image model and setup the webcam
+    async function init() {
+        console.log("It's in the Init");
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        // load the model and metadata
+        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+        // or files from your local hard drive
+        // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+        console.log(maxPredictions);
+        // append elements to the DOM
+        labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < maxPredictions; i++) { // and class labels
+            labelContainer.appendChild(document.createElement("div"));
+        }
+    }
+    
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        const fileReader = new FileReader();
+
+        fileReader.readAsDataURL(file);
+        fileReader.onload = function () {
+            document.getElementById('upload-area').style.display = 'none';
+            document.getElementById("previewImg").src = fileReader.result;
+        }
+        predict();
+    }
+
+    function handleGenderChange(event) {
+        const genderDisplay = document.getElementById('gender-display');
+        genderDisplay.textContent = event.target.checked ? "Female" : "Male";
+        console.log(genderDisplay.textContent);
+    }
+
+    // 상시대기 함수
+    document.getElementById('menu-button').addEventListener('click', function () {
+        const sideMenu = document.getElementById('side-menu');
+        const pageContainer = document.getElementById('page-container');
+        const isMenuVisible = sideMenu.style.left === '0px';
+        sideMenu.style.left = isMenuVisible ? '-25%' : '0';
+        pageContainer.style.left = isMenuVisible ? '0' : '25%';
+    });
+
+    // run the webcam image through the image model
+    async function predict() {
+        // predict can take in an image, video or canvas html element
+        console.log("predicting...");
+        var image = document.getElementById("previewImg");
+        const prediction = await model.predict(image, false); // 여기에 사진을 넣는다
+        for (let i = 0; i < maxPredictions; i++) {
+            const classPrediction =
+                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+            labelContainer.childNodes[i].innerHTML = classPrediction;
+        }
+        console.log("predict End");
+    }
+</script>
+</html>
+
