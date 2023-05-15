@@ -224,6 +224,7 @@
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             let newElement = document.createElement("div"); // 새로운 div 요소를 생성
             newElement.className = "gauge_fill"; // 생성된 요소에 "myClass"라는 클래스 이름을 지정
+            newElement.style.visibility = 'visible';
             labelContainer.appendChild(newElement);
         }
         labelContainer.style.visibility = 'visible';
