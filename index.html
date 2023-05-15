@@ -190,9 +190,9 @@
         <div id="upload-area" onclick="document.getElementById('file-input').click();">
             Click or touch to upload
         </div>
+        <div id="label-container"></div>
         <img id="previewImg" style="width: 300px;" alt=""/>
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-        <div id="label-container"></div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -217,9 +217,7 @@
         // or files from your local hard drive
         // Note: the pose library adds "tmImage" object to your window (window.tmImage)
         model = await tmImage.load(modelURL, metadataURL);
-        maxPredictions = model.getTotalClasses();
-        console.log(maxPredictions);
-        // append elements to the DOM
+        maxPredictions = model.getTotalClasses();                
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             let newElement = document.createElement("div"); // 새로운 div 요소를 생성
