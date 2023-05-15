@@ -148,6 +148,23 @@
         #side-menu p:hover {
             background-color: #e0e0e0;
         }
+
+        .gauge {
+            height: 20px; 
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .gauge_fill {
+            height: 100%;
+            width: 0%;
+            background-color: #4a4a4a;
+            border-radius: 25px;
+            transition: width 0.3s;
+        }
+
     </style>
 </head>
 <body>
@@ -175,7 +192,9 @@
         </div>
         <img id="previewImg" style="width: 300px;" alt=""/>
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-        <div id="label-container"></div>
+        <div class="gauge">
+            <div class="gauge_fill" id="gauge_fill"></div>
+        </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -225,16 +244,16 @@
     }
     
     async function handleFileUpload(event) {
-        const file = event.target.files[0];
-        const fileReader = new FileReader();
-
-        fileReader.readAsDataURL(file);
-        fileReader.onload = function () {
-            document.getElementById('upload-area').style.display = 'none';
-            document.getElementById("previewImg").src = fileReader.result;
-        }
-
         try {
+            const file = event.target.files[0];
+            const fileReader = new FileReader();
+
+            fileReader.readAsDataURL(file);
+            fileReader.onload = function () {
+                document.getElementById('upload-area').style.display = 'none';
+                document.getElementById("previewImg").src = fileReader.result;
+            }
+
             // 로딩 페이지 표시
             document.getElementById('loading-page').style.display = 'flex';
 
@@ -256,16 +275,6 @@
         console.log(genderDisplay.textContent);
     }
 
-    // 상시대기 함수
-    document.getElementById('menu-button').addEventListener('click', function () {
-        const sideMenu = document.getElementById('side-menu');
-        const pageContainer = document.getElementById('page-container');
-        const isMenuVisible = sideMenu.style.left === '0px';
-        sideMenu.style.left = isMenuVisible ? '-25%' : '0';
-        pageContainer.style.left = isMenuVisible ? '0' : '25%';
-    });
-
-    // run the webcam image through the image model
     async function predict() {
         // predict can take in an image, video or canvas html element
         console.log("predicting...");
@@ -275,9 +284,22 @@
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
+
+            // 가로 게이지를 채움
+            var gaugeFill = document.getElementById("gauge_fill");
+            gaugeFill.style.width = (prediction[i].probability * 100).toFixed(2) + "%";
         }
         console.log("predict End");
     }
+
+    // 상시대기 함수
+    document.getElementById('menu-button').addEventListener('click', function () {
+        const sideMenu = document.getElementById('side-menu');
+        const pageContainer = document.getElementById('page-container');
+        const isMenuVisible = sideMenu.style.left === '0px';
+        sideMenu.style.left = isMenuVisible ? '-25%' : '0';
+        pageContainer.style.left = isMenuVisible ? '0' : '25%';
+    });
 </script>
 </html>
 
