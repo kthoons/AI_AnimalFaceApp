@@ -205,21 +205,6 @@
     const URL = "./my_model_male/";
     let model, webcam, labelContainer, maxPredictions;
 
-    async function start() {
-        try {
-            // 로딩 페이지 표시
-            document.getElementById('loading-page').style.display = 'flex';
-
-            await init();
-
-            // 로딩 페이지 숨기기
-            document.getElementById('loading-page').style.display = 'none';
-
-            // otherFunction();
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     // Load the image model and setup the webcam
     async function init() {
@@ -241,7 +226,21 @@
             newElement.className = "gauge_fill"; // 생성된 요소에 "myClass"라는 클래스 이름을 지정
         }
     }
-    
+    async function predict() {
+        // predict can take in an image, video or canvas html element
+        console.log("predicting...");
+        var image = document.getElementById("previewImg");
+        const prediction = await model.predict(image, false); // 여기에 사진을 넣는다
+        var gaugeFill = document.getElementsByClassName("gauge_fill");
+        for (let i = 0; i < maxPredictions; i++) {
+            const classPrediction =
+                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+
+            // 가로 게이지를 채움
+            gaugeFill[i].style.width = (prediction[i].probability * 100).toFixed(2) + "%";
+        }
+        console.log("predict End");
+    }
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -267,29 +266,15 @@
         }
         
     }
-
     function handleGenderChange(event) {
         const genderDisplay = document.getElementById('gender-display');
         genderDisplay.textContent = event.target.checked ? "Female" : "Male";
         console.log(genderDisplay.textContent);
     }
 
-    async function predict() {
-        // predict can take in an image, video or canvas html element
-        console.log("predicting...");
-        var image = document.getElementById("previewImg");
-        const prediction = await model.predict(image, false); // 여기에 사진을 넣는다
-        for (let i = 0; i < maxPredictions; i++) {
-            const classPrediction =
-                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-            labelContainer.childNodes[i].innerHTML = classPrediction;
+    
 
-            // 가로 게이지를 채움
-            var gaugeFill = document.getElementById("gauge_fill");
-            gaugeFill.style.width = (prediction[i].probability * 100).toFixed(2) + "%";
-        }
-        console.log("predict End");
-    }
+
 
     // 상시대기 함수
     document.getElementById('menu-button').addEventListener('click', function () {
