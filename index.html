@@ -239,8 +239,7 @@
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
 
             // 가로 게이지를 채움
-            gaugeFill.style.width = (prediction[i].probability * 100).toFixed(2) + "%";
-            
+            gaugeFill[i].style.width = (prediction[i].probability * 100).toFixed(2) + "%";
         }
         console.log("predict End");
     }
