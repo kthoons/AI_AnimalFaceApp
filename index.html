@@ -222,7 +222,7 @@
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             let newElement = document.createElement("div"); // 새로운 div 요소를 생성
             newElement.className = "gauge_fill"; // 생성된 요소에 "myClass"라는 클래스 이름을 지정
-            newElement.style.visibility = 'visible';
+
             labelContainer.appendChild(newElement);
         }
         labelContainer.style.visibility = 'visible';
@@ -240,6 +240,7 @@
 
             // 가로 게이지를 채움
             gaugeFill[i].style.width = (prediction[i].probability * 100).toFixed(2) + "%";
+            gaugeFill[i].style.visibility = 'visible';
         }
         console.log("predict End");
     }
@@ -251,7 +252,7 @@
             fileReader.readAsDataURL(file);
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
-                document.getElementById("previewImg").src = fileReader.result;
+                document.getElementById("previewImg").src = fileReader.result; 
             }
 
             // 로딩 페이지 표시
@@ -261,8 +262,7 @@
             predict();
 
             // 로딩 페이지 숨기기
-            document.getElementById('loading-page').style.display = 'none';
-            // otherFunction();
+            document.getElementById('loading-page').style.display = 'none';            
         } catch (error) {
             console.error(error);
         }
