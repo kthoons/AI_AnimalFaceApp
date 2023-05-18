@@ -393,14 +393,14 @@
         const randomElements = [];
 
         while (randomElements.length < n ) {
-            const randomIndex = Math.floor(Math.random() * list.length);
-            const randomElement = list[randomIndex];
+            const randomIndex = Math.floor(Math.random() * list.length); // color 리스트 크기 만큼의 난수를 생성
+            const randomElement = list[randomIndex]; 
 
             if (!randomElements.includes(randomElement)) {
                 randomElements.push(randomElement);
             }
         }
-
+        console.log(randomElements);
         return randomElements;
     }
 
