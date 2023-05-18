@@ -264,10 +264,11 @@
             <label for="gender-switch"></label>
             <span>Female</span>
         </div>
-
         <div id="upload-area" onclick="document.getElementById('file-input').click();">
             Click or touch to upload
         </div>
+        <img id="previewImg" style="width: 300px;" alt="" />
+        <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
         <div id="gauge-container" style="display:none">
             <div id="bar-1" class="bar-main-container azure">
                 <div class="wrap">
@@ -294,8 +295,6 @@
                 </div>
             </div>
         </div>
-        <img id="previewImg" style="width: 300px;" alt="" />
-        <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -400,7 +399,7 @@
                 randomElements.push(randomElement);
             }
         }
-        console.log(randomElements);
+        
         return randomElements;
     }
 
