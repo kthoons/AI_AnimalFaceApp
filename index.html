@@ -352,7 +352,7 @@
     function fillGauge(data) {
         $('.bar-percentage[data-percentage]').each(function (i) {
             var progress = $(this);
-            var percentage = Math.ceil(data[i][1]);
+            var percentage = Math.ceil(data[i][1] * 100);
             console.log(percentage);
             $({ countNum: 0 }).animate({ countNum: percentage }, {
                 duration: 1000,
