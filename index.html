@@ -388,22 +388,20 @@
     }
 
     // 배열에서 n개의 랜덤 요소 선택하는 함수
-    function getRandomElements(arr, n) {
-        const shuffled = arr.slice(); // 배열을 복사하여 새로운 배열 생성
-        let currentIndex = shuffled.length;
+    function getRandomElements(list, n) {
 
-        // Fisher-Yates 알고리즘 적용
-        while (currentIndex !== 0) {
-            const randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
+        const randomElements = [];
 
-            // 현재 위치의 요소와 무작위 위치의 요소 교환
-            const temp = shuffled[currentIndex];
-            shuffled[currentIndex] = shuffled[randomIndex];
-            shuffled[randomIndex] = temp;
+        while (randomElements.length < n ) {
+            const randomIndex = Math.floor(Math.random() * list.length);
+            const randomElement = list[randomIndex];
+
+            if (!randomElements.includes(randomElement)) {
+                randomElements.push(randomElement);
+            }
         }
 
-        return shuffled.slice(0, n);
+        return randomElements;
     }
 
     async function handleFileUpload(event) {
