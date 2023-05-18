@@ -352,6 +352,7 @@
         $('.bar-percentage[data-percentage]').each(function (i) {
             var progress = $(this);
             var percentage = Math.ceil(data[i]);
+            console.log(percentage);
             $({ countNum: 0 }).animate({ countNum: percentage }, {
                 duration: 1000,
                 easing: 'linear',
