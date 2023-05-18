@@ -348,11 +348,11 @@
         console.log("predict End");
     }
     function fillGauge(data) {
-        $('.bar-percentage[data-percentage]').each(function (index) {
+        $('.bar-percentage[data-percentage]').each(function (i) {
             var progress = $(this);
-            var percentage = Math.ceil(data[index]);
+            var percentage = Math.ceil(data[i]);
             changeRandomColors();
-            $({ countNum: 0 }).animate({ countNum: data[index] }, {
+            $({ countNum: 0 }).animate({ countNum: percentage }, {
                 duration: 1000,
                 easing: 'linear',
                 step: function () {
