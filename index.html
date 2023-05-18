@@ -299,8 +299,9 @@
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script> 
+<script
+    src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
 <script>
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -388,9 +389,23 @@
 
     // 배열에서 n개의 랜덤 요소 선택하는 함수
     function getRandomElements(arr, n) {
-        const shuffled = arr.sort(() => 0.5 - Math.random());
+        const shuffled = arr.slice(); // 배열을 복사하여 새로운 배열 생성
+        let currentIndex = shuffled.length;
+
+        // Fisher-Yates 알고리즘 적용
+        while (currentIndex !== 0) {
+            const randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            // 현재 위치의 요소와 무작위 위치의 요소 교환
+            const temp = shuffled[currentIndex];
+            shuffled[currentIndex] = shuffled[randomIndex];
+            shuffled[randomIndex] = temp;
+        }
+
         return shuffled.slice(0, n);
     }
+
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -421,8 +436,8 @@
         console.log(genderDisplay.textContent);
     }
 
-    
-    
+
+
 
     // 상시대기 함수
     document.getElementById('menu-button').addEventListener('click', function () {
