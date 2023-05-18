@@ -346,13 +346,13 @@
         const sortedEntries = Object.entries(gaugeData).sort((a, b) => b[1] - a[1]);
         const top3GaugeData = sortedEntries.slice(0, 3);
         fillGauge(top3GaugeData);
+        changeRandomColors();
         console.log("predict End");
     }
     function fillGauge(data) {
         $('.bar-percentage[data-percentage]').each(function (i) {
             var progress = $(this);
             var percentage = Math.ceil(data[i]);
-            changeRandomColors();
             $({ countNum: 0 }).animate({ countNum: percentage }, {
                 duration: 1000,
                 easing: 'linear',
