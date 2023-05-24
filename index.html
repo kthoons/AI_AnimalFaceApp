@@ -44,11 +44,13 @@
         #gender-toggle {
             margin: 40px;
             display: flex;
+            margin: auto;
             align-items: center;
             justify-content: center;
-            background-color: #4a4a4a;
+            background-color: #6488e2;
             padding: 10px;
             border-radius: 50px;
+            width: fit-content;
         }
 
         #gender-toggle span {
@@ -91,7 +93,9 @@
             width: 300px;
             height: 300px;
             border: 2px dashed #4a4a4a;
-            margin: 40px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -105,29 +109,9 @@
             display: none;
         }
 
-        #side-menu {
-            position: fixed;
-            left: -25%;
-            top: 0;
-            width: 25%;
-            height: 100%;
-            background-color: #f1f1f1;
-            transition: left 0.5s;
-            padding: 20px;
-        }
+        
 
-        #menu-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #63aff2;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            transition: left 0.5s;
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+
 
         #page-container {
             position: relative;
@@ -137,8 +121,31 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 50px;
         }
 
+        #page-border {
+            border: 2px solid rgb(112, 75, 246);
+            border-radius: 60px;
+            /* 테두리의 색상과 굵기 */
+            padding: 20px;
+            /* 테두리와 내용물 사이의 간격 */
+            margin: 20px;
+            /* 테두리와 다른 요소와의 간격 */
+            width: 400px;
+        }
+
+        #side-menu {
+            position: fixed;
+            left: -30%;
+            top: 0;
+            width: 25%;
+            height: 100%;
+            background-color: #f1f1f1;
+            transition: left 0.5s;
+            padding: 20px;
+            z-index: 2;
+        }
         #side-menu p {
             font-size: 18px;
             color: #4a4a4a;
@@ -147,6 +154,7 @@
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s;
+            
         }
 
         #side-menu p:hover {
@@ -242,6 +250,69 @@
         .red {
             background: #E44C41;
         }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+
+
+        #menu-button {
+            top: 20px;
+            left: 30px;
+            width: 30px;
+            height: 50px;
+            position: absolute;
+            margin: 10px auto;
+            display: inline-block;
+            z-index: 1;
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+            -webkit-transition: .5s ease-in-out;
+            -moz-transition: .5s ease-in-out;
+            -o-transition: .5s ease-in-out;
+            transition: .5s ease-in-out;
+            cursor: pointer;
+        }
+
+        #menu-button span {
+            display: block;
+            position: absolute;
+            height: 6px;
+            width: 100%;
+            background: #d3531a;
+            border-radius: 9px;
+            pointer-events: none;
+            opacity: 1;
+            left: 0;
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+            -webkit-transition: .25s ease-in-out;
+            -moz-transition: .25s ease-in-out;
+            -o-transition: .25s ease-in-out;
+            transition: .25s ease-in-out;
+        }
+
+        #menu-button span:nth-child(1) {
+            top: 0px;
+        }
+
+        #menu-button span:nth-child(2),
+        #menu-button span:nth-child(3) {
+            top: 10px;
+        }
+
+        #menu-button span:nth-child(4) {
+            top: 20px;
+        }
     </style>
 </head>
 
@@ -249,52 +320,61 @@
     <div id="loading-page" style="display: none;">
         <div class="loading-indicator">Loading...</div>
     </div>
+    <div id="menu-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div id="side-menu" class="side-menu">
+        <!-- 메뉴 항목을 여기에 추가하세요. -->
+        <p>Copyright</p>
+        <p>Description</p>
+    </div>
     <div id="page-container">
-        <button id="menu-button">-------</button>
-        <div id="side-menu">
-            <!-- 메뉴 항목을 여기에 추가하세요. -->
-            <p>Copyright</p>
-            <p>Description</p>
-        </div>
-        <h1 id="title">Animal Face Test</h1>
+        <div id="page-border">
+            
+            <h1 id="title">Animal Face Test</h1>
 
-        <div id="gender-toggle" style="margin-bottom: 80px;">
-            <span>Male</span>
-            <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
-            <label for="gender-switch"></label>
-            <span>Female</span>
-        </div>
-        <div id="upload-area" onclick="document.getElementById('file-input').click();">
-            Click or touch to upload
-        </div>
-        <img id="previewImg" style="width: 300px;" alt="" />
-        <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-        <div id="gauge-container" style="display:none">
-            <div id="bar-1" class="bar-main-container azure">
-                <div class="wrap">
-                    <div class="bar-percentage" data-percentage="100"></div>
-                    <div class="bar-container">
-                        <div class="bar"></div>
+            <div id="gender-toggle" style="margin-bottom: 80px;">
+                <span>Male</span>
+                <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
+                <label for="gender-switch"></label>
+                <span>Female</span>
+            </div>
+            <div id="upload-area" onclick="document.getElementById('file-input').click();">
+                Click or touch to upload
+            </div>
+            <img id="previewImg" style="width: 300px;" alt="" />
+            <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
+            <div id="gauge-container" style="display:none">
+                <div id="bar-1" class="bar-main-container azure">
+                    <div class="wrap">
+                        <div class="bar-percentage" data-percentage="100"></div>
+                        <div class="bar-container">
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="bar-2" class="bar-main-container azure">
+                    <div class="wrap">
+                        <div class="bar-percentage" data-percentage="100"></div>
+                        <div class="bar-container">
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="bar-3" class="bar-main-container azure">
+                    <div class="wrap">
+                        <div class="bar-percentage" data-percentage="100"></div>
+                        <div class="bar-container">
+                            <div class="bar"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="bar-2" class="bar-main-container azure">
-                <div class="wrap">
-                    <div class="bar-percentage" data-percentage="100"></div>
-                    <div class="bar-container">
-                        <div class="bar"></div>
-                    </div>
-                </div>
-            </div>
-            <div id="bar-3" class="bar-main-container azure">
-                <div class="wrap">
-                    <div class="bar-percentage" data-percentage="100"></div>
-                    <div class="bar-container">
-                        <div class="bar"></div>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -306,7 +386,9 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
     // the link to your model provided by Teachable Machine export panel
-    const URL = "./my_model_male/";
+    const URL_Man = "./my_model_male/";
+    const URL_Woman = "./my_model_female/";
+    let URL = URL_Man;
     let model, webcam, guageContainer, maxPredictions;
     var predictions = [];
 
@@ -393,15 +475,15 @@
 
         const randomElements = [];
 
-        while (randomElements.length < n ) {
+        while (randomElements.length < n) {
             const randomIndex = Math.floor(Math.random() * list.length); // color 리스트 크기 만큼의 난수를 생성
-            const randomElement = list[randomIndex]; 
+            const randomElement = list[randomIndex];
 
             if (!randomElements.includes(randomElement)) {
                 randomElements.push(randomElement);
             }
         }
-        
+
         return randomElements;
     }
 
@@ -430,22 +512,31 @@
 
     }
     function handleGenderChange(event) {
-        const genderDisplay = document.getElementById('gender-display');
-        genderDisplay.textContent = event.target.checked ? "Female" : "Male";
-        console.log(genderDisplay.textContent);
+        // const genderDisplay = document.getElementById('gender-display');
+        const gender = event.target.checked ? "Female" : "Male";        
+        URL = (gender == 'Male') ? URL_Man : URL_Woman;        
+        console.log(URL);
     }
 
 
 
-
-    // 상시대기 함수
-    document.getElementById('menu-button').addEventListener('click', function () {
+    document.addEventListener('click', function (event) {
+        var target = event.target;
         const sideMenu = document.getElementById('side-menu');
         const pageContainer = document.getElementById('page-container');
-        const isMenuVisible = sideMenu.style.left === '0px';
-        sideMenu.style.left = isMenuVisible ? '-25%' : '0';
-        pageContainer.style.left = isMenuVisible ? '0' : '25%';
+        const menuButton = document.getElementById('menu-button');
+        const isMenuVisible = sideMenu.style.left === '0px';    
+  
+        if (target != menuButton && !sideMenu.contains(target) && isMenuVisible) {
+            sideMenu.style.left = '-30%';
+        }
+        else if (target == menuButton && !isMenuVisible) {        
+            sideMenu.style.left = '0';          
+        }
     });
+
+
+
 </script>
 
 </html>

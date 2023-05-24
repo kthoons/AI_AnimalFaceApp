@@ -1,0 +1,123 @@
+
+<style>
+    .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        transition: 0.3s;
+        pointer-events: none;
+    }
+
+    .modal.show {
+        opacity: 1;
+        pointer-events: initial;
+    }
+
+    .modal>.content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 500px;
+        width: 85vw;
+        height: 100px;
+        padding: 24px;
+        background: #fff;
+        border-radius: 5px;
+        transform: translate(-50%, -50%);
+    }
+
+    small {
+        color: #444;
+    }
+
+    /* ------------------- */
+
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Pretendard;
+        word-break: break-all;
+        outline: none;
+    }
+
+    body {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        height: 100vh;
+        background: #f7f8fc;
+        padding: 1.2rem 0;
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20rem;
+        height: 50px;
+        margin-top: 1rem;
+        font-size: 1.1rem;
+        background: #febf00;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+<button class="modal-open-btn">모달 열기</button>
+<div class="modal show">
+    <div class="content">
+        <p>모달 영역 외부를 클릭해보세요!</p>
+        <small>※ 외부 영역 클릭을 감지하여 모달을 닫습니다</small>
+    </div>
+</div>
+
+<script>
+    class useOutsideClick {
+        ref = null;
+        onClickOutside = null;
+
+        constructor(ref, onClickOutside) {
+            this.ref = ref;
+            this.onClickOutside = onClickOutside;
+
+            document.addEventListener('mouseup', this.handleClickOutside);
+        }
+
+        handleClickOutside = (event) => {
+            if (this.ref && !this.ref?.contains?.(event.target)) {
+                this.onClickOutside(this);
+            }
+        }
+
+        removeClickListener = () => {
+            document.removeEventListener('mouseup', this.handleClickOutside);
+        }
+    }
+
+
+    const $modal = document.querySelector('.modal');
+    const $content = document.querySelector('.content');
+
+    // 영역 외 클릭 감지
+    const outsideClick = new useOutsideClick($content, () => {
+        $modal.classList.remove('show');
+    });  
+
+    // 모달 열기
+    const $btn = document.querySelector('.modal-open-btn');
+
+    $btn.onclick = () => {
+        $modal.classList.add('show');
+    }
+</script>
