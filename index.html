@@ -395,7 +395,7 @@
                     </div>
                 </div>
             </div>
-            <button id="tryAgain-button" style="display : none">Try Again</button>
+            <div id="tryAgain-button" style="display : none">Try Again</div>
         </div>
 
     </div>
@@ -492,24 +492,6 @@
             }
         }
     }
-
-    // 배열에서 n개의 랜덤 요소 선택하는 함수
-    function getRandomElements(list, n) {
-
-        const randomElements = [];
-
-        while (randomElements.length < n) {
-            const randomIndex = Math.floor(Math.random() * list.length); // color 리스트 크기 만큼의 난수를 생성
-            const randomElement = list[randomIndex];
-
-            if (!randomElements.includes(randomElement)) {
-                randomElements.push(randomElement);
-            }
-        }
-
-        return randomElements;
-    }
-
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -536,6 +518,24 @@
         }
 
     }
+    // 배열에서 n개의 랜덤 요소 선택하는 함수
+    function getRandomElements(list, n) {
+
+        const randomElements = [];
+
+        while (randomElements.length < n) {
+            const randomIndex = Math.floor(Math.random() * list.length); // color 리스트 크기 만큼의 난수를 생성
+            const randomElement = list[randomIndex];
+
+            if (!randomElements.includes(randomElement)) {
+                randomElements.push(randomElement);
+            }
+        }
+
+        return randomElements;
+    }
+
+    
     function handleGenderChange(event) {
         const gender = event.target.checked ? "Female" : "Male";
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
