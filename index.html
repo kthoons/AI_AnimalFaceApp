@@ -109,7 +109,7 @@
             display: none;
         }
 
-        
+
 
 
 
@@ -146,6 +146,7 @@
             padding: 20px;
             z-index: 2;
         }
+
         #side-menu p {
             font-size: 18px;
             color: #4a4a4a;
@@ -154,7 +155,7 @@
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s;
-            
+
         }
 
         #side-menu p:hover {
@@ -313,6 +314,27 @@
         #menu-button span:nth-child(4) {
             top: 20px;
         }
+
+        #tryAgain-button {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 1px solid #000;
+            background-color: #ff9c9c;
+            color: #000;
+            border-radius: 4px;
+            font-size: 20px;
+            /* display: none; */
+
+            /* 가운데 정렬을 위한 스타일 */
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #tryAgain-button:hover {
+            background-color: #e6e6e6;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -333,7 +355,7 @@
     </div>
     <div id="page-container">
         <div id="page-border">
-            
+
             <h1 id="title">Animal Face Test</h1>
 
             <div id="gender-toggle" style="margin-bottom: 80px;">
@@ -373,6 +395,7 @@
                     </div>
                 </div>
             </div>
+            <button id="tryAgain-button" style="display : none">Try Again</button>
         </div>
 
     </div>
@@ -506,35 +529,52 @@
 
             // 로딩 페이지 숨기기
             document.getElementById('loading-page').style.display = 'none';
+            // tryAgainButton 생성
+            document.getElementById('tryAgain-button').style.display = 'block';
         } catch (error) {
             console.error(error);
         }
 
     }
     function handleGenderChange(event) {
-        // const genderDisplay = document.getElementById('gender-display');
-        const gender = event.target.checked ? "Female" : "Male";        
-        URL = (gender == 'Male') ? URL_Man : URL_Woman;        
-        console.log(URL);
+        const gender = event.target.checked ? "Female" : "Male";
+        URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
 
+    function CheckExceptionTarget(elem) {
+        const tryAgainButton = document.getElementById('tryAgain-button');
+        let array = [tryAgainButton];
 
+        return array.includes(elem);
+    }
 
     document.addEventListener('click', function (event) {
+
         var target = event.target;
         const sideMenu = document.getElementById('side-menu');
         const pageContainer = document.getElementById('page-container');
         const menuButton = document.getElementById('menu-button');
-        const isMenuVisible = sideMenu.style.left === '0px';    
-  
+        const isMenuVisible = sideMenu.style.left === '0px';
+
+        // target의 예외리스트 확인
+        if (CheckExceptionTarget(target)) {
+            return;
+        }
+
+
+        // 메뉴창이 열려있을때만 
         if (target != menuButton && !sideMenu.contains(target) && isMenuVisible) {
             sideMenu.style.left = '-30%';
         }
-        else if (target == menuButton && !isMenuVisible) {        
-            sideMenu.style.left = '0';          
+        // 메뉴창이 닫혀있을때만
+        else if (target == menuButton && !isMenuVisible) {
+            sideMenu.style.left = '0';
         }
     });
 
+    document.getElementById('tryAgain-button').addEventListener('click', function () {
+        location.reload();
+    });
 
 
 </script>
