@@ -463,7 +463,6 @@
         console.log(top3GaugeData);
         fillGauge(top3GaugeData);
         changeRandomColors();
-        fillText();
         console.log("predict End");
     }
     function fillText() {
@@ -493,6 +492,7 @@
             });
         });
         document.getElementById('gauge-container').style.display = 'block';
+        fillText();
     }
     function changeRandomColors() {
         const colors = ['azure', 'emerald', 'violet', 'yellow', 'red'];
