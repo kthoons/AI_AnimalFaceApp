@@ -467,9 +467,8 @@
     }
     function fillText() {
         console.log("fill Text");
-        $('.bar-text').each(function (i) {
-            $(this).text(predictions[i].className);
-        });
+        var text = document.getElementsByClassName('bar-text');
+        console.log(text);
     }
     function fillGauge(data) {
         $('.bar-percentage[data-percentage]').each(function (i) {
