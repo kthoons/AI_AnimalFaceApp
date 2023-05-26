@@ -461,9 +461,9 @@
         const sortedEntries = Object.entries(gaugeData).sort((a, b) => b[1] - a[1]);
         const top3GaugeData = sortedEntries.slice(0, 3);
         console.log(top3GaugeData);
-        fillText();
         fillGauge(top3GaugeData);
         changeRandomColors();
+        fillText();
         console.log("predict End");
     }
     function fillText() {
