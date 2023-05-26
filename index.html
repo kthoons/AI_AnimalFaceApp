@@ -340,7 +340,8 @@
         }
 
         .bar-text {
-            font-size: 10px;
+            font-size: 30px;
+            display: inline;
         }
         
     </style>
@@ -378,7 +379,7 @@
             <img id="previewImg" style="width: 300px;" alt="" />
             <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
             <div id="gauge-container" style="display:none">
-                <span id="bar-1" class="bar-text"></span>
+                <span id="text-1" class="bar-text"></span>
                 <div id="bar-1" class="bar-main-container azure">
                     <div class="wrap">
                         <div class="bar-percentage" data-percentage="100"></div>
@@ -387,7 +388,7 @@
                         </div>
                     </div>
                 </div>
-                <span id="bar-2" class="bar-text"></span>
+                <span id="text-2" class="bar-text"></span>
                 <div id="bar-2" class="bar-main-container azure">
                     <div class="wrap">
                         <div class="bar-percentage" data-percentage="100"></div>
@@ -396,7 +397,7 @@
                         </div>
                     </div>
                 </div>
-                <span id="bar-3" class="bar-text"></span>
+                <span id="text-3" class="bar-text"></span>
                 <div id="bar-3" class="bar-main-container azure">
                     <div class="wrap">
                         <div class="bar-percentage" data-percentage="100"></div>
@@ -470,7 +471,6 @@
         $('.bar-text').each( function (i) {
             $(this).text(prediction[i].className);
         });
-        console.log(text);
     }
     function fillGauge(data) {
         $('.bar-percentage[data-percentage]').each(function (i) {
