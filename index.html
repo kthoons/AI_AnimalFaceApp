@@ -181,7 +181,7 @@
         }
 
         .bar-main-container {
-            position: fixed;
+            position: absolute;
             right: 0;
             margin: 10px auto;
             width: 300px;
@@ -349,6 +349,9 @@
             display: inline-block;
             vertical-align: middle;
         }
+        .partition {
+            position: relative;
+        }
     </style>
 </head>
 
@@ -384,7 +387,7 @@
             <img id="previewImg" style="width: 300px;" alt="" />
             <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
             <div id="gauge-container" style="display:none">
-                <div id="partition-1">
+                <div id="partition-1" class="partition">
                     <span id="text-1" class="bar-text"></span>
                     <div id="bar-1" class="bar-main-container azure">
                         <div class="wrap">
@@ -396,7 +399,7 @@
                     </div>
                 </div>
 
-                <div id="partition-2">
+                <div id="partition-2" class="partition">
                     <span id="text-2" class="bar-text"></span>
                     <div id="bar-2" class="bar-main-container azure">
                         <div class="wrap">
@@ -408,7 +411,7 @@
                     </div>
                 </div>
 
-                <div id="partition-3">
+                <div id="partition-3" class="partition">
                     <span id="text-3" class="bar-text"></span>
                     <div id="bar-3" class="bar-main-container azure">
                         <div class="wrap">
