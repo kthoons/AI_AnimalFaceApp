@@ -424,7 +424,6 @@
     const URL_Woman = "./my_model_female/";
     let URL = URL_Man;
     let model, webcam, guageContainer, maxPredictions;
-    var predictions = [];
 
     // Load the image model and setup the webcam
     async function init() {
@@ -463,11 +462,14 @@
         console.log(top3GaugeData);
         fillGauge(top3GaugeData);
         changeRandomColors();
+        fillText();
         console.log("predict End");
     }
-    function fillText(i) {
+    function fillText() {
         console.log("fill Text");
-        var text = $('.bar-text').text(prediction[i].className);
+        var text = $('.bar-text').each( function (i) {
+            $(this).text(prediction[i].className);
+        });
         console.log(text);
     }
     function fillGauge(data) {
@@ -475,7 +477,6 @@
             var progress = $(this);
             var percentage = Math.ceil(data[i][1] * 100);
             console.log(percentage);
-            fillText(i);
             $({ countNum: 0 }).animate({ countNum: percentage }, {
                 duration: 1000,
                 easing: 'linear',
