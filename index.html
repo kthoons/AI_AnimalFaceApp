@@ -462,12 +462,12 @@
         console.log(top3GaugeData);
         fillGauge(top3GaugeData);
         changeRandomColors();
-        fillText();
+        fillText(prediction);
         console.log("predict End");
     }
-    function fillText() {
+    function fillText(prediction) {
         console.log("fill Text");
-        var text = $('.bar-text').each( function (i) {
+        $('.bar-text').each( function (i) {
             $(this).text(prediction[i].className);
         });
         console.log(text);
