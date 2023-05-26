@@ -190,6 +190,7 @@
             font-weight: normal;
             font-size: 0.8em;
             color: #FFF;
+            display: inline-block;
         }
 
         .wrap {
@@ -530,6 +531,10 @@
 
             // 로딩 페이지 숨기기
             document.getElementById('loading-page').style.display = 'none';
+            // 타이틀 숨기기
+            document.getElementById('title').style.display = 'none';
+            // 젠더 토글 숨기기
+            document.getElementById('gender-toggle').style.display = 'none';
             // tryAgainButton 생성
             document.getElementById('tryAgain-button').style.display = 'block';
         } catch (error) {
