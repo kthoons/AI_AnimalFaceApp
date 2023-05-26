@@ -465,9 +465,9 @@
         changeRandomColors();
         console.log("predict End");
     }
-    function fillText() {
+    function fillText(i) {
         console.log("fill Text");
-        var text = $('.bar-text');
+        var text = $('.bar-text').text(predictions[i].className);
         console.log(text);
     }
     function fillGauge(data) {
@@ -475,6 +475,7 @@
             var progress = $(this);
             var percentage = Math.ceil(data[i][1] * 100);
             console.log(percentage);
+            fillText();
             $({ countNum: 0 }).animate({ countNum: percentage }, {
                 duration: 1000,
                 easing: 'linear',
@@ -491,7 +492,7 @@
             });
         });
         document.getElementById('gauge-container').style.display = 'block';
-        fillText();
+        
     }
     function changeRandomColors() {
         const colors = ['azure', 'emerald', 'violet', 'yellow', 'red'];
