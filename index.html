@@ -338,6 +338,11 @@
             background-color: #e6e6e6;
             cursor: pointer;
         }
+
+        .bar-text {
+            font-size: 10px;
+        }
+        
     </style>
 </head>
 
@@ -373,6 +378,7 @@
             <img id="previewImg" style="width: 300px;" alt="" />
             <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
             <div id="gauge-container" style="display:none">
+                <span id="bar-1" class="bar-text"></span>
                 <div id="bar-1" class="bar-main-container azure">
                     <div class="wrap">
                         <div class="bar-percentage" data-percentage="100"></div>
@@ -381,6 +387,7 @@
                         </div>
                     </div>
                 </div>
+                <span id="bar-2" class="bar-text"></span>
                 <div id="bar-2" class="bar-main-container azure">
                     <div class="wrap">
                         <div class="bar-percentage" data-percentage="100"></div>
@@ -389,6 +396,7 @@
                         </div>
                     </div>
                 </div>
+                <span id="bar-3" class="bar-text"></span>
                 <div id="bar-3" class="bar-main-container azure">
                     <div class="wrap">
                         <div class="bar-percentage" data-percentage="100"></div>
@@ -454,8 +462,14 @@
         const top3GaugeData = sortedEntries.slice(0, 3);
         console.log(top3GaugeData);
         fillGauge(top3GaugeData);
+        fillText();
         changeRandomColors();
         console.log("predict End");
+    }
+    function fillText() {
+        $('.bar-text').each(function (i) {
+            $(this).text(predictions[i].className);
+        });
     }
     function fillGauge(data) {
         $('.bar-percentage[data-percentage]').each(function (i) {
