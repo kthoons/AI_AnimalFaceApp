@@ -344,7 +344,6 @@
             font-size: 30px;
             display: inline-block;
         }
-        
     </style>
 </head>
 
@@ -380,33 +379,42 @@
             <img id="previewImg" style="width: 300px;" alt="" />
             <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
             <div id="gauge-container" style="display:none">
-                <span id="text-1" class="bar-text"></span>
-                <div id="bar-1" class="bar-main-container azure">
-                    <div class="wrap">
-                        <div class="bar-percentage" data-percentage="100"></div>
-                        <div class="bar-container">
-                            <div class="bar"></div>
+                <div id="partition-1">
+                    <span id="text-1" class="bar-text"></span>
+                    <div id="bar-1" class="bar-main-container azure">
+                        <div class="wrap">
+                            <div class="bar-percentage" data-percentage="100"></div>
+                            <div class="bar-container">
+                                <div class="bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <span id="text-2" class="bar-text"></span>
-                <div id="bar-2" class="bar-main-container azure">
-                    <div class="wrap">
-                        <div class="bar-percentage" data-percentage="100"></div>
-                        <div class="bar-container">
-                            <div class="bar"></div>
+
+                <div id="partition-2">
+                    <span id="text-2" class="bar-text"></span>
+                    <div id="bar-2" class="bar-main-container azure">
+                        <div class="wrap">
+                            <div class="bar-percentage" data-percentage="100"></div>
+                            <div class="bar-container">
+                                <div class="bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <span id="text-3" class="bar-text"></span>
-                <div id="bar-3" class="bar-main-container azure">
-                    <div class="wrap">
-                        <div class="bar-percentage" data-percentage="100"></div>
-                        <div class="bar-container">
-                            <div class="bar"></div>
+
+                <div id="partition-3">
+                    <span id="text-3" class="bar-text"></span>
+                    <div id="bar-3" class="bar-main-container azure">
+                        <div class="wrap">
+                            <div class="bar-percentage" data-percentage="100"></div>
+                            <div class="bar-container">
+                                <div class="bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div id="tryAgain-button" style="display: none;">Try Again</div>
         </div>
@@ -469,7 +477,7 @@
     }
     function fillText(prediction) {
         console.log("fill Text");
-        $('.bar-text').each( function (i) {
+        $('.bar-text').each(function (i) {
             $(this).text(prediction[i].className);
         });
     }
@@ -494,7 +502,7 @@
             });
         });
         document.getElementById('gauge-container').style.display = 'block';
-        
+
     }
     function changeRandomColors() {
         const colors = ['azure', 'emerald', 'violet', 'yellow', 'red'];
@@ -559,7 +567,7 @@
         return randomElements;
     }
 
-    
+
     function handleGenderChange(event) {
         const gender = event.target.checked ? "Female" : "Male";
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
