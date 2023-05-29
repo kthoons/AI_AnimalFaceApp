@@ -126,7 +126,7 @@
 
         #page-border {
             position: absolute;
-            
+
             border: 2px solid rgb(112, 75, 246);
             border-radius: 60px;
             /* 테두리의 색상과 굵기 */
@@ -181,15 +181,14 @@
         }
 
         .bar-main-container {
-
             position: absolute;
-            display: inline-block;
+            top: 50%;
+            transform: translate(0, -50%);
+      
             right: 0;
-            margin: 10px auto;
+          
             width: 300px;
             height: 50px;
-
-
             -webkit-border-radius: 4px;
             -moz-border-radius: 4px;
             border-radius: 4px;
@@ -197,7 +196,6 @@
             font-weight: normal;
             font-size: 0.8em;
             color: #FFF;
-            
             vertical-align: middle;
         }
 
@@ -327,7 +325,6 @@
         }
 
         #tryAgain-button {
-            top: 30px;
             width: 100px;
             padding: 10px 20px;
             border: 1px solid #000;
@@ -338,8 +335,9 @@
             /* display: none; */
 
             /* 가운데 정렬을 위한 스타일 */
-            position: relative;
+            position: absolute;
             left: 50%;
+            bottom: 5%;
             transform: translate(-50%, -50%);
         }
 
@@ -349,16 +347,21 @@
         }
 
         .bar-text {
-            float: left;
+            position: absolute;
+            top: 50%;
+            left: 0;
             font-size: 20px;
             vertical-align: middle;
+            transform: translate(0, -50%);
         }
+
         .partition {
             position: relative;
             display: block;
             width: 100%;
             height: 33.33%;
         }
+
         #gauge-container {
             width: 100%;
             height: 50%;
