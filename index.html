@@ -124,19 +124,7 @@
             margin-top: 50px;
         }
 
-        #page-border {
-            position: absolute;
 
-            border: 2px solid rgb(112, 75, 246);
-            border-radius: 60px;
-            /* 테두리의 색상과 굵기 */
-            padding: 20px;
-            /* 테두리와 내용물 사이의 간격 */
-            margin: 20px;
-            /* 테두리와 다른 요소와의 간격 */
-            width: 400px;
-            height: 700px;
-        }
 
         #side-menu {
             position: fixed;
@@ -184,9 +172,9 @@
             position: absolute;
             top: 50%;
             transform: translate(0, -50%);
-      
+
             right: 0;
-          
+
             width: 300px;
             height: 50px;
             -webkit-border-radius: 4px;
@@ -385,61 +373,60 @@
         <p>Description</p>
     </div>
     <div id="page-container">
-        <div id="page-border">
 
-            <h1 id="title">Animal Face Test</h1>
+        <h1 id="title">Animal Face Test</h1>
 
-            <div id="gender-toggle" style="margin-bottom: 80px;">
-                <span>Male</span>
-                <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
-                <label for="gender-switch"></label>
-                <span>Female</span>
-            </div>
-            <div id="upload-area" onclick="document.getElementById('file-input').click();">
-                Click or touch to upload
-            </div>
-            <img id="previewImg" style="width: 300px;" alt="" />
-            <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-            <div id="gauge-container" style="display:none">
-                <div id="partition-1" class="partition">
-                    <span id="text-1" class="bar-text"></span>
-                    <div id="bar-1" class="bar-main-container azure">
-                        <div class="wrap">
-                            <div class="bar-percentage" data-percentage="100"></div>
-                            <div class="bar-container">
-                                <div class="bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="partition-2" class="partition">
-                    <span id="text-2" class="bar-text"></span>
-                    <div id="bar-2" class="bar-main-container azure">
-                        <div class="wrap">
-                            <div class="bar-percentage" data-percentage="100"></div>
-                            <div class="bar-container">
-                                <div class="bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="partition-3" class="partition">
-                    <span id="text-3" class="bar-text"></span>
-                    <div id="bar-3" class="bar-main-container azure">
-                        <div class="wrap">
-                            <div class="bar-percentage" data-percentage="100"></div>
-                            <div class="bar-container">
-                                <div class="bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div id="tryAgain-button" style="display: none;">Try Again</div>
+        <div id="gender-toggle" style="margin-bottom: 80px;">
+            <span>Male</span>
+            <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
+            <label for="gender-switch"></label>
+            <span>Female</span>
         </div>
+        <div id="upload-area" onclick="document.getElementById('file-input').click();">
+            Click or touch to upload
+        </div>
+        <img id="previewImg" style="width: 300px;" alt="" />
+        <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
+        <div id="gauge-container" style="display:none">
+            <div id="partition-1" class="partition">
+                <span id="text-1" class="bar-text"></span>
+                <div id="bar-1" class="bar-main-container azure">
+                    <div class="wrap">
+                        <div class="bar-percentage" data-percentage="100"></div>
+                        <div class="bar-container">
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="partition-2" class="partition">
+                <span id="text-2" class="bar-text"></span>
+                <div id="bar-2" class="bar-main-container azure">
+                    <div class="wrap">
+                        <div class="bar-percentage" data-percentage="100"></div>
+                        <div class="bar-container">
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="partition-3" class="partition">
+                <span id="text-3" class="bar-text"></span>
+                <div id="bar-3" class="bar-main-container azure">
+                    <div class="wrap">
+                        <div class="bar-percentage" data-percentage="100"></div>
+                        <div class="bar-container">
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="tryAgain-button" style="display: none;">Try Again</div>
+
 
     </div>
 </body>
