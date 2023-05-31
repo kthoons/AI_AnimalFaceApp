@@ -172,12 +172,9 @@
 
         .bar-main-container {
             position: relative;
-            top: 50%;
-            transform: translate(0, -50%);
-
-
             width: 300px;
             height: 50px;
+
             -webkit-border-radius: 4px;
             -moz-border-radius: 4px;
             border-radius: 4px;
@@ -337,18 +334,22 @@
 
         .bar-text {
             position: relative;
-            top: 50%;
-
             font-size: 20px;
             vertical-align: middle;
-            transform: translate(0, -100%);
         }
 
         .partition {
-            position: relative;
+            position: absolute;
             display: inline-block;
+            height: 40%;
         }
 
+        #partition-1 {
+            margin-left: 30%;
+        }
+        #partition-2 {
+            margin-right: 20%;
+        }
         #gauge-container {
             position: relative;
             width: 100%;
