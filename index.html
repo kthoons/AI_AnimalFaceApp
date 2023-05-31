@@ -44,8 +44,8 @@
 
         #gender-toggle {
             margin: 40px;
+            
             display: flex;
-            margin: auto;
             align-items: center;
             justify-content: center;
             background-color: #6488e2;
@@ -171,11 +171,11 @@
         }
 
         .bar-main-container {
-            position: absolute;
+            position: relative;
+            display: inline-block;
             top: 50%;
             transform: translate(0, -50%);
 
-            right: 0;
 
             width: 300px;
             height: 50px;
@@ -337,12 +337,12 @@
         }
 
         .bar-text {
-            position: absolute;
+            position: relative;
             top: 50%;
-            left: 0;
+
             font-size: 20px;
             vertical-align: middle;
-            transform: translate(0, -50%);
+            transform: translate(0, -100%);
         }
 
         .partition {
@@ -393,6 +393,10 @@
         <div id="gauge-container" style="display:none">
             <div id="partition-1" class="partition">
                 <div id="text-1" class="bar-text"></div>
+                <div id="text-2" class="bar-text"></div>
+                <div id="text-3" class="bar-text"></div>
+            </div>
+            <div id="partition-2" class="partition">
                 <div id="bar-1" class="bar-main-container azure">
                     <div class="wrap">
                         <div class="bar-percentage" data-percentage="100"></div>
@@ -401,10 +405,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div id="partition-2" class="partition">
-                <div id="text-2" class="bar-text"></div>
                 <div id="bar-2" class="bar-main-container azure">
                     <div class="wrap">
                         <div class="bar-percentage" data-percentage="100"></div>
@@ -413,10 +413,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div id="partition-3" class="partition">
-                <div id="text-3" class="bar-text"></div>
                 <div id="bar-3" class="bar-main-container azure">
                     <div class="wrap">
                         <div class="bar-percentage" data-percentage="100"></div>
@@ -426,6 +422,11 @@
                     </div>
                 </div>
             </div>
+            <div></div>
+            
+                
+                
+            
 
         </div>
         <div id="tryAgain-button" style="display: none;">Try Again</div>
