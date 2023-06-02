@@ -544,7 +544,7 @@
         // 딕셔너리 생성
         for (let i = 0; i < maxPredictions; i++) {
             const key = prediction[i].className;
-            const value = prediction[i].probability.toFixed(2);
+            const value = prediction[i].probability.toFixed(2) * 100;
             gaugeData[key] = value;
         }
 
@@ -585,11 +585,10 @@
                 `linear-gradient(to bottom, ${colors[i].start}, ${colors[i].end})`
             );
             $(this).css("width", `${prediction[i].probability.toFixed(2) * 100}%`);
-            console.log(prediction[i].probability.toFixed(2));
         });
 
         pointCounters.each(function (i, obj) {
-            animateValue(obj, 0, prediction[i].probability.toFixed(2), 100);
+            animateValue(obj, 0, prediction[i].probability.toFixed(2) * 100, 100);
         });
 
         textContainers.each(function (i, obj) {
