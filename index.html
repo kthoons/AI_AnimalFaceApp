@@ -513,7 +513,8 @@
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
     let URL = URL_Man;
-    let model, webcam, guageContainer, maxPredictions, predict, gaugeData;
+    let model, webcam, guageContainer, maxPredictions, predict;
+    const gaugeData = {};
     
     // Load the image model and setup the webcam
     async function init() {
@@ -538,7 +539,6 @@
         prediction = await model.predict(image, false); // 여기에 사진을 넣는다
 
         // 딕셔너리 생성
-        const gaugeData = {};
         for (let i = 0; i < maxPredictions; i++) {
             const key = prediction[i].className;
             const value = prediction[i].probability.toFixed(2);
