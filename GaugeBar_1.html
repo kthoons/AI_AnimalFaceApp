@@ -94,7 +94,7 @@
 <body>
     <div class="bar_wrapper">
         <div id="loader_container1" class="loader_container">
-            <div id="text_container">
+            <div class="text_container">
                 공룡상
             </div>
             <div id="bar_container">
@@ -103,7 +103,7 @@
             </div>
         </div>
         <div id="loader_container2" class="loader_container">
-            <div id="text_container">
+            <div class="text_container">
                 공룡상
             </div>
             <div id="bar_container">
@@ -112,7 +112,7 @@
             </div>
         </div>
         <div id="loader_container3" class="loader_container">
-            <div id="text_container">
+            <div class="text_container">
                 공룡상
             </div>
             <div id="bar_container">
@@ -128,6 +128,7 @@
     window.addEventListener("load", () => {
         const progressBar = $(".progress_bar");
         const pointCounters = $(".point_counter");
+        const textContainers = $(".text_container");
         const colors = [
             { start: "rgba(240, 128, 128, 0.5)", end: "rgba(240, 128, 128, 1)" }, // Light Coral
             { start: "rgba(135, 206, 235, 0.5)", end: "rgba(135, 206, 235, 1)" }, // Sky Blue
@@ -137,6 +138,7 @@
             { start: "rgba(255, 215, 0, 0.5)", end: "rgba(255, 215, 0, 1)" }, // Gold
             { start: "rgba(64, 224, 208, 0.5)", end: "rgba(64, 224, 208, 1)" } // Turquoise
         ];
+        const texts = ["호랑이상", "사슴상", "곰상"]; 
 
         // Shuffle the colors array
         for (let i = colors.length - 1; i > 0; i--) {
@@ -155,6 +157,10 @@
         pointCounters.each(function (index, obj) {
             animateValue(obj, 0, 80, 3000); // 80 숫자 수정
         });
+
+        textContainers.each(function (index, obj) {
+        obj.textContent = texts[index]; // Changing the text
+    });
     });
 
     function animateValue(obj, start, end, duration) {

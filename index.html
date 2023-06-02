@@ -357,6 +357,83 @@
             width: 100%;
             height: 50%;
         }
+
+        
+
+        /* 게이지바 */
+        div.loader_container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 60%;
+            margin: auto;
+        }
+
+        div#bar_container {
+            height: 2vw;
+            background: #dcdbd7;
+            border-radius: 20px;
+            border-top: 1px solid #cfcec9;
+            border-bottom: 1px solid #f7f6f4;
+            box-shadow: 0 -1px 0 #bab9b4;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #222222;
+        }
+
+        div.progress_bar {
+            background-color: #dcf1c6;
+            background-image: linear-gradient(to bottom, #9fbff4 0%, #555bb4 100%);
+            height: 110%;
+            position: absolute;
+            top: -3px;
+            left: 0px;
+            border-top: 1px solid #e5ebf4;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px #717171;
+            width: 0%;
+            transition: all 3s 0s cubic-bezier(0.83, 0, 0.17, 1);
+        }
+
+        div#progress_percentage {
+            position: absolute;
+            top: -20%;
+            right: -5%;
+            width: 10%;
+            height: 5%;
+            padding-top: 5%;
+        }
+
+        div#text_container {
+            margin-right: 15px;
+            color: #757575;
+            font-weight: bold;
+            font-size: 3vw;
+            text-shadow: -1px 1px 1px #d1d0cc;
+        }
+
+        div#text_container span {
+            display: block;
+            font-weight: normal;
+            font-size: 2vw;
+            margin-top: 2%;
+        }
+
+        span.point_counter {
+            position: absolute;
+            z-index: 1;
+            font-size: 2vw;
+            transform: translate(0, -15%);
+        }
+
+        .bar_wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+        /* 게이지바 끝 */
     </style>
 </head>
 
@@ -390,44 +467,34 @@
         </div>
         <img id="previewImg" style="width: 300px;" alt="" />
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-        <div id="gauge-container" style="display:none">
-            <div id="partition-1" class="partition">
-                <div id="text-1" class="bar-text"></div>
-                <div id="text-2" class="bar-text"></div>
-                <div id="text-3" class="bar-text"></div>
-            </div>
-            <div id="partition-2" class="partition">
-                <div id="bar-1" class="bar-main-container azure">
-                    <div class="wrap">
-                        <div class="bar-percentage" data-percentage="100"></div>
-                        <div class="bar-container">
-                            <div class="bar"></div>
-                        </div>
-                    </div>
+        <div class="gauge-container">
+            <div id="loader_container1" class="loader_container">
+                <div class="text_container">
+                    동물상
                 </div>
-                <div id="bar-2" class="bar-main-container azure">
-                    <div class="wrap">
-                        <div class="bar-percentage" data-percentage="100"></div>
-                        <div class="bar-container">
-                            <div class="bar"></div>
-                        </div>
-                    </div>
-                </div>
-                <div id="bar-3" class="bar-main-container azure">
-                    <div class="wrap">
-                        <div class="bar-percentage" data-percentage="100"></div>
-                        <div class="bar-container">
-                            <div class="bar"></div>
-                        </div>
-                    </div>
+                <div id="bar_container">
+                    <div class="progress_bar"></div>
+                    <span class="point_counter">0</span>
                 </div>
             </div>
-            <div></div>
-            
-                
-                
-            
-
+            <div id="loader_container2" class="loader_container">
+                <div class="text_container">
+                    동물상
+                </div>
+                <div id="bar_container">
+                    <div class="progress_bar"></div>
+                    <span class="point_counter">0</span>
+                </div>
+            </div>
+            <div id="loader_container3" class="loader_container">
+                <div class="text_container">
+                    동물상
+                </div>
+                <div id="bar_container">
+                    <div class="progress_bar"></div>
+                    <span class="point_counter">0</span>
+                </div>
+            </div>
         </div>
         <div id="tryAgain-button" style="display: none;">Try Again</div>
 
@@ -446,8 +513,8 @@
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
     let URL = URL_Man;
-    let model, webcam, guageContainer, maxPredictions;
-
+    let model, webcam, guageContainer, maxPredictions, predict, gaugeData;
+    
     // Load the image model and setup the webcam
     async function init() {
         console.log("It's in the Init");
@@ -460,7 +527,6 @@
         // Note: the pose library adds "tmImage" object to your window (window.tmImage)
         model = await tmImage.load(modelURL, metadataURL);
         maxPredictions = model.getTotalClasses();
-        guageContainer = document.getElementById("gauge-container");
 
         console.log("Init End");
     }
@@ -468,8 +534,8 @@
         // predict can take in an image, video or canvas html element
         console.log("predicting...");
         var image = document.getElementById("previewImg");
-        let prediction = await model.predict(image, false); // 여기에 사진을 넣는다
         var gaugeFill = document.getElementsByClassName("gauge_fill");
+        prediction = await model.predict(image, false); // 여기에 사진을 넣는다
 
         // 딕셔너리 생성
         const gaugeData = {};
@@ -479,40 +545,58 @@
             gaugeData[key] = value;
         }
 
-        // 값의 크기에 따라 내림차순으로 정렬
+        // predict 결과값의 크기에 따라 내림차순으로 정렬
         const sortedEntries = Object.entries(gaugeData).sort((a, b) => b[1] - a[1]);
-        const top3GaugeData = sortedEntries.slice(0, 3);
-        console.log(top3GaugeData);
-        fillGauge(top3GaugeData);
+        gaugeData = sortedEntries.slice(0, 3);
+  
+        fillGauge();
         changeRandomColors();
-        fillText(prediction);
+
         console.log("predict End");
     }
-    function fillText(prediction) {
-        console.log("fill Text");
+
+    function fillGauge(data) {
+        const progressBar = $(".progress_bar");
+        const pointCounters = $(".point_counter");
+        const textContainers = $(".text_container");
+        const animalName = prediction[i].className;
+        const pct = prediction[i].probability.toFixed(2);
+        const colors = [
+            { start: "rgba(240, 128, 128, 0.5)", end: "rgba(240, 128, 128, 1)" }, // Light Coral
+            { start: "rgba(135, 206, 235, 0.5)", end: "rgba(135, 206, 235, 1)" }, // Sky Blue
+            { start: "rgba(144, 238, 144, 0.5)", end: "rgba(144, 238, 144, 1)" }, // Light Green
+            { start: "rgba(255, 182, 193, 0.5)", end: "rgba(255, 182, 193, 1)" }, // Light Pink
+            { start: "rgba(221, 160, 221, 0.5)", end: "rgba(221, 160, 221, 1)" }, // Plum
+            { start: "rgba(255, 215, 0, 0.5)", end: "rgba(255, 215, 0, 1)" }, // Gold
+            { start: "rgba(64, 224, 208, 0.5)", end: "rgba(64, 224, 208, 1)" } // Turquoise
+        ];
+         
+
+        // Shuffle the colors array
+        for (let i = colors.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [colors[i], colors[j]] = [colors[j], colors[i]];
+        }
+
+        progressBar.each(function (index) {
+            $(this).css(
+                "background",
+                `linear-gradient(to bottom, ${colors[index].start}, ${colors[index].end})`
+            );
+            $(this).css("width", `${pct}%`);
+        });
+
+        pointCounters.each(function (index, obj) {
+            animateValue(obj, 0, pct, 100); 
+        });
+
+        textContainers.each(function (index, obj) {
+        obj.textContent = animalName[index]; // Changing the text
+    });
+
+        // 텍스트 채우기
         $('.bar-text').each(function (i) {
             $(this).text(prediction[i].className);
-        });
-    }
-    function fillGauge(data) {
-        $('.bar-percentage[data-percentage]').each(function (i) {
-            var progress = $(this);
-            var percentage = Math.ceil(data[i][1] * 100);
-            console.log(percentage);
-            $({ countNum: 0 }).animate({ countNum: percentage }, {
-                duration: 1000,
-                easing: 'linear',
-                step: function () {
-                    // What todo on every count
-                    var pct = '';
-                    if (percentage == 0) {
-                        pct = Math.floor(this.countNum) + '%';
-                    } else {
-                        pct = Math.floor(this.countNum + 1) + '%';
-                    }
-                    progress.text(pct) && progress.siblings().children().css('width', pct);
-                }
-            });
         });
         document.getElementById('gauge-container').style.display = 'block';
 
@@ -591,6 +675,18 @@
         let array = [tryAgainButton];
 
         return array.includes(elem);
+    }
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.textContent = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
     }
 
     document.addEventListener('click', function (event) {
