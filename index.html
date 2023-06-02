@@ -562,7 +562,6 @@
         const progressBar = $(".progress_bar");
         const pointCounters = $(".point_counter");
         const textContainers = $(".text_container");
-        const animalName = prediction.className;
         const colors = [
             { start: "rgba(240, 128, 128, 0.5)", end: "rgba(240, 128, 128, 1)" }, // Light Coral
             { start: "rgba(135, 206, 235, 0.5)", end: "rgba(135, 206, 235, 1)" }, // Sky Blue
@@ -593,7 +592,7 @@
         });
 
         textContainers.each(function (i, obj) {
-            obj.textContent = animalName[i]; // Changing the text
+            obj.textContent = prediction[i].className; // Changing the text
         });
 
         // 텍스트 채우기
