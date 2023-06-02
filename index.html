@@ -467,7 +467,7 @@
         </div>
         <img id="previewImg" style="width: 300px;" alt="" />
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-        <div class="gauge-container">
+        <div class="gauge-container" style="display: none;">
             <div id="loader_container1" class="loader_container">
                 <div class="text_container">
                     동물상
@@ -607,7 +607,7 @@
         // 랜덤으로 3개의 색상 선택
         const randomColors = getRandomElements(colors, 3);
 
-        // 선택한 요소의 클래스 변경
+        // 선택한 요소의 클래스 변경handleFileUpload
         for (let i = 0; i < randomColors.length; i++) {
             const elementId = `bar-${i + 1}`;
             const element = document.getElementById(elementId);
