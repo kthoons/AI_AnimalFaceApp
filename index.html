@@ -559,7 +559,6 @@
     }
 
     function fillGauge() {
-        document.getElementById('gauge-container').style.display = 'block';
         const progressBar = $(".progress_bar");
         const pointCounters = $(".point_counter");
         const textContainers = $(".text_container");
@@ -585,7 +584,7 @@
                 "background",
                 `linear-gradient(to bottom, ${colors[i].start}, ${colors[i].end})`
             );
-            $(this).css("width", `${String(prediction[i].probability.toFixed(2))}%`);
+            $(this).css("width", prediction[i].probability.toFixed(2));
             console.log(typeof(prediction[i].probability.toFixed(2)));
         });
 
@@ -601,6 +600,7 @@
         $('.bar-text').each(function (i) {
             $(this).text(prediction[i].className);
         });
+        document.getElementById('gauge-container').style.display = 'block';
 
     }
     function changeRandomColors() {
