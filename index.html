@@ -590,10 +590,12 @@
 
         pointCounters.each(function (i, obj) {
             animateValue(obj, 0, prediction[i].probability.toFixed(2), 100);
+            console.log("point Counter");
         });
 
         textContainers.each(function (i, obj) {
             obj.textContent = prediction[i].className; // Changing the text
+            console.log("textContainers");
         });
 
         // 텍스트 채우기
