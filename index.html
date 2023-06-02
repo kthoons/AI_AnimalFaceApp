@@ -559,6 +559,7 @@
     }
 
     function fillGauge() {
+        document.getElementById('gauge-container').style.display = 'block';
         const progressBar = $(".progress_bar");
         const pointCounters = $(".point_counter");
         const textContainers = $(".text_container");
@@ -600,7 +601,6 @@
         $('.bar-text').each(function (i) {
             $(this).text(prediction[i].className);
         });
-        document.getElementById('gauge-container').style.display = 'block';
 
     }
     function changeRandomColors() {
