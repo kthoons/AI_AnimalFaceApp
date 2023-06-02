@@ -332,12 +332,6 @@
             cursor: pointer;
         }
 
-        .bar-text {
-            position: relative;
-            font-size: 20px;
-            vertical-align: middle;
-        }
-
         .partition {
             position: absolute;
             height: 40%;
@@ -509,9 +503,6 @@
     src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
 <script>
-    // More API functions here:
-    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
-
     // the link to your model provided by Teachable Machine export panel
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
@@ -519,40 +510,44 @@
     let model, webcam, guageContainer, maxPredictions, predict;
     let gaugeData = {};
 
-    // Load the image model and setup the webcam
     async function init() {
-        console.log("It's in the Init");
+        console.log("Init..");
+        
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
-        // load the model and metadata
-        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-        // or files from your local hard drive
-        // Note: the pose library adds "tmImage" object to your window (window.tmImage)
         model = await tmImage.load(modelURL, metadataURL);
         maxPredictions = model.getTotalClasses();
 
         console.log("Init End");
     }
     async function Predict() {
-        // predict can take in an image, video or canvas html element
         console.log("predicting...");
+
         var image = document.getElementById("previewImg");
         var gaugeFill = document.getElementsByClassName("gauge_fill");
-        prediction = await model.predict(image, false); // 여기에 사진을 넣는다
-
-    
+        prediction = await model.predict(image, false); 
         createDataList();
-        fillGauge();
-        // changeRandomColors();
 
         console.log("predict End");
     }
 
     function fillGauge() {
-        const progressBar = $(".progress_bar");
+        fillRandomColors();
+
         const pointCounters = $(".point_counter");
         const textContainers = $(".text_container");
+        
+        pointCounters.each(function (i, obj) {
+            animateValue(obj, 0, gaugeData[i][1], 100);
+        });
+
+        textContainers.each(function (i, obj) {
+            obj.textContent = gaugeData[i][0]; // Change the text
+        });
+    }
+    function fillRandomColors() {
+        const progressBar = $(".progress_bar");
         const colors = [
             { start: "rgba(240, 128, 128, 0.5)", end: "rgba(240, 128, 128, 1)" }, // Light Coral
             { start: "rgba(135, 206, 235, 0.5)", end: "rgba(135, 206, 235, 1)" }, // Sky Blue
@@ -577,37 +572,6 @@
             );
             $(this).css("width", `${gaugeData[i][1]}%`);
         });
-
-        pointCounters.each(function (i, obj) {
-            animateValue(obj, 0, gaugeData[i][1], 100);
-        });
-
-        textContainers.each(function (i, obj) {
-            obj.textContent = gaugeData[i][0]; // Change the text
-        });
-
-        // 텍스트 채우기
-        $('.bar-text').each(function (i) {
-            $(this).text(gaugeData[i][0]);
-        });
-        document.getElementById('gauge-container').style.display = 'block';
-
-    }
-    function changeRandomColors() {
-        const colors = ['azure', 'emerald', 'violet', 'yellow', 'red'];
-
-        // 랜덤으로 3개의 색상 선택
-        const randomColors = getRandomElements(colors, 3);
-
-        // 선택한 요소의 클래스 변경handleFileUpload
-        for (let i = 0; i < randomColors.length; i++) {
-            const elementId = `bar-${i + 1}`;
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.classList.remove('azure');
-                element.classList.add(randomColors[i]);
-            }
-        }
     }
     async function handleFileUpload(event) {
         try {
@@ -625,7 +589,10 @@
 
             await init();
             Predict();
+            fillGauge();
 
+            // 게이지 생성
+            document.getElementById('gauge-container').style.display = 'block';
             // 로딩 페이지 숨기기
             document.getElementById('loading-page').style.display = 'none';
             // 타이틀 숨기기
@@ -638,22 +605,6 @@
             console.error(error);
         }
 
-    }
-    // 배열에서 n개의 랜덤 요소 선택하는 함수
-    function getRandomElements(list, n) {
-
-        const randomElements = [];
-
-        while (randomElements.length < n) {
-            const randomIndex = Math.floor(Math.random() * list.length); // color 리스트 크기 만큼의 난수를 생성
-            const randomElement = list[randomIndex];
-
-            if (!randomElements.includes(randomElement)) {
-                randomElements.push(randomElement);
-            }
-        }
-
-        return randomElements;
     }
 
 
