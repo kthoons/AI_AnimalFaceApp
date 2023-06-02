@@ -530,7 +530,7 @@
 
         console.log("Init End");
     }
-    async function predict() {
+    async function Predict() {
         // predict can take in an image, video or canvas html element
         console.log("predicting...");
         var image = document.getElementById("previewImg");
@@ -632,7 +632,7 @@
             document.getElementById('loading-page').style.display = 'flex';
 
             await init();
-            predict();
+            Predict();
 
             // 로딩 페이지 숨기기
             document.getElementById('loading-page').style.display = 'none';
