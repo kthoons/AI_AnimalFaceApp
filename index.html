@@ -512,7 +512,7 @@
 
     async function init() {
         console.log("Init..");
-        
+
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
@@ -527,9 +527,44 @@
         var image = document.getElementById("previewImg");
         var gaugeFill = document.getElementsByClassName("gauge_fill");
         prediction = await model.predict(image, false); 
-        createDataList();
-
+    
         console.log("predict End");
+    }
+
+    
+    async function handleFileUpload(event) {
+        try {
+            const file = event.target.files[0];
+            const fileReader = new FileReader();
+
+            fileReader.readAsDataURL(file);
+            fileReader.onload = function () {
+                document.getElementById('upload-area').style.display = 'none';
+                document.getElementById("previewImg").src = fileReader.result;
+            }
+
+            // 로딩 페이지 표시
+            document.getElementById('loading-page').style.display = 'flex';
+
+            await init();
+            Predict();
+            createDataList();
+            fillGauge();
+
+            // 게이지 생성
+            document.getElementById('gauge-container').style.display = 'block';
+            // 로딩 페이지 숨기기
+            document.getElementById('loading-page').style.display = 'none';
+            // 타이틀 숨기기
+            document.getElementById('title').style.display = 'none';
+            // 젠더 토글 숨기기
+            document.getElementById('gender-toggle').style.display = 'none';
+            // tryAgainButton 생성
+            document.getElementById('tryAgain-button').style.display = 'block';
+        } catch (error) {
+            console.error(error);
+        }
+
     }
 
     function fillGauge() {
@@ -573,41 +608,6 @@
             $(this).css("width", `${gaugeData[i][1]}%`);
         });
     }
-    async function handleFileUpload(event) {
-        try {
-            const file = event.target.files[0];
-            const fileReader = new FileReader();
-
-            fileReader.readAsDataURL(file);
-            fileReader.onload = function () {
-                document.getElementById('upload-area').style.display = 'none';
-                document.getElementById("previewImg").src = fileReader.result;
-            }
-
-            // 로딩 페이지 표시
-            document.getElementById('loading-page').style.display = 'flex';
-
-            await init();
-            Predict();
-            fillGauge();
-
-            // 게이지 생성
-            document.getElementById('gauge-container').style.display = 'block';
-            // 로딩 페이지 숨기기
-            document.getElementById('loading-page').style.display = 'none';
-            // 타이틀 숨기기
-            document.getElementById('title').style.display = 'none';
-            // 젠더 토글 숨기기
-            document.getElementById('gender-toggle').style.display = 'none';
-            // tryAgainButton 생성
-            document.getElementById('tryAgain-button').style.display = 'block';
-        } catch (error) {
-            console.error(error);
-        }
-
-    }
-
-
     function handleGenderChange(event) {
         const gender = event.target.checked ? "Female" : "Male";
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
