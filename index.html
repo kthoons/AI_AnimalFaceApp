@@ -584,7 +584,7 @@
                 "background",
                 `linear-gradient(to bottom, ${colors[i].start}, ${colors[i].end})`
             );
-            $(this).css("width", prediction[i].probability.toFixed(2));
+            $(this).css("width", `${prediction[i].probability.toFixed(2) * 100}%`);
             console.log(prediction[i].probability.toFixed(2));
         });
 
