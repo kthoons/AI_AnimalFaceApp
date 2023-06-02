@@ -541,17 +541,8 @@
         var gaugeFill = document.getElementsByClassName("gauge_fill");
         prediction = await model.predict(image, false); // 여기에 사진을 넣는다
 
-        // 딕셔너리 생성
-        for (let i = 0; i < maxPredictions; i++) {
-            const key = prediction[i].className;
-            const value = prediction[i].probability.toFixed(2) * 100;
-            gaugeData[key] = value;
-        }
-
-        // predict 결과값의 크기에 따라 내림차순으로 정렬
-        const sortedEntries = Object.entries(gaugeData).sort((a, b) => b[1] - a[1]);
-        gaugeData = sortedEntries.slice(0, 3);
-
+    
+        createDataList();
         fillGauge();
         // changeRandomColors();
 
@@ -584,7 +575,8 @@
                 "background",
                 `linear-gradient(to bottom, ${colors[i].start}, ${colors[i].end})`
             );
-            $(this).css("width", `${prediction[i].probability.toFixed(2) * 100}%`);
+            $(this).css("width", `${gaugeData[i]}%`);
+            console.log(gaugeData[i]);
         });
 
         pointCounters.each(function (i, obj) {
@@ -689,6 +681,17 @@
             }
         };
         window.requestAnimationFrame(step);
+    }
+    function createDataList() {
+        for (let i = 0; i < maxPredictions; i++) {
+            const key = prediction[i].className;
+            const value = prediction[i].probability.toFixed(2) * 100;
+            gaugeData[key] = value;
+        }
+
+        // predict 결과값의 크기에 따라 내림차순으로 정렬
+        const sortedEntries = Object.entries(gaugeData).sort((a, b) => b[1] - a[1]);
+        gaugeData = sortedEntries.slice(0, 3);
     }
 
     document.addEventListener('click', function (event) {
