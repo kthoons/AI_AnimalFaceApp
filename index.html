@@ -584,7 +584,7 @@
                 "background",
                 `linear-gradient(to bottom, ${colors[i].start}, ${colors[i].end})`
             );
-            $(this).css("width", `${prediction[i].probability.toFixed(2)}%`);
+            $(this).css("width", `${String(p0rediction[i].probability.toFixed(2))}%`);
         });
 
         pointCounters.each(function (i, obj) {
@@ -677,7 +677,7 @@
 
         return array.includes(elem);
     }
-    
+
     function animateValue(obj, start, end, duration) {
         let startTimestamp = null;
         const step = (timestamp) => {
