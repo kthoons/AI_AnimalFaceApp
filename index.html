@@ -563,7 +563,6 @@
         const pointCounters = $(".point_counter");
         const textContainers = $(".text_container");
         const animalName = prediction.className;
-        const pct = prediction.probability.toFixed(2);
         const colors = [
             { start: "rgba(240, 128, 128, 0.5)", end: "rgba(240, 128, 128, 1)" }, // Light Coral
             { start: "rgba(135, 206, 235, 0.5)", end: "rgba(135, 206, 235, 1)" }, // Sky Blue
@@ -581,20 +580,20 @@
             [colors[i], colors[j]] = [colors[j], colors[i]];
         }
 
-        progressBar.each(function (index) {
+        progressBar.each(function (i) {
             $(this).css(
                 "background",
                 `linear-gradient(to bottom, ${colors[index].start}, ${colors[index].end})`
             );
-            $(this).css("width", `${pct[index]}%`);
+            $(this).css("width", `${prediction[i].probability.toFixed(2)}%`);
         });
 
-        pointCounters.each(function (index, obj) {
-            animateValue(obj, 0, pct[index], 100);
+        pointCounters.each(function (i, obj) {
+            animateValue(obj, 0, prediction[i].probability.toFixed(2), 100);
         });
 
-        textContainers.each(function (index, obj) {
-            obj.textContent = animalName[index]; // Changing the text
+        textContainers.each(function (i, obj) {
+            obj.textContent = animalName[i]; // Changing the text
         });
 
         // 텍스트 채우기
