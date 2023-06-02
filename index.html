@@ -549,7 +549,7 @@
         }
 
         // predict 결과값의 크기에 따라 내림차순으로 정렬
-        const sortedEntries = Object.entries(gaugeData).sort((a, b) => b[1] - a[1]);
+        let sortedEntries = Object.entries(gaugeData).sort((a, b) => b[1] - a[1]);
         gaugeData = sortedEntries.slice(0, 3);
 
         fillGauge();
