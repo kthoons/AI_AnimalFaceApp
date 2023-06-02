@@ -562,8 +562,8 @@
         const progressBar = $(".progress_bar");
         const pointCounters = $(".point_counter");
         const textContainers = $(".text_container");
-        const animalName = prediction[i].className;
-        const pct = prediction[i].probability.toFixed(2);
+        const animalName = prediction.className;
+        const pct = prediction.probability.toFixed(2);
         const colors = [
             { start: "rgba(240, 128, 128, 0.5)", end: "rgba(240, 128, 128, 1)" }, // Light Coral
             { start: "rgba(135, 206, 235, 0.5)", end: "rgba(135, 206, 235, 1)" }, // Sky Blue
@@ -586,11 +586,11 @@
                 "background",
                 `linear-gradient(to bottom, ${colors[index].start}, ${colors[index].end})`
             );
-            $(this).css("width", `${pct}%`);
+            $(this).css("width", `${pct[index]}%`);
         });
 
         pointCounters.each(function (index, obj) {
-            animateValue(obj, 0, pct, 100);
+            animateValue(obj, 0, pct[index], 100);
         });
 
         textContainers.each(function (index, obj) {
