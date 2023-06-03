@@ -632,8 +632,9 @@
         };
         window.requestAnimationFrame(step);
     }
+
     function createDataList() {
-        console.log(prediction);
+        console.log("createData");
         for (let i = 0; i < maxPredictions; i++) {
             const key = prediction[i].className;
             const value = prediction[i].probability.toFixed(2) * 100;
