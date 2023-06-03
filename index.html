@@ -529,7 +529,7 @@
         prediction = await model.predict(image, false);
         createDataList();
         fillGauge();
-
+        adjustDisplay();
         console.log("predict End");
     }
 
@@ -550,7 +550,7 @@
 
             await init();
             Predict();
-            adjustDisplay();
+            
 
         } catch (error) {
             console.error(error);
@@ -559,7 +559,6 @@
     }
 
     function adjustDisplay() {
-        console.log("ad");
         // 게이지 생성
         document.getElementById('gauge-container').style.display = 'block';
         // 로딩 페이지 숨기기
