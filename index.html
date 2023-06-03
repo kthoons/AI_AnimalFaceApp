@@ -598,12 +598,13 @@
             const j = Math.floor(Math.random() * (i + 1));
             [colors[i], colors[j]] = [colors[j], colors[i]];
         }
-
+        
         progressBar.each(function (i) {
             $(this).css(
                 "background",
                 `linear-gradient(to bottom, ${colors[i].start}, ${colors[i].end})`
             );
+            console.log(gaugeData[i][1]);
             $(this).css("width", `${gaugeData[i][1]}%`);
         });
     }
