@@ -528,6 +528,7 @@
         var gaugeFill = document.getElementsByClassName("gauge_fill");
         prediction = await model.predict(image, false); 
         createDataList();
+        fillGauge();
         console.log("predict End");
     }
 
@@ -548,7 +549,7 @@
 
             await init();
             Predict();
-            fillGauge();
+            
 
             // 게이지 생성
             document.getElementById('gauge-container').style.display = 'block';
