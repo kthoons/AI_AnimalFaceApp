@@ -526,13 +526,14 @@
 
         var image = document.getElementById("previewImg");
         var gaugeFill = document.getElementsByClassName("gauge_fill");
-        prediction = await model.predict(image, false); 
+        prediction = await model.predict(image, false);
         createDataList();
         fillGauge();
+
         console.log("predict End");
     }
 
-    
+
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -549,30 +550,31 @@
 
             await init();
             Predict();
-            
+            adjustDisplay();
 
-            // 게이지 생성
-            document.getElementById('gauge-container').style.display = 'block';
-            // 로딩 페이지 숨기기
-            document.getElementById('loading-page').style.display = 'none';
-            // 타이틀 숨기기
-            document.getElementById('title').style.display = 'none';
-            // 젠더 토글 숨기기
-            document.getElementById('gender-toggle').style.display = 'none';
-            // tryAgainButton 생성
-            document.getElementById('tryAgain-button').style.display = 'block';
         } catch (error) {
             console.error(error);
         }
 
     }
-
+    function adjustDisplay() {
+        // 게이지 생성
+        document.getElementById('gauge-container').style.display = 'block';
+        // 로딩 페이지 숨기기
+        document.getElementById('loading-page').style.display = 'none';
+        // 타이틀 숨기기
+        document.getElementById('title').style.display = 'none';
+        // 젠더 토글 숨기기
+        document.getElementById('gender-toggle').style.display = 'none';
+        // tryAgainButton 생성
+        document.getElementById('tryAgain-button').style.display = 'block';
+    }
     function fillGauge() {
         fillRandomColors();
 
         const pointCounters = $(".point_counter");
         const textContainers = $(".text_container");
-        
+
         pointCounters.each(function (i, obj) {
             animateValue(obj, 0, gaugeData[i][1], 100);
         });
@@ -581,6 +583,7 @@
             obj.textContent = gaugeData[i][0]; // Change the text
         });
     }
+
     function fillRandomColors() {
         const progressBar = $(".progress_bar");
         const colors = [
@@ -599,7 +602,7 @@
             const j = Math.floor(Math.random() * (i + 1));
             [colors[i], colors[j]] = [colors[j], colors[i]];
         }
-        
+
         progressBar.each(function (i) {
             $(this).css(
                 "background",
