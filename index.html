@@ -557,6 +557,7 @@
         }
 
     }
+
     function adjustDisplay() {
         // 게이지 생성
         document.getElementById('gauge-container').style.display = 'block';
@@ -569,7 +570,9 @@
         // tryAgainButton 생성
         document.getElementById('tryAgain-button').style.display = 'block';
     }
+
     function fillGauge() {
+        console.log("fillGauge");
         fillRandomColors();
 
         const pointCounters = $(".point_counter");
@@ -608,7 +611,6 @@
                 "background",
                 `linear-gradient(to bottom, ${colors[i].start}, ${colors[i].end})`
             );
-            console.log(gaugeData[i][1]);
             $(this).css("width", `${gaugeData[i][1]}%`);
         });
     }
