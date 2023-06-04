@@ -430,6 +430,10 @@
             flex-direction: column;
         }
 
+        img {
+            width: 50vw;
+            height: 10vh;
+        }
         /* 게이지바 끝 */
     </style>
 </head>
@@ -462,7 +466,7 @@
         <div id="upload-area" onclick="document.getElementById('file-input').click();">
             Click or touch to upload
         </div>
-        <img id="previewImg" style="width: 300px;" alt="" />
+        <img id="previewImg"  alt="" />
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
         <div id="gauge-container" style="display: none;">
             <div id="loader_container1" class="loader_container">
@@ -529,7 +533,7 @@
         prediction = await model.predict(image, false);
         createDataList();
         fillGauge();
-        adjustDisplay();
+
         console.log("predict End");
     }
 
@@ -550,7 +554,7 @@
 
             await init();
             Predict();
-            
+            adjustDisplay();
 
         } catch (error) {
             console.error(error);
