@@ -431,8 +431,8 @@
 
         img {
             display : none;
-            width: 50vw;
-            height: 10vh;
+            /* width: 50vw;
+            height: 10vh; */
         }
         /* 게이지바 끝 */
     </style>
@@ -548,7 +548,6 @@
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
-                image.style.display = 'block';
                 const aspectRatio = image.naturalWidth / image.naturalHeight;
                 console.log(aspectRatio);                
             }
@@ -566,6 +565,8 @@
     }
 
     function adjustDisplay() {
+        // 이미지 생성
+        document.getElementById("previewImg").style.display = 'block';
         // 게이지 생성
         document.getElementById('gauge-container').style.display = 'block';
         // 로딩 페이지 숨기기
