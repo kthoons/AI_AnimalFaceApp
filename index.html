@@ -548,11 +548,11 @@
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
-                image.display = 'block';
-                const aspectRatio = image.naturalWidth / image.naturalHeight;
-                console.log(image);
+                
             }
-            
+            image.display = 'block';
+            const aspectRatio = image.naturalWidth / image.naturalHeight;
+            console.log(image);
             // 로딩 페이지 표시
             document.getElementById('loading-page').style.display = 'flex';
 
