@@ -547,10 +547,12 @@
 
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
+                image.display = 'block';
                 image.src = fileReader.result;
+                const aspectRatio = image.naturalWidth / image.naturalHeight;
+                console.log(aspectRatio);
             }
-            const aspectRatio = image.naturalWidth / image.naturalHeight;
-            console.log(aspectRatio);
+            
             // 로딩 페이지 표시
             document.getElementById('loading-page').style.display = 'flex';
 
