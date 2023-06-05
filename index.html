@@ -547,10 +547,10 @@
 
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
-                image.display = 'block';
                 image.src = fileReader.result;
+                image.display = 'block';
                 const aspectRatio = image.naturalWidth / image.naturalHeight;
-                console.log(aspectRatio);
+                console.log(image);
             }
             
             // 로딩 페이지 표시
@@ -563,7 +563,6 @@
         } catch (error) {
             console.error(error);
         }
-
     }
 
     function adjustDisplay() {
