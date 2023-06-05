@@ -429,10 +429,16 @@
             flex-direction: column;
         }
 
-        img {
-            display: none;
-            /* width: 50vw;
-            height: 10vh; */
+        .image-container {
+            width: 50%; /* 원하는 너비를 설정하세요. */
+            height: 50%; /* 원하는 높이를 설정하세요. */
+        }
+
+        .image-container img {
+            display : none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* 게이지바 끝 */
@@ -467,7 +473,9 @@
         <div id="upload-area" onclick="document.getElementById('file-input').click();">
             Click or touch to upload
         </div>
-        <img id="previewImg" alt="" />
+        <div class="image-container">
+            <img id="previewImg" alt="" />
+        </div>
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
         <div id="gauge-container" style="display: none;">
             <div id="loader_container1" class="loader_container">
