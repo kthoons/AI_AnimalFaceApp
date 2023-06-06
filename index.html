@@ -717,6 +717,17 @@
         location.reload();
     });
 
+    document.getElementById("menu-button").addEventListener("click", function () {
+        var sideMenu = document.getElementById("side-menu");
+        if (sideMenu.style.display === "none" || sideMenu.style.height === "0px") {
+            sideMenu.style.display = "block";
+            sideMenu.style.height = "200px"; // Adjust as needed
+        } else {
+            sideMenu.style.height = "0px";
+            // Hide the menu bar after the transition is done
+            setTimeout(function () { sideMenu.style.display = "none"; }, 500);
+        }
+    });
 
 </script>
 
