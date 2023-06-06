@@ -714,6 +714,14 @@
     document.getElementById("menu-button").addEventListener("click", function () {
         var sideMenu = document.getElementById("side-menu");
         var pageContainer = document.getElementById("page-container");
+        let style = window.getComputedStyle(element);
+        let transitionDuration = style.getPropertyValue("transition-duration");
+        let transitionDurationSeconds = parseFloat(transitionDuration);
+
+        if (transitionDuration.includes("ms")) {
+            transitionDurationSeconds /= 1000;  // convert from milliseconds to seconds
+        }
+
         if (sideMenu.style.display === "none" || sideMenu.style.height === "0px") {
             sideMenu.style.display = "block";
             sideMenu.style.height = "100px"; // Adjust as needed
@@ -722,8 +730,8 @@
             sideMenu.style.height = "0px";
             pageContainer.style.marginTop = "0px";
             // Hide the menu bar after the transition is done
-            setTimeout(function () { sideMenu.style.display = "none"; }, sideMenu.style.transition);
-            console.log(sideMenu.style.transition);
+            setTimeout(function () { sideMenu.style.display = "none"; }, transitionDurationSeconds);
+            console.log(transitionDurationSeconds);
         }
     });
 
