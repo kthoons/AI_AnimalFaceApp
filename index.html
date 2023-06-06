@@ -651,6 +651,7 @@
             $(this).css("width", `${gaugeData[i][1]}%`);
         });
     }
+
     function handleGenderChange(event) {
         const gender = event.target.checked ? "Female" : "Male";
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
@@ -725,7 +726,7 @@
         } else {
             sideMenu.style.height = "0px";
             // Hide the menu bar after the transition is done
-            setTimeout(function () { sideMenu.style.display = "none"; }, 500);
+            setTimeout(function () { sideMenu.style.display = "none"; }, 1000);
         }
     });
 
