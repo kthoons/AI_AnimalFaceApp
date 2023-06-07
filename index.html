@@ -128,6 +128,9 @@
 
 
         #side-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
             width: 100%;
             height: 0;
             overflow: hidden;
@@ -136,14 +139,15 @@
         }
 
         #side-menu p {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
             font-size: 18px;
             color: #4a4a4a;
             padding: 10px;
-            margin-bottom: 20px;
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s;
-
         }
 
         #side-menu p:hover {
@@ -731,6 +735,8 @@
         }
     });
 
+
+    // 다시하기 버튼 이벤트
     document.getElementById('tryAgain-button').addEventListener('click', function () {
         location.reload();
     });
