@@ -120,8 +120,7 @@
             transition: height 0.5s;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            transform: translate(0, 50%);
+            align-items: center;    
             transform-origin: top;
         }
 
@@ -725,10 +724,10 @@
 
         if (sideMenu.style.height === "0px") {
             sideMenu.style.height = "100px"; // Adjust as needed
-            pageContainer.style.transform = "translateY(100px)";
+            pageContainer.style.height = "100px";
         } else {
             sideMenu.style.height = "0px";
-            pageContainer.style.transform = "translateY(0px)";
+            pageContainer.style.height = "0px";
             // Hide the menu bar after the transition is done
             setTimeout(function () { sideMenu.style.height = "0px"; }, transitionDurationSeconds * 1000);
         }
