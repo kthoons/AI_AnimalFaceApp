@@ -122,7 +122,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transform: translate(0, 50%);
         }
 
 
@@ -728,10 +727,10 @@
 
         if (sideMenu.style.height === "0px") {
             sideMenu.style.height = "100px"; // Adjust as needed
-            pageContainer.style.height = "100px";
+            pageContainer.style.height = "translateY(100px)";
         } else {
             sideMenu.style.height = "0px";
-            pageContainer.style.height = "0px";
+            pageContainer.style.transform  = "translateY(0px)";
             // Hide the menu bar after the transition is done
             setTimeout(function () { sideMenu.style.height = "0px"; }, transitionDurationSeconds * 1000);
         }
