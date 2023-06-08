@@ -144,6 +144,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            /* Add this */
             font-size: 18px;
             color: #4a4a4a;
             padding: 10px;
@@ -151,27 +152,11 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             width: 100%;
-            position: relative;
-            /* New */
-            overflow: hidden;
-            /* New */
+            /* Add this */
         }
 
-        #side-menu p::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #e0e0e0;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        #side-menu p:hover::after {
-            opacity: 1;
+        #side-menu p:hover {
+            background-color: #e0e0e0;
         }
 
         /* 게이지 바 */
