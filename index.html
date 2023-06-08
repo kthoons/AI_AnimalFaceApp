@@ -592,7 +592,7 @@
         });
 
         textContainers.each(function (i, obj) {
-            obj.textContent = gaugeData[i][0] + "%";
+            obj.textContent = gaugeData[i][0] ;
         });
     }
     function fillAnimalExplanation() {
@@ -667,7 +667,7 @@
         console.log("createData");
         for (let i = 0; i < maxPredictions; i++) {
             const key = prediction[i].className;
-            const value = prediction[i].probability.toFixed(2) * 100;
+            const value = prediction[i].probability.toFixed(2) * 100 + "%";
             gaugeData[key] = value;
         }
 
