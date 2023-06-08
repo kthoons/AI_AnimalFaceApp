@@ -120,7 +120,7 @@
             transition: transform 0.5s;
             display: flex;
             flex-direction: column;
-            align-items: center;    
+            align-items: center;
             transform-origin: top;
         }
 
@@ -707,10 +707,11 @@
         let style = window.getComputedStyle(sideMenu);
         let transitionDuration = style.getPropertyValue("transition-duration");
         let transitionDurationSeconds = parseFloat(transitionDuration);
+        let sideMenuHeight = style.getPropertyValue("height");
 
         if (sideMenu.style.height === "0px") {
             sideMenu.style.height = "100px"; // Adjust as needed
-            pageContainer.style.transform = "translateY(100px)";
+            pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             sideMenu.style.height = "0px";
             pageContainer.style.transform = "translateY(0px)";
