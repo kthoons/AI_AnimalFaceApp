@@ -603,7 +603,7 @@
             .then(response => response.json())
             .then(descriptions => {
                 let userGender = gender; 
-                let userAnimal = gaugeData[0]; 
+                let userAnimal = gaugeData[0][0]; 
                 console.log(userAnimal);
                 let description = descriptions[userGender][userAnimal];
                 console.log(description);
