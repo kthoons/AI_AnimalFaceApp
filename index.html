@@ -714,7 +714,7 @@
         let sideMenuHeight = style.getPropertyValue("height");
 
         if (sideMenu.style.height === "0px") {
-            sideMenu.style.height = "100px"; 
+            sideMenu.style.height = "100px";
             pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             sideMenu.style.height = "0px";
@@ -722,7 +722,30 @@
         }
     });
 
+    document.addEventListener('click', function (event) {
+        var sideMenu = document.getElementById("side-menu");
+        var isClickInsideMenu = sideMenu.contains(event.target);
 
+        var menuButton = document.getElementById("menu-button");
+        var isClickOnMenuButton = menuButton.contains(event.target);
+
+        if (!isClickInsideMenu && !isClickOnMenuButton) {
+            // The click was outside the side-menu and not on the menu button, so close the side-menu
+            let style = window.getComputedStyle(sideMenu);
+            let transitionDuration = style.getPropertyValue("transition-duration");
+            let transitionDurationSeconds = parseFloat(transitionDuration);
+
+            if (sideMenu.style.height !== "0px") {
+                sideMenu.style.height = "0px";
+                document.getElementById("page-container").style.transform = "translateY(0px)";
+
+                // Hide the menu bar after the transition is done
+                setTimeout(function () {
+                    sideMenu.style.height = "0px";
+                }, transitionDurationSeconds * 1000);
+            }
+        }
+    });
     // 다시하기 버튼 이벤트
     document.getElementById('tryAgain-button').addEventListener('click', function () {
         location.reload();
