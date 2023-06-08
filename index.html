@@ -286,7 +286,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; // add this line
+            justify-content: center; 
         }
 
         #tryAgain-button {
@@ -297,7 +297,7 @@
             color: #000;
             border-radius: 4px;
             font-size: 20px;
-            margin-top: 20px; // add this line to add some space above the button
+            margin-top: 100px;
         }
 
         #tryAgain-button:hover {
@@ -399,9 +399,10 @@
         .image-container img {
             display: none;
             width: 20%;
-            /* 이미지의 가로 너비를 항상 브라우저 창의 너비에 맞춤 */
+            
             height: auto;
             margin: auto;
+            padding-top: 100px;
         }
 
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
@@ -504,6 +505,10 @@
                 </div>
             </div>
         </div>
+        <div id="animalface-explain">
+            <h1 id="main-explain"></h1>
+            <h2 id="sub-explain"></h2>
+        </div>
         <div id="tryAgain-button" style="display: none;">Try Again</div>
 
 
@@ -540,6 +545,7 @@
         prediction = await model.predict(image, false);
         createDataList();
         fillGauge();
+        fillAnimalExplanation();
 
         console.log("predict End");
     }
@@ -603,7 +609,9 @@
             obj.textContent = gaugeData[i][0]; // Change the text
         });
     }
-
+    function fillAnimalExplanation() {
+        
+    }
     function fillRandomColors() {
         const progressBar = $(".progress_bar");
         const colors = [
