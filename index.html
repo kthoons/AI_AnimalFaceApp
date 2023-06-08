@@ -714,13 +714,11 @@
         let sideMenuHeight = style.getPropertyValue("height");
 
         if (sideMenu.style.height === "0px") {
-            sideMenu.style.height = "100px"; // Adjust as needed
+            sideMenu.style.height = "100px"; 
             pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             sideMenu.style.height = "0px";
             pageContainer.style.transform = "translateY(0px)";
-            // Hide the menu bar after the transition is done
-            setTimeout(function () { sideMenu.style.height = "0px"; }, transitionDurationSeconds * 1000);
         }
     });
 
