@@ -602,7 +602,7 @@
         fetch('animalDiscriptions.json')
             .then(response => response.json())
             .then(descriptions => {
-                let userGender = gender; 
+                let userGender = gender == "Male" ? "남자" : "여자"; 
                 let userAnimal = gaugeData[0][0]; 
                 console.log(userGender);
                 console.log(userAnimal);
