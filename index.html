@@ -540,8 +540,7 @@
 
                 image.onload = function () {
                     const aspectRatio = image.naturalWidth / image.naturalHeight;
-                    document.getElementById('image-container').style.display = 'flex';
-                    console.log(aspectRatio);
+                    image.style.display = 'block';
                 }
             }
 
