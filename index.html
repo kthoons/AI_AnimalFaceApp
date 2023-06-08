@@ -286,7 +286,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; 
+            justify-content: center;
         }
 
         #tryAgain-button {
@@ -399,7 +399,7 @@
         .image-container img {
             display: none;
             width: 20%;
-            
+
             height: auto;
             margin: auto;
             padding-top: 100px;
@@ -455,7 +455,6 @@
         <span></span>
     </div>
     <div id="side-menu" class="side-menu" style="height: 0;">
-        <!-- 메뉴 항목을 여기에 추가하세요. -->
         <p>Copyright</p>
         <p>Description</p>
     </div>
@@ -523,6 +522,7 @@
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
     let URL = URL_Man;
+    let gender = "Male";
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
 
@@ -555,7 +555,7 @@
             console.error(error);
         }
     }
-    
+
     async function init() {
         console.log("Init..");
 
@@ -581,23 +581,6 @@
     }
 
 
-    
-
-    function adjustDisplay() {
-        // 이미지 생성
-        document.getElementById("previewImg").style.display = 'block';
-        // 게이지 생성
-        document.getElementById('gauge-container').style.display = 'block';
-        // 로딩 페이지 숨기기
-        document.getElementById('loading-page').style.display = 'none';
-        // 타이틀 숨기기
-        document.getElementById('title').style.display = 'none';
-        // 젠더 토글 숨기기
-        document.getElementById('gender-toggle').style.display = 'none';
-        // tryAgainButton 생성
-        document.getElementById('tryAgain-button').style.display = 'block';
-    }
-
     function fillGauge() {
         fillRandomColors();
 
@@ -609,11 +592,23 @@
         });
 
         textContainers.each(function (i, obj) {
-            obj.textContent = gaugeData[i][0]; // Change the text
+            obj.textContent = gaugeData[i][0] + "%";
         });
     }
     function fillAnimalExplanation() {
+        var mainEx = document.getElementById("main-explain");
+        var subEx = document.getElementById("sub-explain");
         
+        fetch('animalDiscriptions.json')
+            .then(response => response.json())
+            .then(descriptions => {
+                let userGender = gender; 
+                let userAnimal = gaugeData[0]; 
+                let description = descriptions[userGender][userAnimal];
+                console.log(description);
+
+                subEx = description;
+            });
     }
     function fillRandomColors() {
         const progressBar = $(".progress_bar");
@@ -644,7 +639,7 @@
     }
 
     function handleGenderChange(event) {
-        const gender = event.target.checked ? "Female" : "Male";
+        gender = event.target.checked ? "Female" : "Male";
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
 
@@ -680,7 +675,22 @@
         const sortedEntries = Object.entries(gaugeData).sort((a, b) => b[1] - a[1]);
         gaugeData = sortedEntries.slice(0, 3);
     }
+    function adjustDisplay() {
+        // 게이지 생성
+        document.getElementById('gauge-container').style.display = 'block';
+        // 로딩 페이지 숨기기
+        document.getElementById('loading-page').style.display = 'none';
+        // 타이틀 숨기기
+        document.getElementById('title').style.display = 'none';
+        // 젠더 토글 숨기기
+        document.getElementById('gender-toggle').style.display = 'none';
+        // tryAgainButton 생성
+        document.getElementById('tryAgain-button').style.display = 'block';
 
+        // 동물상 설명 생성
+        document.getElementById("main-explain").style.display = 'block';
+        document.getElementById("sub-explain").style.display = 'block';
+    }
 
     // 사이드메뉴바 애니메이션
     document.getElementById("menu-button").addEventListener("click", function () {
