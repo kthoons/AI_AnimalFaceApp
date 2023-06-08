@@ -603,7 +603,7 @@
             .then(response => response.json())
             .then(descriptions => {
                 let userGender = gender == "Male" ? "남자" : "여자"; 
-                let userAnimal = gaugeData[0][0]; 
+                let userAnimal = gaugeData[0][0].replace(/상/g, "");; 
                 console.log(userGender);
                 console.log(userAnimal);
                 let description = descriptions[userGender][userAnimal];
