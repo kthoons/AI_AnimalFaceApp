@@ -680,29 +680,6 @@
         gaugeData = sortedEntries.slice(0, 3);
     }
 
-    document.addEventListener('click', function (event) {
-
-        var target = event.target;
-        const sideMenu = document.getElementById('side-menu');
-        const pageContainer = document.getElementById('page-container');
-        const menuButton = document.getElementById('menu-button');
-        const isMenuVisible = sideMenu.style.left === '0px';
-
-        // target의 예외리스트 확인
-        if (CheckExceptionTarget(target)) {
-            return;
-        }
-
-
-        // // 메뉴창이 열려있을때만 
-        // if (target != menuButton && !sideMenu.contains(target) && isMenuVisible) {
-        //     sideMenu.style.height = '0px';
-        // }
-        // // 메뉴창이 닫혀있을때만
-        // else if (target == menuButton && !isMenuVisible) {
-        //     sideMenu.style.height = '0';
-        // }
-    });
 
     // 사이드메뉴바 애니메이션
     document.getElementById("menu-button").addEventListener("click", function () {
