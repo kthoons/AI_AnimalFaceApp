@@ -690,10 +690,8 @@
 
     function handleGenderChange(event) {
         let genderToggle = document.getElementById("gender-toggle");
-        let backgroundColor = genderToggle.style.backgroundColor;
         gender = event.target.checked ? "Female" : "Male";
-        console.log(gender);
-        gender == "Male" ? backgroundColor = '#e998cd' : backgroundColor = '#8999e1';
+        gender == "Male" ? genderToggle.style.backgroundColor = '#e998cd' : genderToggle.style.backgroundColor = '#8999e1';
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
 
