@@ -405,6 +405,14 @@
             padding-top: 100px;
         }
 
+        #sub-explain {
+            width: 40%;
+            margin: auto;
+            margin-top: 20px;
+            color: #616161;
+        }
+
+
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
         @media screen and (max-width: 500px) {
             .image-container img {
@@ -438,9 +446,17 @@
                 top: 2%;
                 left: 5%;
             }
+            #sub-explain {
+                width: 60%;
+                margin: auto;
+                margin-top: 20px;
+                font-size: 25px;
+            }
+            #side-menu p {
+                font-size: 15px;
+            }
         }
 
-        /* 게이지바 끝 */
     </style>
 </head>
 
@@ -604,10 +620,7 @@
             .then(descriptions => {
                 let userGender = gender == "Male" ? "남자" : "여자"; 
                 let userAnimal = gaugeData[0][0].replace(/상/g, "");; 
-                console.log(userGender);
-                console.log(userAnimal);
                 let description = descriptions[userGender][userAnimal];
-                console.log(description);
 
                 subEx.textContent = description;
             });
