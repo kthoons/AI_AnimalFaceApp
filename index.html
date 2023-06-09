@@ -586,6 +586,7 @@
 
         console.log("Init End");
     }
+
     async function Predict() {
         console.log("predicting...");
 
@@ -614,6 +615,7 @@
             obj.textContent = gaugeData[i][0] ;
         });
     }
+
     function fillAnimalExplanation() {
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
@@ -628,6 +630,7 @@
                 subEx.textContent = description;
             });
     }
+
     function fillRandomColors() {
         const progressBar = $(".progress_bar");
         const colors = [
@@ -673,7 +676,7 @@
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            obj.textContent = Math.floor(progress * (end - start) + start + "%");
+            obj.textContent = Math.floor(progress * (end - start) + start) + "%";
             if (progress < 1) {
                 window.requestAnimationFrame(step);
             }
