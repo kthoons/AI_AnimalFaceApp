@@ -474,6 +474,7 @@
                 margin: auto;
                 margin-top: 20px;
                 color: #2a2a2a;
+                font-size: 18px;
             }
 
             #tryAgain-button {
@@ -690,7 +691,10 @@
     }
 
     function handleGenderChange(event) {
+        let genderToggle = document.getElementById("gender-toggle");
+        let backgroundColor = genderToggle.style.backgroundColor;
         gender = event.target.checked ? "Female" : "Male";
+        gender == "Male" ? backgroundColor = '#e998cd' : backgroundColor = '#8999e1';
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
 
