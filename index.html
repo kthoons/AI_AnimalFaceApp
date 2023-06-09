@@ -292,12 +292,12 @@
         #tryAgain-button {
             width: 100px;
             padding: 10px 20px;
-            border: 1px solid #000;
+            border: 4px solid #fb7070;
             background-color: #ff9c9c;
-            color: #000;
-            border-radius: 4px;
+            color: #141414;
+            border-radius: 19px;
             font-size: 20px;
-            margin-top: 100px;
+            margin-top: 52px;
         }
 
         #tryAgain-button:hover {
@@ -453,26 +453,40 @@
                 top: 2%;
                 left: 5%;
             }
+
             #sub-explain {
                 width: 60%;
                 margin: auto;
                 margin-top: 20px;
                 font-size: 15px;
             }
+
             #side-menu p {
                 font-size: 15px;
             }
+
             .image-container img {
                 padding-top: 50px;
             }
+
             #main-explain {
                 width: 70%;
                 margin: auto;
                 margin-top: 20px;
                 color: #2a2a2a;
             }
-        }
 
+            #tryAgain-button {
+                width: 70px;
+                padding: 5px 15px;
+                border: 4px solid #fb7070;
+                background-color: #ff9c9c;
+                color: #141414;
+                border-radius: 19px;
+                font-size: 13px;
+                margin-top: 23px;
+            }
+        }
     </style>
 </head>
 
@@ -625,19 +639,19 @@
         });
 
         textContainers.each(function (i, obj) {
-            obj.textContent = gaugeData[i][0] ;
+            obj.textContent = gaugeData[i][0];
         });
     }
 
     function fillAnimalExplanation() {
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
-        
+
         fetch('animalDiscriptions.json')
             .then(response => response.json())
             .then(descriptions => {
-                let userGender = gender == "Male" ? "남자" : "여자"; 
-                let userAnimal = gaugeData[0][0].replace(/상/g, "");; 
+                let userGender = gender == "Male" ? "남자" : "여자";
+                let userAnimal = gaugeData[0][0].replace(/상/g, "");;
                 let description = descriptions["설명"][userGender][userAnimal];
                 let summary = descriptions["요약"][userGender][userAnimal];
                 subEx.textContent = description;
@@ -704,7 +718,7 @@
         console.log("createData");
         for (let i = 0; i < maxPredictions; i++) {
             const key = prediction[i].className;
-            const value = prediction[i].probability.toFixed(2) * 100 ;
+            const value = prediction[i].probability.toFixed(2) * 100;
             gaugeData[key] = value;
         }
 
