@@ -625,10 +625,13 @@
             .then(descriptions => {
                 let userGender = gender == "Male" ? "남자" : "여자"; 
                 let userAnimal = gaugeData[0][0].replace(/상/g, "");; 
-                let description = descriptions[userGender][userAnimal];
-
+                let description = descriptions["설명"][userGender][userAnimal];
+                let summary = descriptions["요약"][userGender][userAnimal];
                 subEx.textContent = description;
+                mainEx.textContent = summary;
+                console.log("in the fetch");
             });
+        console.log("outside of the fetch");
     }
 
     function fillRandomColors() {
