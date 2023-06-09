@@ -48,7 +48,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #6488e2;
+            background-color: #8999e1;
             padding: 10px;
             border-radius: 50px;
             width: fit-content;
@@ -691,7 +691,7 @@
     function handleGenderChange(event) {
         let genderToggle = document.getElementById("gender-toggle");
         gender = event.target.checked ? "Female" : "Male";
-        gender == "Male" ? genderToggle.style.backgroundColor = '#e998cd' : genderToggle.style.backgroundColor = '#8999e1';
+        gender == "Male" ? genderToggle.style.backgroundColor = '#8999e1' : genderToggle.style.backgroundColor = '#e998cd';
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
 
