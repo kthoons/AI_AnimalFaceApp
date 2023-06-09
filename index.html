@@ -586,8 +586,6 @@
                 image.src = fileReader.result;
 
                 image.onload = function () {
-                    const aspectRatio = image.naturalHeight / image.naturalWidth;
-                    image.style.height = image.style.width * aspectRatio ;
                     image.style.display = 'block';
                 }
             }
