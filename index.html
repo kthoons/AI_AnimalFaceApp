@@ -657,9 +657,7 @@
                 let summary = descriptions["요약"][userGender][userAnimal];
                 subEx.textContent = description;
                 mainEx.textContent = summary;
-                console.log("in the fetch");
             });
-        console.log("outside of the fetch");
     }
 
     function fillRandomColors() {
@@ -694,6 +692,7 @@
         let genderToggle = document.getElementById("gender-toggle");
         let backgroundColor = genderToggle.style.backgroundColor;
         gender = event.target.checked ? "Female" : "Male";
+        console.log(gender);
         gender == "Male" ? backgroundColor = '#e998cd' : backgroundColor = '#8999e1';
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
