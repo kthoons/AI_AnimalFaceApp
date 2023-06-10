@@ -323,7 +323,7 @@
             position: relative;
             width: 100%;
             height: 50%;
-            margin-top: 5%;
+            margin-top: 3%;
         }
 
 
@@ -402,7 +402,7 @@
 
             height: auto;
             margin: auto;
-            padding-top: 100px;
+            padding-top: 75px;
         }
 
         #sub-explain {
@@ -467,12 +467,13 @@
 
             .image-container img {
                 padding-top: 50px;
+                margin-top: 50px;
             }
 
             #main-explain {
                 width: 70%;
                 margin: auto;
-                margin-top: 20px;
+                margin-top: 45px;
                 color: #2a2a2a;
                 font-size: 18px;
             }
@@ -654,8 +655,10 @@
                 let userAnimal = gaugeData[0][0].replace(/상/g, "");;
                 let description = descriptions["설명"][userGender][userAnimal];
                 let summary = descriptions["요약"][userGender][userAnimal];
+                let randomColor = getRandomColor();
                 subEx.textContent = description;
                 mainEx.textContent = summary;
+                mainEx.style.color = randomColor;
             });
     }
 
@@ -687,6 +690,12 @@
         });
     }
 
+    function getRandomColor() {
+        const colors = ['#FF0000', '#00FF00', '#0000FF', '#FF00FF', '#FFFF00', '#00FFFF'];
+        const randomIndex = Math.floor(Math.random() * colors.length);
+        return colors[randomIndex];
+    }
+    
     function handleGenderChange(event) {
         let genderToggle = document.getElementById("gender-toggle");
         gender = event.target.checked ? "Female" : "Male";
