@@ -61,10 +61,11 @@
             border-radius: 50px;
             width: fit-content;
             font-family: 'Dovemayo_gothic';
+            transition: background-color 0.5s ease;
         }
 
         #gender-toggle span {
-            font-size: 18px;
+            font-size: 25px;
             color: #fff;
             margin: 0 15px;
         }
@@ -532,7 +533,7 @@
             <span>여자</span>
         </div>
         <div id="upload-area" onclick="document.getElementById('file-input').click();">
-            Click or touch to upload
+            여기에 사진을 올려주세요!
         </div>
         <div class="image-container">
             <img id="previewImg" alt="" />
@@ -639,7 +640,7 @@
         createDataList();
         fillGauge();
         fillAnimalExplanation();
-
+upload-are
         console.log("predict End");
     }
 
@@ -719,11 +720,12 @@
     }
 
     function handleGenderChange(event) {
-        let genderToggle = document.getElementById("gender-toggle");
-        gender = event.target.checked ? "Female" : "Male";
-        gender == "Male" ? genderToggle.style.backgroundColor = '#8999e1' : genderToggle.style.backgroundColor = '#e998cd';
-        URL = (gender == 'Male') ? URL_Man : URL_Woman;
-    }
+    let genderToggle = document.getElementById("gender-toggle");
+    gender = event.target.checked ? "Female" : "Male";
+    genderToggle.style.backgroundColor = (gender == "Male") ? '#8999e1' : '#e998cd';
+    URL = (gender == 'Male') ? URL_Man : URL_Woman;
+}
+
 
     function CheckExceptionTarget(elem) {
         const tryAgainButton = document.getElementById('tryAgain-button');
