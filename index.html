@@ -7,11 +7,11 @@
     <title>나의 동물상 찾기</title>
     <style>
         @font-face {
-    font-family: 'Dovemayo_gothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
+            font-family: 'Dovemayo_gothic';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
 
         body {
             font-family: Arial, sans-serif;
@@ -502,12 +502,19 @@
                 font-size: 11px;
                 margin-top: 23px;
             }
+
+            #title {
+                font-size: 30px;
+                width:90%;
+            }
         }
     </style>
 </head>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Kanit:wght@500&family=Russo+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Kanit:wght@500&family=Russo+One&display=swap"
+    rel="stylesheet">
+
 <body>
     <div id="loading-page" style="display: none;">
         <div class="loading-indicator">Loading...</div>
@@ -640,7 +647,7 @@
         createDataList();
         fillGauge();
         fillAnimalExplanation();
-upload-are
+        upload - are
         console.log("predict End");
     }
 
@@ -720,11 +727,11 @@ upload-are
     }
 
     function handleGenderChange(event) {
-    let genderToggle = document.getElementById("gender-toggle");
-    gender = event.target.checked ? "Female" : "Male";
-    genderToggle.style.backgroundColor = (gender == "Male") ? '#8999e1' : '#f998d8';
-    URL = (gender == 'Male') ? URL_Man : URL_Woman;
-}
+        let genderToggle = document.getElementById("gender-toggle");
+        gender = event.target.checked ? "Female" : "Male";
+        genderToggle.style.backgroundColor = (gender == "Male") ? '#8999e1' : '#f998d8';
+        URL = (gender == 'Male') ? URL_Man : URL_Woman;
+    }
 
 
     function CheckExceptionTarget(elem) {
