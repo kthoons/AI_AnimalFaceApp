@@ -691,11 +691,18 @@
     }
 
     function getRandomColor() {
-        const colors = ['#000000', '#333333', '#555555', '#666666', '#777777', '#999999']; 
+        const colors = [
+            "#17A2B8", // 청록색
+            "#28A745", // 녹색
+            "#6F42C1", // 보라색
+            "#007BFF", // 파랑색
+            "#FD7E14", // 오렌지색
+            "#DC3545" // 빨강색
+        ];
         const randomIndex = Math.floor(Math.random() * colors.length);
         return colors[randomIndex];
     }
-    
+
     function handleGenderChange(event) {
         let genderToggle = document.getElementById("gender-toggle");
         gender = event.target.checked ? "Female" : "Male";
