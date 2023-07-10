@@ -441,9 +441,14 @@
 
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
         @media screen and (max-width: 500px) {
+            #gauge-container {
+                margin-top: 8%;
+            }
             .image-container img {
                 width: 30%;
                 height: auto;
+                padding-top: 40px;
+                margin-top: 50px;
             }
 
             div.loader_container {
@@ -451,12 +456,12 @@
             }
 
             div#bar_container {
-                height: 15px;
+                height: 13px;
             }
 
             div.text_container {
                 margin-right: 15px;
-                font-size: 3vw;
+                font-size: 3.5vw;
             }
 
             #upload-area {
@@ -484,15 +489,11 @@
                 font-size: 15px;
             }
 
-            .image-container img {
-                padding-top: 50px;
-                margin-top: 50px;
-            }
 
             #main-explain {
                 width: 70%;
                 margin: auto;
-                margin-top: 45px;
+                margin-top: 5%;
                 color: #2a2a2a;
                 font-size: 6vw;
             }
