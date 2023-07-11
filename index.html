@@ -298,7 +298,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            
+
         }
 
         #tryAgain-button {
@@ -444,6 +444,7 @@
             #gauge-container {
                 margin-top: 8%;
             }
+
             .image-container img {
                 width: 30%;
                 height: auto;
@@ -515,13 +516,15 @@
 
             #title {
                 font-size: 26px;
-                width:80%;
+                width: 80%;
             }
+
             #gender-toggle span {
                 font-size: 18px;
                 color: #fff;
                 margin: 0 15px;
             }
+
             #page-container {
                 margin-top: 0;
             }
@@ -615,7 +618,17 @@
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
 
+    const spawn = require('child_process').spawn;
 
+    const result = spawn('python', ['function.py']);
+
+    result.stdout.on('data', function (data) {
+        console.log(data.toString());
+    });
+
+    result.stderr.on('data', function (data) {
+        console.log(data.toString());
+    });
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
