@@ -244,7 +244,7 @@
             position: absolute;
             margin: 10px auto;
             display: inline-block;
-            z-index: 1;
+            z-index: 0;
             -webkit-transform: rotate(0deg);
             -moz-transform: rotate(0deg);
             -o-transform: rotate(0deg);
@@ -547,8 +547,8 @@
         <span></span>
     </div>
     <div id="side-menu" class="side-menu" style="height: 0;">
-        <p>Copyright</p>
-        <p>Description</p>
+        <p>앱 설명</p>
+        <p>저작권</p>
     </div>
     <div id="page-container">
 
@@ -566,6 +566,14 @@
         <div class="image-container">
             <img id="previewImg" alt="" />
         </div>
+        <div class="avatar-edit">
+            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload"></label>
+        </div>
+        <div class="avatar-preview">
+            <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+            </div>
+        </div>
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
         <div id="gauge-container" style="display: none;">
             <div id="loader_container1" class="loader_container">
@@ -577,7 +585,7 @@
                     <span class="point_counter">0</span>
                 </div>
             </div>
-            <div id="loader_container2" class="loader_container">
+            <div id="loader_container2" class="loader_container"> 
                 <div class="text_container">
                     동물상
                 </div>
