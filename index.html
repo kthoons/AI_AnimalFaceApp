@@ -143,7 +143,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Add this */
             font-size: 18px;
             color: #4a4a4a;
             padding: 10px;
@@ -151,7 +150,6 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             width: 100%;
-            /* Add this */
         }
 
         #side-menu p:hover {
@@ -446,6 +444,9 @@
 
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
         @media screen and (max-width: 500px) {
+            #side-menu p:hover {
+                background-color: #efefef;
+            }
             #gauge-container {
                 margin-top: 8%;
             }
