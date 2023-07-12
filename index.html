@@ -547,7 +547,7 @@
     </div>
     <div id="side-menu" class="side-menu" style="height: 0;">
         <p>앱 설명</p>
-        <p>저작</p>
+        <p>개발자</p>
     </div>
     <div id="page-container">
 
@@ -564,14 +564,6 @@
         </div>
         <div class="image-container">
             <img id="previewImg" alt="" />
-        </div>
-        <div class="avatar-edit">
-            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-            <label for="imageUpload"></label>
-        </div>
-        <div class="avatar-preview">
-            <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
-            </div>
         </div>
         <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
         <div id="gauge-container" style="display: none;">
@@ -857,6 +849,22 @@
     document.getElementById('tryAgain-button').addEventListener('click', function () {
         location.reload();
     });
+
+    document.getElementById("menu-button").addEventListener("click", function() {
+    var sideMenu = document.getElementById("side-menu");
+    var menuButton = document.getElementById("menu-button");
+
+    // 메뉴가 열려있는지 확인
+    if (sideMenu.style.height === "0px") {
+        // 메뉴를 열고 버튼을 숨김
+        sideMenu.style.height = "100%";
+        menuButton.style.display = "none";
+    } else {
+        // 메뉴를 닫고 버튼을 보임
+        sideMenu.style.height = "0px";
+        menuButton.style.display = "block";
+    }
+});
 </script>
 
 </html>
