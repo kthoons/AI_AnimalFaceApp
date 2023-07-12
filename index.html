@@ -814,9 +814,11 @@
 
         if (sideMenu.style.height === "0px") {
             sideMenu.style.height = "100px";
+            menuButton.style.display = "none";
             pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             sideMenu.style.height = "0px";
+            menuButton.style.display = "block";
             pageContainer.style.transform = "translateY(0px)";
         }
     });
@@ -850,21 +852,7 @@
         location.reload();
     });
 
-    document.getElementById("menu-button").addEventListener("click", function() {
-    var sideMenu = document.getElementById("side-menu");
-    var menuButton = document.getElementById("menu-button");
-
-    // 메뉴가 열려있는지 확인
-    if (sideMenu.style.height === "0px") {
-        // 메뉴를 열고 버튼을 숨김
-        sideMenu.style.height = "100%";
-        menuButton.style.display = "none";
-    } else {
-        // 메뉴를 닫고 버튼을 보임
-        sideMenu.style.height = "0px";
-        menuButton.style.display = "block";
-    }
-});
+    
 </script>
 
 </html>
