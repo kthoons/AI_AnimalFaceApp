@@ -470,7 +470,7 @@
             }
 
             #upload-area {
-                font-size: 1.5vw;
+                font-size: 4vw;
                 font-weight: bold;
                 color: #717171;
                 width: 250px;
@@ -824,11 +824,13 @@
         let sideMenuHeight = style.getPropertyValue("height");
 
         if (sideMenu.style.height === "0px") {
+            console.log("sideMenu is open");
             sideMenu.style.height = "100px";
             menuButton.style.opacity = "0";
             menuButton.style.pointerEvents = "none"; // disable the button
             pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
+            console.log("sideMenu is closed");
             sideMenu.style.height = "0px";
             menuButton.style.opacity = "1";
             menuButton.style.pointerEvents = "auto"; // enable the button
@@ -850,6 +852,7 @@
 
         // 클릭한 요소가 side-menu와 menu-button 외부에 있는지 확인합니다.
         if (!isClickSideMenu && !isClickOnMenuButton) {
+            console.log("it's outside of menu");
             // 클릭이 side-menu와 menu-button 외부에서 발생했으므로 side-menu를 닫습니다.
 
             // side-menu의 스타일 속성을 가져옵니다.
