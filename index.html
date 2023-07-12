@@ -824,13 +824,13 @@
         let sideMenuHeight = style.getPropertyValue("height");
 
         if (sideMenu.style.height === "0px") {
-            console.log("sideMenu is open");
+            console.log("sideMenu is opning");
             sideMenu.style.height = "100px";
             menuButton.style.opacity = "0";
             menuButton.style.pointerEvents = "none"; // disable the button
             pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
-            console.log("sideMenu is closed");
+            console.log("sideMenu is closing");
             sideMenu.style.height = "0px";
             menuButton.style.opacity = "1";
             menuButton.style.pointerEvents = "auto"; // enable the button
@@ -863,6 +863,7 @@
 
             // side-menu가 이미 열려있는지 확인합니다.
             if (sideMenu.style.height !== "0px") {
+                console.log("it's outside of menu and side-menu is closing");
                 // side-menu를 닫으므로 menu-button을 다시 보이게 합니다.
                 sideMenu.style.height = "0px"; // side-menu의 높이를 0으로 설정해 숨깁니다.
                 menuButton.style.display = "block";
