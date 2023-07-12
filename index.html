@@ -819,7 +819,6 @@
             pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             sideMenu.style.height = "0px";
-            menuButton.style.display = "block";
             pageContainer.style.transform = "translateY(0px)";
         }
     });
@@ -838,6 +837,7 @@
             let transitionDurationSeconds = parseFloat(transitionDuration);
 
             if (sideMenu.style.height !== "0px") {
+                menuButton.style.display = "block";
                 sideMenu.style.height = "0px";
                 document.getElementById("page-container").style.transform = "translateY(0px)";
 
