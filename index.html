@@ -807,26 +807,28 @@
 
     // 사이드메뉴바 애니메이션
     document.getElementById("menu-button").addEventListener("click", function (event) {
-    event.stopPropagation(); // Add this line
+        event.stopPropagation();
 
-    var sideMenu = document.getElementById("side-menu");
-    var pageContainer = document.getElementById("page-container");
-    let style = window.getComputedStyle(sideMenu);
-    var menuButton = document.getElementById("menu-button"); 
-    let transitionDuration = style.getPropertyValue("transition-duration");
-    let transitionDurationSeconds = parseFloat(transitionDuration);
-    let sideMenuHeight = style.getPropertyValue("height");
+        var sideMenu = document.getElementById("side-menu");
+        var pageContainer = document.getElementById("page-container");
+        let style = window.getComputedStyle(sideMenu);
+        var menuButton = document.getElementById("menu-button");
+        let transitionDuration = style.getPropertyValue("transition-duration");
+        let transitionDurationSeconds = parseFloat(transitionDuration);
+        let sideMenuHeight = style.getPropertyValue("height");
 
-    if (sideMenu.style.height === "0px") {
-        sideMenu.style.height = "100px";
-        menuButton.style.opacity = "0";
-        pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
-    } else {
-        sideMenu.style.height = "0px";
-        menuButton.style.opacity = "1";
-        pageContainer.style.transform = "translateY(0px)";
-    }
-});
+        if (sideMenu.style.height === "0px") {
+            sideMenu.style.height = "100px";
+            menuButton.style.opacity = "0";
+            menuButton.style.pointerEvents = "none"; // disable the button
+            pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
+        } else {
+            sideMenu.style.height = "0px";
+            menuButton.style.opacity = "1";
+            menuButton.style.pointerEvents = "auto"; // enable the button
+            pageContainer.style.transform = "translateY(0px)";
+        }
+    });
     // 사이드메뉴바 외부 클릭시 올라가는 이벤트
     document.addEventListener('click', function (event) {
         var sideMenu = document.getElementById("side-menu");
