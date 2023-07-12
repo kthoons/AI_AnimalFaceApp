@@ -808,6 +808,7 @@
         var sideMenu = document.getElementById("side-menu");
         var pageContainer = document.getElementById("page-container");
         let style = window.getComputedStyle(sideMenu);
+        var menuButton = document.getElementById("menu-button"); 
         let transitionDuration = style.getPropertyValue("transition-duration");
         let transitionDurationSeconds = parseFloat(transitionDuration);
         let sideMenuHeight = style.getPropertyValue("height");
