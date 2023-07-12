@@ -835,7 +835,7 @@
         // side-menu 요소를 가져옵니다.
         var sideMenu = document.getElementById("side-menu");
         // 클릭한 요소가 side-menu 내부에 있는지 확인합니다.
-        var isClickInsideMenu = sideMenu.contains(event.target);
+        var isClickSideMenu = sideMenu.contains(event.target);
 
         // menu-button 요소를 가져옵니다.
         var menuButton = document.getElementById("menu-button");
@@ -843,7 +843,7 @@
         var isClickOnMenuButton = menuButton.contains(event.target);
 
         // 클릭한 요소가 side-menu와 menu-button 외부에 있는지 확인합니다.
-        if (!isClickInsideMenu && !isClickOnMenuButton) {
+        if (!isClickSideMenu && !isClickOnMenuButton) {
             // 클릭이 side-menu와 menu-button 외부에서 발생했으므로 side-menu를 닫습니다.
 
             // side-menu의 스타일 속성을 가져옵니다.
@@ -855,15 +855,15 @@
             // side-menu가 이미 열려있는지 확인합니다.
             if (sideMenu.style.height !== "0px") {
                 // side-menu를 닫으므로 menu-button을 다시 보이게 합니다.
+                sideMenu.style.height = "0px"; // side-menu의 높이를 0으로 설정해 숨깁니다.
                 menuButton.style.display = "block";
                 menuButton.style.opacity = "1";
-                menuButton.style.pointerEvents = "auto"; // 메뉴 버튼의 클릭 이벤트를 활성화합니다.
-                sideMenu.style.height = "0px"; // side-menu의 높이를 0으로 설정해 메뉴를 숨깁니다.
                 // page-container의 위치를 원래대로 복구합니다.
                 document.getElementById("page-container").style.transform = "translateY(0px)";
 
                 // transition-duration 후에 side-menu를 완전히 숨깁니다.
                 setTimeout(function () {
+                    menuButton.style.pointerEvents = "auto"; // 메뉴 버튼의 클릭 이벤트를 활성화합니다.
                     sideMenu.style.height = "0px";
                 }, transitionDurationSeconds * 1000); // 밀리초로 변환
             }
