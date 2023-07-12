@@ -827,19 +827,13 @@
         if (sideMenu.style.height === "0px") {
             console.log("sideMenu is opening");
             sideMenu.style.height = "100px";
-            menuButton.style.opacity = "0";
-            menuButton.style.pointerEvents = "none"; // disable the button
+            menuButton.style.zIndex = "-1"; // Hide the button under the side menu
             pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             console.log("sideMenu is closing");
             sideMenu.style.height = "0px";
-            menuButton.style.opacity = "1";
+            menuButton.style.zIndex = "1"; // Show the button
             pageContainer.style.transform = "translateY(0px)";
-
-            // transition-duration 후에 메뉴 버튼의 클릭 이벤트를 활성화합니다.
-            setTimeout(function () {
-                menuButton.style.pointerEvents = "auto";
-            }, transitionDurationSeconds * 1000);
         }
     });
     // 사이드메뉴바 외부 클릭시 올라가는 이벤트
