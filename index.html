@@ -802,8 +802,9 @@
             const j = Math.floor(Math.random() * (i + 1));
             [colors[i], colors[j]] = [colors[j], colors[i]];
         }
-        console.log(progressBar);
+        
         progressBar.each(function (i) {
+            console.log(this);
             $(this).css(
                 "background",
                 `linear-gradient(to bottom, ${colors[i].start}, ${colors[i].end})`
