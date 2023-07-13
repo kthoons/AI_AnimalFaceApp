@@ -126,6 +126,7 @@
 
 
         #side-menu {
+            height: 0;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -558,65 +559,124 @@
         <span></span>
         <span></span>
     </div>
-    <div id="side-menu" class="side-menu" style="height: 0;">
+    <div id="side-menu" class="side-menu">
         <div class="menu-item" id="page1">앱 설명</div>
         <div class="menu-item" id="page2">개발자</div>
     </div>
     <div id="content">
-        <div id="page-container">
-
-            <h1 id="title">나와 닮은 동물상은 무엇일까요?</h1>
-    
-            <div id="gender-toggle" style="margin-bottom: 80px;">
-                <span>남자</span>
-                <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
-                <label for="gender-switch"></label>
-                <span>여자</span>
-            </div>
-            <div id="upload-area" onclick="document.getElementById('file-input').click();">
-                여기에 사진을 올려주세요!
-            </div>
-            <div class="image-container">
-                <img id="previewImg" alt="" />
-            </div>
-            <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-            <div id="gauge-container" style="display: none;">
-                <div id="loader_container1" class="loader_container">
-                    <div class="text_container">
-                        동물상
+        <div id="page-1">
+            <div id="page-container">
+            
+                <h1 id="title">나와 닮은 동물상은 무엇일까요?</h1>
+        
+                <div id="gender-toggle" style="margin-bottom: 80px;">
+                    <span>남자</span>
+                    <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
+                    <label for="gender-switch"></label>
+                    <span>여자</span>
+                </div>
+                <div id="upload-area" onclick="document.getElementById('file-input').click();">
+                    여기에 사진을 올려주세요!
+                </div>
+                <div class="image-container">
+                    <img id="previewImg" alt="" />
+                </div>
+                <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
+                <div id="gauge-container" style="display: none;">
+                    <div id="loader_container1" class="loader_container">
+                        <div class="text_container">
+                            동물상
+                        </div>
+                        <div id="bar_container">
+                            <div class="progress_bar"></div>
+                            <span class="point_counter">0</span>
+                        </div>
                     </div>
-                    <div id="bar_container">
-                        <div class="progress_bar"></div>
-                        <span class="point_counter">0</span>
+                    <div id="loader_container2" class="loader_container">
+                        <div class="text_container">
+                            동물상
+                        </div>
+                        <div id="bar_container">
+                            <div class="progress_bar"></div>
+                            <span class="point_counter">0</span>
+                        </div>
+                    </div>
+                    <div id="loader_container3" class="loader_container">
+                        <div class="text_container">
+                            동물상
+                        </div>
+                        <div id="bar_container">
+                            <div class="progress_bar"></div>
+                            <span class="point_counter">0</span>
+                        </div>
                     </div>
                 </div>
-                <div id="loader_container2" class="loader_container">
-                    <div class="text_container">
-                        동물상
-                    </div>
-                    <div id="bar_container">
-                        <div class="progress_bar"></div>
-                        <span class="point_counter">0</span>
-                    </div>
+                <div id="animalface-explain">
+                    <h1 id="main-explain"></h1>
+                    <h2 id="sub-explain"></h2>
                 </div>
-                <div id="loader_container3" class="loader_container">
-                    <div class="text_container">
-                        동물상
-                    </div>
-                    <div id="bar_container">
-                        <div class="progress_bar"></div>
-                        <span class="point_counter">0</span>
-                    </div>
-                </div>
+                <div id="tryAgain-button" style="display: none;">다시하기</div>
+        
+        
             </div>
-            <div id="animalface-explain">
-                <h1 id="main-explain"></h1>
-                <h2 id="sub-explain"></h2>
-            </div>
-            <div id="tryAgain-button" style="display: none;">다시하기</div>
-    
-    
         </div>
+        <div id="page-2">
+            <div id="page-container">
+            
+                <h1 id="title">나와 닮은 동물상은 무엇일까요?</h1>
+        
+                <div id="gender-toggle" style="margin-bottom: 80px;">
+                    <span>남자</span>
+                    <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
+                    <label for="gender-switch"></label>
+                    <span>여자</span>
+                </div>
+                <div id="upload-area" onclick="document.getElementById('file-input').click();">
+                    여기에 사진을 올려주세요!
+                </div>
+                <div class="image-container">
+                    <img id="previewImg" alt="" />
+                </div>
+                <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
+                <div id="gauge-container" style="display: none;">
+                    <div id="loader_container1" class="loader_container">
+                        <div class="text_container">
+                            동물상
+                        </div>
+                        <div id="bar_container">
+                            <div class="progress_bar"></div>
+                            <span class="point_counter">0</span>
+                        </div>
+                    </div>
+                    <div id="loader_container2" class="loader_container">
+                        <div class="text_container">
+                            동물상
+                        </div>
+                        <div id="bar_container">
+                            <div class="progress_bar"></div>
+                            <span class="point_counter">0</span>
+                        </div>
+                    </div>
+                    <div id="loader_container3" class="loader_container">
+                        <div class="text_container">
+                            동물상
+                        </div>
+                        <div id="bar_container">
+                            <div class="progress_bar"></div>
+                            <span class="point_counter">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="animalface-explain">
+                    <h1 id="main-explain"></h1>
+                    <h2 id="sub-explain"></h2>
+                </div>
+                <div id="tryAgain-button" style="display: none;">다시하기</div>
+        
+        
+            </div>
+        </div>
+        
         <!-- Page content will be loaded here -->
     </div>
     
@@ -895,7 +955,7 @@
     // Get all the menu items
     var menuItems = document.getElementsByClassName("menu-item");
 
-    // Add a click event listener to each menu item
+    // 사이드 메뉴의 버튼 Id 가져와서 loadPage 의 parameter 로 사용
     for (let i = 0; i < menuItems.length; i++) {
         menuItems[i].addEventListener("click", function () {
             loadPage(this.id);
@@ -903,20 +963,20 @@
     }
 
     function loadPage(pageId) {
-        // Replace this with actual code to fetch and display content
         var content = fetchPageContent(pageId);
         document.getElementById("content").innerHTML = content;
     }
+
+    var page1 = document.getElementById('page-1');
+    var page2 = document.getElementById('page-2');
 
     function fetchPageContent(pageId) {
         // This is just an example. In real use, you would fetch content from a server.
         switch (pageId) {
             case "page1":
-                return "This is page 1";
+                return page1;
             case "page2":
-                return "This is page 2";
-            case "page3":
-                return "This is page 3";
+                return page2;
             default:
                 return "";
         }
