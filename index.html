@@ -443,7 +443,9 @@
             color: #2a2a2a;
             font-family: 'Dovemayo_gothic';
         }
-
+        #page-2 {
+            display: none;
+        }
 
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
         @media screen and (max-width: 500px) {
@@ -566,9 +568,9 @@
     <div id="content">
         <div id="page-1">
             <div id="page-container">
-            
+
                 <h1 id="title">나와 닮은 동물상은 무엇일까요?</h1>
-        
+
                 <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
                     <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
@@ -616,15 +618,15 @@
                     <h2 id="sub-explain"></h2>
                 </div>
                 <div id="tryAgain-button" style="display: none;">다시하기</div>
-        
-        
+
+
             </div>
         </div>
         <div id="page-2">
             <div id="page-container">
-            
-                <h1 id="title">나와 닮은 동물상은 무엇일까요?</h1>
-        
+
+                <h1 id="title">너와 닮은 동물상은 무엇일까요?</h1>
+
                 <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
                     <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
@@ -672,14 +674,14 @@
                     <h2 id="sub-explain"></h2>
                 </div>
                 <div id="tryAgain-button" style="display: none;">다시하기</div>
-        
-        
+
+
             </div>
         </div>
-        
+
         <!-- Page content will be loaded here -->
     </div>
-    
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script
@@ -955,6 +957,11 @@
     // Get all the menu items
     var menuItems = document.getElementsByClassName("menu-item");
 
+    // Store all page elements in an array
+    var pages = [];
+    for (var i = 1; i <= 100; i++) {
+        pages[i] = document.getElementById('page-' + i);
+    }
     // 사이드 메뉴의 버튼 Id 가져와서 loadPage 의 parameter 로 사용
     for (let i = 0; i < menuItems.length; i++) {
         menuItems[i].addEventListener("click", function () {
@@ -962,23 +969,16 @@
         });
     }
 
+    
+
     function loadPage(pageId) {
-        var content = fetchPageContent(pageId);
-        document.getElementById("content").innerHTML = content;
-    }
-
-    var page1 = document.getElementById('page-1');
-    var page2 = document.getElementById('page-2');
-
-    function fetchPageContent(pageId) {
-        // This is just an example. In real use, you would fetch content from a server.
-        switch (pageId) {
-            case "page1":
-                return page1;
-            case "page2":
-                return page2;
-            default:
-                return "";
+        // Loop through all pages
+        for (var i = 1; i <= pages.length; i++) {
+            if ('page' + i === pageId) {
+                pages[i].style.display = 'block';
+            } else {
+                pages[i].style.display = 'none';
+            }
         }
     }
 
