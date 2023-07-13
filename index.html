@@ -138,7 +138,7 @@
             justify-content: center;
         }
 
-        #side-menu p {
+        .menu-item {
             font-family: 'Dovemayo_gothic';
             font-weight: bold;
             flex-grow: 1;
@@ -154,7 +154,7 @@
             width: 100%;
         }
 
-        #side-menu p:hover {
+        .menu-item:hover {
             background-color: #e0e0e0;
         }
 
@@ -443,12 +443,13 @@
             font-family: 'Dovemayo_gothic';
         }
 
-        
+
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
         @media screen and (max-width: 500px) {
-            #side-menu p:hover {
+            .menu-item:hover {
                 background-color: #efefef;
             }
+
             #gauge-container {
                 margin-top: 8%;
             }
@@ -497,7 +498,7 @@
                 font-size: 5vw;
             }
 
-            #side-menu p {
+            .menu-item {
                 font-size: 4.5vw;
             }
 
@@ -558,8 +559,11 @@
         <span></span>
     </div>
     <div id="side-menu" class="side-menu" style="height: 0;">
-        <p>앱 설명</p>
-        <p>개발자</p>
+        <div class="menu-item" id="page1">앱 설명</div>
+        <div class="menu-item" id="page2">개발자</div>
+    </div>
+    <div id="content">
+        <!-- Page content will be loaded here -->
     </div>
     <div id="page-container">
 
@@ -873,18 +877,49 @@
 
                 // transition-duration 후에 side-menu를 완전히 숨깁니다.
                 setTimeout(function () {
-                    menuButton.style.zIndex = "2"; 
+                    menuButton.style.zIndex = "2";
                     sideMenu.style.height = "0px";
                 }, transitionDurationSeconds * 1000); // 밀리초로 변환
             }
         }
     });
 
+
     // 다시하기 버튼 이벤트
     document.getElementById('tryAgain-button').addEventListener('click', function () {
         location.reload();
     });
 
+
+    // Get all the menu items
+    var menuItems = document.getElementsByClassName("menu-item");
+
+    // Add a click event listener to each menu item
+    for (let i = 0; i < menuItems.length; i++) {
+        menuItems[i].addEventListener("click", function () {
+            loadPage(this.id);
+        });
+    }
+
+    function loadPage(pageId) {
+        // Replace this with actual code to fetch and display content
+        var content = fetchPageContent(pageId);
+        document.getElementById("content").innerHTML = content;
+    }
+
+    function fetchPageContent(pageId) {
+        // This is just an example. In real use, you would fetch content from a server.
+        switch (pageId) {
+            case "page1":
+                return "This is page 1";
+            case "page2":
+                return "This is page 2";
+            case "page3":
+                return "This is page 3";
+            default:
+                return "";
+        }
+    }
 
 </script>
 
