@@ -966,7 +966,7 @@
     var menuItems = document.getElementsByClassName("menu-item");
     var pages = [];
 
-    
+
     for (var i = 1; i <= menuItems.length; i++) {
         pages[i] = document.getElementById('page-' + i);
     }
@@ -979,7 +979,7 @@
 
     function getCurrentPage() {
         console.log(menuItems.length);
-        console.log(pages);
+        console.log(pages[1]);
         for (var i = 1; i <= pages.length; i++) {
             if (pages[i].style.display === 'block') {
                 return 'page-' + i;
