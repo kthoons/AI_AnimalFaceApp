@@ -959,9 +959,8 @@
     var menuItems = document.getElementsByClassName("menu-item");
     var pages = [];
 
-
     for (var i = 1; i <= menuItems.length; i++) {
-        pages[i-1] = document.getElementById('page-' + i);
+        pages[i - 1] = document.getElementById('page-' + i);
     }
     // 사이드 메뉴의 버튼 Id 가져와서 loadPage 의 parameter 로 사용
     for (let i = 0; i < menuItems.length; i++) {
@@ -971,10 +970,10 @@
     }
 
     function getCurrentPage() {
-        for (var i = 1; i <= pages.length; i++) {
+        for (var i = 0; i < pages.length; i++) {
             console.log(pages[i].style.display);
             if (pages[i].style.display === 'block') {
-                return 'page-' + i;
+                return 'page-' + (i + 1);
             }
         }
         return null;
@@ -982,8 +981,8 @@
 
     function loadPage(pageId) {
         // Loop through all pages
-        for (var i = 1; i <= pages.length; i++) {
-            if ('page' + i === pageId) {
+        for (var i = 0; i < pages.length; i++) {
+            if ('page' + (i + 1) === pageId) {
                 pages[i].style.display = 'block';
             } else {
                 pages[i].style.display = 'none';
