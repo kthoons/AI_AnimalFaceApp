@@ -972,6 +972,7 @@
 
     function getCurrentPage() {
         for (var i = 1; i <= pages.length; i++) {
+            console.log(pages[i].style.display);
             if (pages[i].style.display === 'block') {
                 return 'page-' + i;
             }
