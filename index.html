@@ -785,7 +785,9 @@
     }
 
     function fillRandomColors() {
-        const progressBar = $(".progress_bar");
+        var currentPage = getCurrentPage();
+        const $parentElement = $(`#${currentPage}}`); // 부모 요소를 찾습니다.
+        const progressBar = $parentElement.find(".progress_bar");
         const colors = [
             { start: "rgba(240, 128, 128, 0.5)", end: "rgba(240, 128, 128, 1)" }, // Light Coral
             { start: "rgba(135, 206, 235, 0.5)", end: "rgba(135, 206, 235, 1)" }, // Sky Blue
@@ -970,7 +972,14 @@
         });
     }
 
-    
+    function getCurrentPage() {
+    for (var i = 1; i <= pages.length; i++) {
+        if (pages[i].style.display === 'block') {
+            return 'page-' + i;
+        }
+    }
+    return null;
+}
 
     function loadPage(pageId) {
         // Loop through all pages
