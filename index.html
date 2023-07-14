@@ -443,12 +443,15 @@
             color: #2a2a2a;
             font-family: 'Dovemayo_gothic';
         }
+
         #page-2 {
             display: none;
         }
+
         #page-1 {
             display: block;
         }
+
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
         @media screen and (max-width: 500px) {
             .menu-item:hover {
@@ -806,7 +809,7 @@
             const j = Math.floor(Math.random() * (i + 1));
             [colors[i], colors[j]] = [colors[j], colors[i]];
         }
-        
+
         progressBar.each(function (i) {
             console.log(this);
             $(this).css(
@@ -975,13 +978,14 @@
     }
 
     function getCurrentPage() {
-    for (var i = 1; i <= pages.length; i++) {
-        if (pages[i].style.display === 'block') {
-            return 'page-' + i;
+        console.log(pages.length);
+        for (var i = 1; i <= pages.length; i++) {
+            if (pages[i].style.display === 'block') {
+                return 'page-' + i;
+            }
         }
+        return null;
     }
-    return null;
-}
 
     function loadPage(pageId) {
         // Loop through all pages
