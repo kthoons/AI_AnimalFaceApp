@@ -683,8 +683,6 @@
 
             </div>
         </div>
-
-        <!-- Page content will be loaded here -->
     </div>
 
 </body>
@@ -978,8 +976,8 @@
     }
 
     function getCurrentPage() {
-        console.log(menuItems.length);
-        console.log(pages[1]);
+
+        console.log(pages[0]);
         for (var i = 1; i <= pages.length; i++) {
             if (pages[i].style.display === 'block') {
                 return 'page-' + i;
