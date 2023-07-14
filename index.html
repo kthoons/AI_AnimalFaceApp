@@ -801,7 +801,7 @@
             { start: "rgba(64, 224, 208, 0.5)", end: "rgba(64, 224, 208, 1)" } // Turquoise
         ];
 
-
+        console.log(progressBar);
         // Shuffle the colors array
         for (let i = colors.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -830,15 +830,12 @@
         const randomIndex = Math.floor(Math.random() * colors.length);
         return colors[randomIndex];
     }
-
     function handleGenderChange(event) {
         let genderToggle = document.getElementById("gender-toggle");
         gender = event.target.checked ? "Female" : "Male";
         genderToggle.style.backgroundColor = (gender == "Male") ? '#8999e1' : '#f998d8';
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
-
-
     function CheckExceptionTarget(elem) {
         const tryAgainButton = document.getElementById('tryAgain-button');
         let array = [tryAgainButton];
@@ -952,8 +949,6 @@
             }
         }
     });
-
-
     // 다시하기 버튼 이벤트
     document.getElementById('tryAgain-button').addEventListener('click', function () {
         location.reload();
@@ -976,8 +971,6 @@
     }
 
     function getCurrentPage() {
-
-        console.log(pages[0]);
         for (var i = 1; i <= pages.length; i++) {
             if (pages[i].style.display === 'block') {
                 return 'page-' + i;
