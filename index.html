@@ -962,11 +962,11 @@
     });
 
 
-    // Get all the menu items
-    var menuItems = document.getElementsByClassName("menu-item");
 
-    // Store all page elements in an array
+    var menuItems = document.getElementsByClassName("menu-item");
     var pages = [];
+
+    
     for (var i = 1; i <= menuItems.length; i++) {
         pages[i] = document.getElementById('page-' + i);
     }
@@ -978,6 +978,7 @@
     }
 
     function getCurrentPage() {
+        console.log(menuItems.length);
         console.log(pages);
         for (var i = 1; i <= pages.length; i++) {
             if (pages[i].style.display === 'block') {
