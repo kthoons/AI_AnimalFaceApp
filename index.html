@@ -960,8 +960,10 @@
     var pages = [];
 
     for (var i = 1; i <= menuItems.length; i++) {
+        console.log("fill the pages");
         pages[i - 1] = document.getElementById('page-' + i);
     }
+    console.log(pages);
     // 사이드 메뉴의 버튼 Id 가져와서 loadPage 의 parameter 로 사용
     for (let i = 0; i < menuItems.length; i++) {
         menuItems[i].addEventListener("click", function () {
