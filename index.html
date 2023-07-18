@@ -571,66 +571,20 @@
         <div class="menu-item" id="page2">개발자</div>
     </div>
     <div id="content">
-        <div id="page-1" style="display: block;">
+        <div id="page-1" style="display: none;">
             <div id="page-container">
-
-                <h1 id="title">나와 닮은 동물상은 무엇일까요?</h1>
-
-                <div id="gender-toggle" style="margin-bottom: 80px;">
-                    <span>남자</span>
-                    <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
-                    <label for="gender-switch"></label>
-                    <span>여자</span>
-                </div>
-                <div id="upload-area" onclick="document.getElementById('file-input').click();">
-                    여기에 사진을 올려주세요!
-                </div>
-                <div class="image-container">
-                    <img id="previewImg" alt="" />
-                </div>
-                <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-                <div id="gauge-container" style="display: none;">
-                    <div id="loader_container1" class="loader_container">
-                        <div class="text_container">
-                            동물상
-                        </div>
-                        <div id="bar_container">
-                            <div class="progress_bar"></div>
-                            <span class="point_counter">0</span>
-                        </div>
-                    </div>
-                    <div id="loader_container2" class="loader_container">
-                        <div class="text_container">
-                            동물상
-                        </div>
-                        <div id="bar_container">
-                            <div class="progress_bar"></div>
-                            <span class="point_counter">0</span>
-                        </div>
-                    </div>
-                    <div id="loader_container3" class="loader_container">
-                        <div class="text_container">
-                            동물상
-                        </div>
-                        <div id="bar_container">
-                            <div class="progress_bar"></div>
-                            <span class="point_counter">0</span>
-                        </div>
-                    </div>
-                </div>
-                <div id="animalface-explain">
-                    <h1 id="main-explain"></h1>
-                    <h2 id="sub-explain"></h2>
-                </div>
-                <div id="tryAgain-button" style="display: none;">다시하기</div>
-
-
+                <h1 id="title">앱 설명</h1>
             </div>
         </div>
         <div id="page-2" style="display: none;">
             <div id="page-container">
+                <h1 id="title">개발자</h1>
+            </div>
+        </div>
+        <div id="page-3" style="display: block;">
+            <div id="page-container">
 
-                <h1 id="title">너와 닮은 동물상은 무엇일까요?</h1>
+                <h1 id="title">나와 닮은 동물상은 무엇일까요?</h1>
 
                 <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
@@ -699,7 +653,9 @@
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
 
-
+    var menuItems = document.getElementsByClassName("menu-item");
+    var pages = [];
+    
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -755,10 +711,9 @@
 
     function fillGauge() {
         fillRandomColors();
-        var currentPage = getCurrentPage();
-        const parentElement = $(`#${currentPage}`);
-        const pointCounters = parentElement.find(".point_counter");
-        const textContainers = parentElement.find(".text_container");
+        
+        const pointCounters = $(".point_counter");
+        const textContainers = $(".text_container");
         console.log(gaugeData[1][1]);
         pointCounters.each(function (i, obj) {
             animateValue(obj, 0, gaugeData[i][1], 100);
@@ -788,13 +743,6 @@
     }
 
     function fillRandomColors() {
-        var currentPage = getCurrentPage();
-        if (currentPage == null) {
-            console.log("currentPage is null");
-            return;
-        } 
-
-        const parentElement = $(`#${currentPage}`); // 부모 요소를 찾습니다.
         const progressBar = parentElement.find(".progress_bar");
         const colors = [
             { start: "rgba(240, 128, 128, 0.5)", end: "rgba(240, 128, 128, 1)" }, // Light Coral
@@ -805,8 +753,7 @@
             { start: "rgba(255, 215, 0, 0.5)", end: "rgba(255, 215, 0, 1)" }, // Gold
             { start: "rgba(64, 224, 208, 0.5)", end: "rgba(64, 224, 208, 1)" } // Turquoise
         ];
-        console.log(currentPage);
-        console.log(progressBar);
+
         // Shuffle the colors array
         for (let i = colors.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -961,8 +908,7 @@
 
 
 
-    var menuItems = document.getElementsByClassName("menu-item");
-    var pages = [];
+    
 
     for (var i = 1; i <= menuItems.length; i++) {
         console.log("fill the pages");
