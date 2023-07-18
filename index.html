@@ -933,10 +933,10 @@
     function loadPage(pageId) {
         console.log("loadPage");
         // Loop through all pages
-        if ('menu-' + (i + 1) === pageId) {
-            pages[i].style.display = 'block';
+        if (pageId == 'menu-1') {
+            pages[0].style.display = 'block';
         } else {
-            pages[i].style.display = 'none';
+            pages[1].style.display = 'none';
         }
         
     }
