@@ -931,8 +931,8 @@
     }
 
     function loadPage(pageId) {
-        console.log("loadPage");
         // Loop through all pages
+        console.log(`pages Length : ${pages.length}`)
         for (var i = 0; i < pages.length; i++) {
             if (pageId === 'menu-' + (i + 1)) {
                 pages[i].style.display = 'block';
