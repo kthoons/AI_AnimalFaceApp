@@ -567,8 +567,8 @@
         <span></span>
     </div>
     <div id="side-menu" class="side-menu">
-        <div class="menu-item" id="page1">앱 설명</div>
-        <div class="menu-item" id="page2">개발자</div>
+        <div class="menu-item" id="menu-1">앱 설명</div>
+        <div class="menu-item" id="menu-2">개발자</div>
     </div>
     <div id="content">
         <div id="page-1" style="display: none;">
@@ -653,7 +653,7 @@
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
 
-    var menuItems = document.getElementsByClassName("menu-item");
+    var menuItems = $(".menu-item");
     var pages = [];
     
     async function handleFileUpload(event) {
@@ -711,7 +711,7 @@
 
     function fillGauge() {
         fillRandomColors();
-        
+
         const pointCounters = $(".point_counter");
         const textContainers = $(".text_container");
         console.log(gaugeData[1][1]);
@@ -849,6 +849,11 @@
         let transitionDurationSeconds = parseFloat(transitionDuration);
         let sideMenuHeight = style.getPropertyValue("height");
 
+        // 클릭한 요소가 side-menu 내부에 있는지 확인합니다.
+        var isClickSideMenu = sideMenu.contains(event.target);
+        // 클릭한 요소가 menu-button 내부에 있는지 확인합니다.
+        var isClickOnMenuButton = menuButton.contains(event.target);
+
         if (sideMenu.style.height === "0px") {
             console.log("sideMenu is opening");
             sideMenu.style.height = "100px";
@@ -860,19 +865,7 @@
             menuButton.style.zIndex = "2"; // Show the button
             pageContainer.style.transform = "translateY(0px)";
         }
-    });
-    // 사이드메뉴바 외부 클릭시 올라가는 이벤트
-    // 전체 문서에 클릭 이벤트 리스너를 추가합니다.
-    document.addEventListener('click', function (event) {
-        // side-menu 요소를 가져옵니다.
-        var sideMenu = document.getElementById("side-menu");
-        // 클릭한 요소가 side-menu 내부에 있는지 확인합니다.
-        var isClickSideMenu = sideMenu.contains(event.target);
 
-        // menu-button 요소를 가져옵니다.
-        var menuButton = document.getElementById("menu-button");
-        // 클릭한 요소가 menu-button 내부에 있는지 확인합니다.
-        var isClickOnMenuButton = menuButton.contains(event.target);
 
         // 클릭한 요소가 side-menu와 menu-button 외부에 있는지 확인합니다.
         if (!isClickSideMenu && !isClickOnMenuButton) {
@@ -900,6 +893,18 @@
                 }, transitionDurationSeconds * 1000); // 밀리초로 변환
             }
         }
+    });
+    // 사이드메뉴바 외부 클릭시 올라가는 이벤트
+    document.addEventListener('click', function (event) {
+        // side-menu 요소를 가져옵니다.
+        var sideMenu = document.getElementById("side-menu");
+        
+
+        // menu-button 요소를 가져옵니다.
+        var menuButton = document.getElementById("menu-button");
+        
+
+        
     });
     // 다시하기 버튼 이벤트
     document.getElementById('tryAgain-button').addEventListener('click', function () {
