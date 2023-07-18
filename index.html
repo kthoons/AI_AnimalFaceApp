@@ -789,6 +789,7 @@
 
     function fillRandomColors() {
         var currentPage = getCurrentPage();
+        if (!currentPage) return;
         const $parentElement = $(`#${currentPage}}`); // 부모 요소를 찾습니다.
         const progressBar = $parentElement.find(".progress_bar");
         const colors = [
