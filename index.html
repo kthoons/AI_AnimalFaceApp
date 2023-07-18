@@ -900,8 +900,7 @@
             }
         }
 
-        
-        
+
     });
     // 다시하기 버튼 이벤트
     document.getElementById('tryAgain-button').addEventListener('click', function () {
@@ -932,6 +931,7 @@
     }
 
     function loadPage(pageId) {
+        console.log("loadPage");
         // Loop through all pages
         for (var i = 0; i < pages.length; i++) {
             if ('page' + (i + 1) === pageId) {
