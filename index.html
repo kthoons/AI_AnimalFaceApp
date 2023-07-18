@@ -931,14 +931,17 @@
     }
 
     function loadPage(pageId) {
+        var mainPage = $("#page-3");
         // Loop through all pages
         console.log(`pages Length : ${pages.length}`)
         for (var i = 0; i < pages.length; i++) {
             if (pageId === 'menu-' + (i + 1)) {
                 pages[i].style.display = 'block';
+                mainPage.style.display = 'none';
                 console.log("block");
             } else {
                 pages[i].style.display = 'none';
+                mainPage.style.display = 'none';
                 console.log("none");
             }
         }
