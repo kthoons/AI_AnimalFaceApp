@@ -872,7 +872,7 @@
         var isClickSideMenu = sideMenu.contains(event.target);
         // 클릭한 요소가 menu-button 내부에 있는지 확인합니다.
         var isClickOnMenuButton = menuButton.contains(event.target);
-        
+
         // 클릭한 요소가 side-menu와 menu-button 외부에 있는지 확인합니다.
         if (!isClickSideMenu && !isClickOnMenuButton) {
             console.log("it's outside of menu");
@@ -902,7 +902,7 @@
         
     });
     // 다시하기 버튼 이벤트
-    $('#tryAgain-button').addEventListener('click', function () {
+    document.getElementById('tryAgain-button').addEventListener('click', function () {
         location.reload();
     });
 
