@@ -571,7 +571,7 @@
         <div class="menu-item" id="page2">개발자</div>
     </div>
     <div id="content">
-        <div id="page-1">
+        <div id="page-1" style="display: block;">
             <div id="page-container">
 
                 <h1 id="title">나와 닮은 동물상은 무엇일까요?</h1>
@@ -627,7 +627,7 @@
 
             </div>
         </div>
-        <div id="page-2">
+        <div id="page-2" style="display: none;">
             <div id="page-container">
 
                 <h1 id="title">너와 닮은 동물상은 무엇일까요?</h1>
@@ -973,7 +973,7 @@
 
     function getCurrentPage() {
         for (var i = 0; i < pages.length; i++) {
-            console.log(pages[i]);
+            console.log(pages[i].style.display);
             if (pages[i].style.display === 'block') {
                 return 'page-' + (i + 1);
             }
