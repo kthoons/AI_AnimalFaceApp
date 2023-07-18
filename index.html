@@ -756,9 +756,10 @@
 
     function fillGauge() {
         fillRandomColors();
-
-        const pointCounters = $(".point_counter");
-        const textContainers = $(".text_container");
+        var currentPage = getCurrentPage();
+        const parentElement = $(`#${currentPage}`);
+        const pointCounters = parentElement.find(".point_counter");
+        const textContainers = parentElement.find(".text_container");
         console.log(gaugeData[1][1]);
         pointCounters.each(function (i, obj) {
             animateValue(obj, 0, gaugeData[i][1], 100);
