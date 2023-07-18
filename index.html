@@ -139,7 +139,7 @@
             justify-content: center;
         }
 
-        .menu-item {
+        .selector {
             font-family: 'Dovemayo_gothic';
             font-weight: bold;
             flex-grow: 1;
@@ -155,7 +155,7 @@
             width: 100%;
         }
 
-        .menu-item:hover {
+        .selector:hover {
             background-color: #e0e0e0;
         }
 
@@ -454,7 +454,7 @@
 
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
         @media screen and (max-width: 500px) {
-            .menu-item:hover {
+            .selector:hover {
                 background-color: #efefef;
             }
 
@@ -506,7 +506,7 @@
                 font-size: 5vw;
             }
 
-            .menu-item {
+            .selector {
                 font-size: 4.5vw;
             }
 
@@ -567,8 +567,8 @@
         <span></span>
     </div>
     <div id="side-menu" class="side-menu">
-        <div class="menu-item" id="menu-1">앱 설명</div>
-        <div class="menu-item" id="menu-2">개발자</div>
+        <div class="selector" id="menu-1">앱 설명</div>
+        <div class="selector" id="menu-2">개발자</div>
     </div>
     <div id="content">
         <div id="page-1" style="display: none;">
@@ -653,7 +653,7 @@
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
 
-    var menuItems = $(".menu-item");
+    var sideMenuSelectors = $(".selector");
     var pages = [];
     
     async function handleFileUpload(event) {
@@ -837,7 +837,7 @@
         document.getElementById("sub-explain").style.display = 'block';
     }
 
-    // 사이드메뉴바 애니메이션
+    // 메뉴버튼 이벤트 --> 사이드메뉴 애니메이션
     document.getElementById("menu-button").addEventListener("click", function (event) {
         event.stopPropagation();
 
@@ -871,10 +871,10 @@
         // 클릭한 요소가 side-menu 내부에 있는지 확인합니다.
         var isClickSideMenu = sideMenu.contains(event.target);
         // 클릭한 요소가 menu-button 내부에 있는지 확인합니다.
-        var isClickOnMenuButton = menuButton.contains(event.target);
+        var isClickMenuButton = menuButton.contains(event.target);
 
         // 클릭한 요소가 side-menu와 menu-button 외부에 있는지 확인합니다.
-        if (!isClickSideMenu && !isClickOnMenuButton) {
+        if (!isClickSideMenu && !isClickMenuButton) {
             console.log("it's outside of menu");
             // 클릭이 side-menu와 menu-button 외부에서 발생했으므로 side-menu를 닫습니다.
 
@@ -899,6 +899,11 @@
                 }, transitionDurationSeconds * 1000); // 밀리초로 변환
             }
         }
+
+        if (isClickSideMenu) {
+            
+            ChangePage();
+        }
         
     });
     // 다시하기 버튼 이벤트
@@ -909,21 +914,17 @@
 
 
     
-
-    for (var i = 1; i <= menuItems.length; i++) {
-        console.log("fill the pages");
-        pages[i - 1] = document.getElementById('page-' + i);
-    }
-    console.log(pages);
     // 사이드 메뉴의 버튼 Id 가져와서 loadPage 의 parameter 로 사용
-    for (let i = 0; i < menuItems.length; i++) {
-        menuItems[i].addEventListener("click", function () {
+    for (let i = 0; i < sideMenuSelectors.length; i++) {
+        pages[i - 1] = document.getElementById('page-' + i);
+        console.log(sideMenuSelectors);
+        sideMenuSelectors[i].addEventListener("click", function () {
             loadPage(this.id);
         });
     }
 
     function getCurrentPage() {
-        for (var i = 0; i < pages.length; i++) {
+        for (var i = 0; i < sideMenuSelectors.length; i++) {
             console.log(pages[i].style.display);
             if (pages[i].style.display === 'block') {
                 console.log("do it");
