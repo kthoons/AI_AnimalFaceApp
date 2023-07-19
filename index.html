@@ -130,7 +130,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            width: 100%;
+            width: 50%;
             height: 0;
             overflow: hidden;
             transition: height 0.5s;
@@ -454,6 +454,9 @@
 
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
         @media screen and (max-width: 500px) {
+            #side-menu {
+                width: 100%;
+            }
             .selector:hover {
                 background-color: #efefef;
             }
@@ -855,12 +858,12 @@
             console.log("sideMenu is opening");
             sideMenu.style.height = "100px";
             menuButton.style.zIndex = "-1"; // Hide the button under the side menu
-            pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
+            // pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             console.log("sideMenu is closing");
             sideMenu.style.height = "0px";
             menuButton.style.zIndex = "2"; // Show the button
-            pageContainer.style.transform = "translateY(0px)";
+            // pageContainer.style.transform = "translateY(0px)";
         }
     });
     // 사이드메뉴바 외부 클릭시 올라가는 이벤트
