@@ -242,7 +242,7 @@
 
         #menu-button {
             top: 4%;
-            left: 4%;
+            right: 4%;
             width: 30px;
             height: 50px;
             position: absolute;
@@ -499,7 +499,7 @@
 
             #menu-button {
                 top: 2%;
-                left: 5%;
+                right: 5%;
             }
 
             #sub-explain {
@@ -666,10 +666,8 @@
  
         sideMenuSelectors[i].addEventListener("click", function () {
             var sideMenu = document.getElementById("side-menu");
-            var menuButton = document.getElementById("menu-button");
 
             sideMenu.style.height = "0px";
-            menuButton.style.display = "none";
             loadPage(this.id);
         });
     }
