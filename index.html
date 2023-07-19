@@ -159,6 +159,10 @@
             background-color: #e0e0e0;
         }
 
+        #back-button {
+            left: 4%;
+            top : 4%;
+        }
         /* 게이지 바 */
         .label-container {
             text-align: center;
@@ -563,6 +567,9 @@
     <div id="loading-page" style="display: none;">
         <div class="loading-indicator">Loading...</div>
     </div>
+    <div id="back-button">
+        <i class="chevron left icon"></i>
+    </div>
     <div id="menu-button">
         <span></span>
         <span></span>
@@ -644,6 +651,11 @@
     </div>
 
 </body>
+<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
