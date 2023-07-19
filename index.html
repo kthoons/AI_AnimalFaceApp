@@ -41,7 +41,7 @@
             /* 로딩 인디케이터 디자인 */
         }
 
-        #title {
+        .title {
             font-size: 32px;
             font-weight: bold;
             color: #4a4a4a;
@@ -534,7 +534,7 @@
                 line-height: 25px;
             }
 
-            #title {
+            .title {
                 font-size: 26px;
                 width: 80%;
             }
@@ -571,20 +571,10 @@
         <div class="selector" id="menu-2">개발자</div>
     </div>
     <div id="content">
-        <div id="page-1" style="display: none;">
-            <div id="page-container">
-                <h1 id="title">앱 설명</h1>
-            </div>
-        </div>
-        <div id="page-2" style="display: none;">
-            <div id="page-container">
-                <h1 id="title">개발자</h1>
-            </div>
-        </div>
-        <div id="page-3" style="display: block;">
+        <div id="mainPage" style="display: block;">
             <div id="page-container">
 
-                <h1 id="title">나와 닮은 동물상은 무엇일까요?</h1>
+                <h1 class="title">나와 닮은 동물상은 무엇일까요?</h1>
 
                 <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
@@ -637,6 +627,17 @@
 
             </div>
         </div>
+        <div id="page-1" style="display: none;">
+            <div id="page-container">
+                <h1 class="title">앱 설명</h1>
+            </div>
+        </div>
+        <div id="page-2" style="display: none;">
+            <div id="page-container">
+                <h1 class="title">개발자</h1>
+            </div>
+        </div>
+        
     </div>
 
 </body>
@@ -826,7 +827,7 @@
         // 로딩 페이지 숨기기
         document.getElementById('loading-page').style.display = 'none';
         // 타이틀 숨기기
-        document.getElementById('title').style.display = 'none';
+        document.querySelector('#mainPage .title').style.display = 'none';
         // 젠더 토글 숨기기
         document.getElementById('gender-toggle').style.display = 'none';
         // tryAgainButton 생성
@@ -931,7 +932,7 @@
     }
 
     function loadPage(pageId) {
-        var mainPage = document.getElementById("page-3");
+        var mainPage = document.getElementById("mainPage");
         // Loop through all pages
         console.log(`pages Length : ${pages.length}`)
         for (var i = 0; i < pages.length; i++) {
