@@ -660,6 +660,22 @@
     var sideMenuSelectors = $(".selector");
     var pages = [];
     
+    // 사이드 메뉴 selector 에 Event 구현
+    for (let i = 0; i < sideMenuSelectors.length; i++) {
+        pages[i] = document.getElementById('page-' + (i+1));
+ 
+        sideMenuSelectors[i].addEventListener("click", function () {
+            var sideMenu = document.getElementById("side-menu");
+            var menuButton = document.getElementById("menu-button");
+
+            sideMenu.style.height = "0px";
+            menuButton.style.display = "none";
+            loadPage(this.id);
+        });
+    }
+
+
+
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -846,9 +862,9 @@
         event.stopPropagation();
 
         var sideMenu = document.getElementById("side-menu");
+        var menuButton = document.getElementById("menu-button");
         var pageContainer = document.getElementById("page-container");
         let style = window.getComputedStyle(sideMenu);
-        var menuButton = document.getElementById("menu-button");
         let transitionDuration = style.getPropertyValue("transition-duration");
         let transitionDurationSeconds = parseFloat(transitionDuration);
         let sideMenuHeight = style.getPropertyValue("height");
@@ -910,18 +926,6 @@
     document.getElementById('tryAgain-button').addEventListener('click', function () {
         location.reload();
     });
-
-
-
-    
-    // 사이드 메뉴의 버튼 Id 가져와서 loadPage 의 parameter 로 사용
-    for (let i = 0; i < sideMenuSelectors.length; i++) {
-        pages[i] = document.getElementById('page-' + (i+1));
- 
-        sideMenuSelectors[i].addEventListener("click", function () {
-            loadPage(this.id);
-        });
-    }
 
     function getCurrentPage() {
         for (var i = 0; i < sideMenuSelectors.length; i++) {
