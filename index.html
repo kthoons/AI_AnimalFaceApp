@@ -335,7 +335,16 @@
             background-color: #ffb7b7;
             cursor: pointer;
         }
-
+        .partition {
+            position: absolute;
+            height: 40%;
+        }
+        #partition-1 {
+            margin-left: 30%;
+        }
+        #partition-2 {
+            margin-left: 50%;
+        }
         #gauge-container {
             position: relative;
             width: 100%;
@@ -645,11 +654,11 @@
     </div>
 
 </body>
+<!-- <link rel="stylesheet" type="text/css" href="semantic/semantic.css"> -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
-<link rel="stylesheet" type="text/css" href="semantic/semantic.css">
 <script 
     src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 
@@ -669,7 +678,7 @@
 
     // 사이드 메뉴 selector 에 Event 구현
     for (let i = 0; i < sideMenuSelectors.length; i++) {
-        pages[i] = document.getElementById('page-' + (i + 1));
+        pages[i] = document.getElementById('page-' + (i + 1));;
 
         sideMenuSelectors[i].addEventListener("click", function () {
             var sideMenu = document.getElementById("side-menu");
