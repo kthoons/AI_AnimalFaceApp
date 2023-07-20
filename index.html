@@ -161,8 +161,9 @@
 
         #back-button {
             left: 4%;
-            top : 4%;
+            top: 4%;
         }
+
         /* 게이지 바 */
         .label-container {
             text-align: center;
@@ -461,6 +462,7 @@
             #side-menu {
                 width: 100%;
             }
+
             .selector:hover {
                 background-color: #efefef;
             }
@@ -562,7 +564,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Kanit:wght@500&family=Russo+One&display=swap"
     rel="stylesheet">
-
 <body>
     <div id="loading-page" style="display: none;">
         <div class="loading-indicator">Loading...</div>
@@ -647,19 +648,18 @@
                 <h1 class="title">개발자</h1>
             </div>
         </div>
-        
+
     </div>
 
 </body>
-<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-<script
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<script src="semantic/dist/semantic.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
+<link rel="stylesheet" type="text/css" href="semantic/semantic.css">
+<script 
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="semantic/semantic.js"></script>
 <script>
     // the link to your model provided by Teachable Machine export panel
     const URL_Man = "./my_model_male/";
@@ -671,11 +671,11 @@
 
     var sideMenuSelectors = $(".selector");
     var pages = [];
-    
+
     // 사이드 메뉴 selector 에 Event 구현
     for (let i = 0; i < sideMenuSelectors.length; i++) {
-        pages[i] = document.getElementById('page-' + (i+1));
- 
+        pages[i] = document.getElementById('page-' + (i + 1));
+
         sideMenuSelectors[i].addEventListener("click", function () {
             var sideMenu = document.getElementById("side-menu");
 
@@ -879,7 +879,7 @@
         let transitionDurationSeconds = parseFloat(transitionDuration);
         let sideMenuHeight = style.getPropertyValue("height");
 
-        
+
         if (sideMenu.style.height === "0px") {
             console.log("sideMenu is opening");
             sideMenu.style.height = "100px";
@@ -894,7 +894,7 @@
     });
     // 사이드메뉴바 외부 클릭시 올라가는 이벤트
     document.addEventListener('click', function (event) {
-        
+
         var sideMenu = document.getElementById("side-menu");
         var menuButton = document.getElementById("menu-button");
 
