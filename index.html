@@ -678,6 +678,8 @@
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
 
+    var sideMenu = document.getElementById("side-menu");
+    var menuButton = document.getElementById("menu-button");
     var sideMenuSelectors = $("#selector");
     var pages = [];
 
@@ -686,8 +688,6 @@
         pages[i] = document.getElementById('page-' + (i + 1));;
 
         sideMenuSelectors[i].addEventListener("click", function () {
-            var sideMenu = document.getElementById("side-menu");
-
             sideMenu.style.height = "0px";
             loadPage(this.id);
         });
@@ -879,9 +879,6 @@
     // 메뉴버튼 이벤트 --> 사이드메뉴 애니메이션
     document.getElementById("menu-button").addEventListener("click", function (event) {
         event.stopPropagation();
-
-        var sideMenu = document.getElementById("side-menu");
-        var menuButton = document.getElementById("menu-button");
         var pageContainer = document.getElementById("page-container");
         let style = window.getComputedStyle(sideMenu);
         let transitionDuration = style.getPropertyValue("transition-duration");
@@ -903,9 +900,6 @@
     });
     // 사이드메뉴바 외부 클릭시 올라가는 이벤트
     document.addEventListener('click', function (event) {
-
-        var sideMenu = document.getElementById("side-menu");
-        var menuButton = document.getElementById("menu-button");
 
         // 클릭한 요소가 side-menu 내부에 있는지 확인합니다.
         var isClickSideMenu = sideMenu.contains(event.target);
@@ -946,8 +940,6 @@
     document.getElementById("back-button").addEventListener("click", function (event) {
         event.stopPropagation();
 
-        var sideMenu = document.getElementById("side-menu");
-        var menuButton = document.getElementById("menu-button");
         var pageContainer = document.getElementById("page-container");
         let style = window.getComputedStyle(sideMenu);
         let transitionDuration = style.getPropertyValue("transition-duration");
