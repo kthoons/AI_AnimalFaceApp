@@ -145,7 +145,7 @@
             justify-content: center;
         }
 
-        .selector {
+        #selector {
             font-family: 'Dovemayo_gothic';
             font-weight: bold;
             flex-grow: 1;
@@ -161,7 +161,7 @@
             width: 100%;
         }
 
-        .selector:hover {
+        #selector:hover {
             background-color: #e0e0e0;
         }
 
@@ -475,7 +475,7 @@
                 width: 100%;
             }
 
-            .selector:hover {
+            #selector:hover {
                 background-color: #efefef;
             }
 
@@ -527,7 +527,7 @@
                 font-size: 5vw;
             }
 
-            .selector {
+            #selector {
                 font-size: 4.5vw;
             }
 
@@ -587,8 +587,8 @@
         <span></span>
     </div>
     <div id="side-menu" class="side-menu">
-        <div class="selector" id="menu-1">앱 설명</div>
-        <div class="selector" id="menu-2">개발자</div>
+        <div id="selector" class="menu-1">앱 설명</div>
+        <div id="selector" class="menu-2">개발자</div>
     </div>
     <div id="content">
         <div id="mainPage" style="display: block;">
@@ -678,7 +678,7 @@
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
 
-    var sideMenuSelectors = $(".selector");
+    var sideMenuSelectors = $("#selector");
     var pages = [];
 
     // 사이드 메뉴 selector 에 Event 구현
