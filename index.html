@@ -683,6 +683,7 @@
 
     // 사이드 메뉴 selector 에 Event 구현
     for (let i = 0; i < sideMenuSelectors.length; i++) {
+        console.log(sideMenuSelectors, pages);
         sideMenuSelectors[i].addEventListener("click", function () {
             sideMenu.style.height = "0px";
             loadPage(this.id);
@@ -970,14 +971,6 @@
             }
         });
         return null;
-        // for (var i = 0; i < sideMenuSelectors.length; i++) {
-        //     console.log(pages[i].style.display);
-        //     if (pages[i].style.display === 'block') {
-        //         console.log("do it");
-        //         return 'page-' + (i + 1);
-        //     }
-        // }
-        // return null;
     }
 
     function loadPage(pageId) {
