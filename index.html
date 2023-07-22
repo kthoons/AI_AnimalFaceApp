@@ -870,6 +870,7 @@
         sideMenuSelectors[i].addEventListener("click", function () {
             sideMenu.style.height = "0px";
             backButton.style.display = "block";
+            backButton.style.zIndex = "2";
             loadPage(pages[i]);
         });
     }
