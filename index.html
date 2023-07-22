@@ -681,6 +681,7 @@
     var backButton = document.getElementById("back-button");
     var sideMenuSelectors = $('.selector');
     var pages = document.getElementsByClassName('page');
+    var mainPage = document.getElementById("mainPage");
 
     async function handleFileUpload(event) {
         try {
@@ -933,28 +934,10 @@
 
     // BackButton Event
     document.getElementById("back-button").addEventListener("click", function (event) {
-        event.stopPropagation();
+        var currentPage = getCurrentPage();
 
-        var pageContainer = document.getElementById("page-container");
-        let style = window.getComputedStyle(sideMenu);
-        let transitionDuration = style.getPropertyValue("transition-duration");
-        let transitionDurationSeconds = parseFloat(transitionDuration);
-        let sideMenuHeight = style.getPropertyValue("height");
-
-
-        if (sideMenu.style.height === "0px") {
-            console.log("sideMenu is opening");
-            sideMenu.style.height = "100px";
-            menuButton.style.zIndex = "-1";
-            backButton.style.zIndex = "-1";
-            // pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
-        } else {
-            console.log("sideMenu is closing");
-            sideMenu.style.height = "0px";
-            menuButton.style.zIndex = "2"; 
-            backButton.style.zIndex = "2";
-            // pageContainer.style.transform = "translateY(0px)";
-        }
+        mainPage.style.display = "block";
+        currentPage.style.display = "none";
     });
     // 다시하기 버튼 이벤트
     document.getElementById('tryAgain-button').addEventListener('click', function () {
@@ -963,19 +946,15 @@
 
     function getCurrentPage() {
         pages.each(function (i) {
-            console.log(`pages' Index : ${i}`);
-            console.log(pages[i].style.display);
+            console.log("getCurrentPage");
             if (pages[i].style.display === 'block') {
-                console.log("do it");
-                return 'page-' + (i + 1);
+                return pages[i];
             }
         });
         return null;
     }
 
     function loadPage(page) {
-        var mainPage = document.getElementById("mainPage");
-        // Loop through all pages
         console.log(`pages Length : ${pages.length}`)
         for (var i = 0; i < pages.length; i++) {
             if (page.id === 'page-' + (i + 1)) {
