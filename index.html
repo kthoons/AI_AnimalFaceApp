@@ -682,18 +682,6 @@
     var sideMenuSelectors = $('.selector');
     var pages = $('.page');
 
-    // 사이드 메뉴 selector 에 Event 구현
-    for (let i = 0; i < sideMenuSelectors.length; i++) {
-        console.log(sideMenuSelectors, pages);
-        sideMenuSelectors[i].addEventListener("click", function () {
-            sideMenu.style.height = "0px";
-            backButton.style.display = "block";
-            loadPage(this.id);
-        });
-    }
-
-
-
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -874,6 +862,16 @@
         document.getElementById("main-explain").style.display = 'block';
         document.getElementById("sub-explain").style.display = 'block';
     }
+    
+    // SideMenu selector Event
+    for (let i = 0; i < sideMenuSelectors.length; i++) {
+        console.log(sideMenuSelectors, pages);
+        sideMenuSelectors[i].addEventListener("click", function () {
+            sideMenu.style.height = "0px";
+            backButton.style.display = "block";
+            loadPage(this.id);
+        });
+    }
 
     // MenuButton Event
     document.getElementById("menu-button").addEventListener("click", function (event) {
@@ -901,7 +899,7 @@
 
         backButton.style.display = "none";
     });
-    // SideBar Event
+    // SideBar Animation
     document.addEventListener('click', function (event) {
 
         var isClickSideMenu = sideMenu.contains(event.target);
@@ -980,7 +978,7 @@
         // Loop through all pages
         console.log(`pages Length : ${pages.length}`)
         for (var i = 0; i < pages.length; i++) {
-            if (pageId === 'menu-' + (i + 1)) {
+            if (pageId === 'page-' + (i + 1)) {
                 pages[i].style.display = 'block';
                 mainPage.style.display = 'none';
                 console.log("block");
