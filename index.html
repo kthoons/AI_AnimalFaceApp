@@ -4,13 +4,578 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Kanit:wght@500&family=Russo+One&display=swap"
         rel="stylesheet">
     <title>나의 동물상 찾기</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <style>
+        @font-face {
+            font-family: 'Dovemayo_gothic';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+        }
+
+        #loading-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            /* 로딩 페이지가 다른 요소 위에 나타나도록 함 */
+        }
+
+        .loading-indicator {
+            /* 로딩 인디케이터 디자인 */
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4a4a4a;
+            margin-top: 70px;
+            margin-bottom: 60px;
+            font-family: 'Dovemayo_gothic';
+
+        }
+
+        #gender-toggle {
+            margin: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #8999e1;
+            padding: 10px;
+            border-radius: 50px;
+            width: fit-content;
+            font-family: 'Dovemayo_gothic';
+            transition: background-color 0.5s ease;
+        }
+
+        #gender-toggle span {
+            font-size: 25px;
+            color: #fff;
+            margin: 0 15px;
+        }
+
+        #gender-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        #gender-toggle label {
+            display: block;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        #gender-toggle label::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            width: 26px;
+            height: 26px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        #gender-toggle input[type="checkbox"]:checked+label::before {
+            transform: translateX(30px);
+        }
+
+        #upload-area {
+            width: 400px;
+            height: 300px;
+            border: 2px dashed #4a4a4a;
+            font-size: 1vw;
+            font-weight: bold;
+            color: #818181;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #file-input {
+            display: none;
+        }
+
+
+
+        #side-menu {
+            height: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.5s;
+            background-color: #efefef;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .selector {
+            font-family: 'Dovemayo_gothic';
+            font-weight: bold;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #4a4a4a;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .selector:hover {
+            background-color: #e0e0e0;
+        }
+
+        #back-button {
+            display: none;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 4%;
+            top: 4%;
+        }
+
+        /* 게이지 바 */
+        .label-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #CCC;
+        }
+
+        a {
+            text-decoration: none;
+            color: #EC5C93;
+        }
+
+        .bar-main-container {
+            position: relative;
+            width: 30vw;
+            height: 4vh;
+
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            font-family: sans-serif;
+            font-weight: normal;
+            font-size: 0.8em;
+            color: #FFF;
+            vertical-align: middle;
+        }
+
+        .wrap {
+            padding: 8px;
+        }
+
+        .bar-percentage {
+            float: left;
+            background: rgba(0, 0, 0, 0.13);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            padding: 9px 0px;
+            width: 18%;
+            height: 16px;
+        }
+
+        .bar-container {
+            float: right;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            height: 10px;
+            background: rgba(0, 0, 0, 0.13);
+            width: 78%;
+            margin: 12px 0px;
+            overflow: hidden;
+        }
+
+        .bar {
+            float: left;
+            background: #FFF;
+            height: 100%;
+            -webkit-border-radius: 10px 0px 0px 10px;
+            -moz-border-radius: 10px 0px 0px 10px;
+            border-radius: 10px 0px 0px 10px;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+            filter: alpha(opacity=100);
+            -moz-opacity: 1;
+            -khtml-opacity: 1;
+            opacity: 1;
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+
+
+        #menu-button {
+            top: 4%;
+            right: 4%;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            margin: 10px auto;
+            display: inline-block;
+            z-index: 1;
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+            -webkit-transition: .5s ease-in-out;
+            -moz-transition: .5s ease-in-out;
+            -o-transition: .5s ease-in-out;
+            transition: .5s ease-in-out;
+            cursor: pointer;
+            transition: opacity 0.5s;
+            opacity: 1;
+        }
+
+        #menu-button span {
+            display: block;
+            position: absolute;
+            height: 6px;
+            width: 100%;
+            background: #c9c9c9;
+            border-radius: 9px;
+            pointer-events: none;
+            opacity: 1;
+            left: 0;
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+            -webkit-transition: .25s ease-in-out;
+            -moz-transition: .25s ease-in-out;
+            -o-transition: .25s ease-in-out;
+            transition: .25s ease-in-out;
+        }
+
+        #menu-button span:nth-child(1) {
+            top: 0px;
+        }
+
+        #menu-button span:nth-child(2),
+        #menu-button span:nth-child(3) {
+            top: 10px;
+        }
+
+        #menu-button span:nth-child(4) {
+            top: 20px;
+        }
+
+        #page-container {
+            width: 100%;
+            height: 80%;
+            margin-top: 75px;
+            transition: transform 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        #tryAgain-button {
+            width: 100px;
+            padding: 10px 20px;
+            border: 4px solid #fb7070;
+            background-color: #ff9c9c;
+            color: #392e2e;
+            border-radius: 19px;
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 52px;
+            /* font-family: 'Alfa Slab One', cursive; */
+            font-family: 'Dovemayo_gothic';
+            font-weight: bold;
+        }
+
+        #tryAgain-button:hover {
+            background-color: #ffb7b7;
+            cursor: pointer;
+        }
+
+        .partition {
+            position: absolute;
+            height: 40%;
+        }
+
+        #partition-1 {
+            margin-left: 30%;
+        }
+
+        #partition-2 {
+            margin-left: 50%;
+        }
+
+        #gauge-container {
+            position: relative;
+            width: 100%;
+            height: 50%;
+            margin-top: 3%;
+        }
+
+        i.icon {
+            color: #919191 !important;
+            font-size: 2em !important;
+        }
+
+        /* 게이지바 */
+        div.loader_container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 40%;
+            margin: auto;
+            padding: 5px;
+        }
+
+        div#bar_container {
+            height: 15px;
+            background: #dcdbd7;
+            border-radius: 20px;
+            border-top: 1px solid #cfcec9;
+            border-bottom: 1px solid #f7f6f4;
+            box-shadow: 0 -1px 0 #bab9b4;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #222222;
+        }
+
+        div.progress_bar {
+            background-color: #dcf1c6;
+            background-image: linear-gradient(to bottom, #9fbff4 0%, #555bb4 100%);
+            height: 110%;
+            position: absolute;
+            top: -3px;
+            left: 0px;
+            border-top: 1px solid #e5ebf4;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px #717171;
+            width: 0%;
+            transition: all 3s 0s cubic-bezier(0.83, 0, 0.17, 1);
+        }
+
+        div#progress_percentage {
+            position: absolute;
+            top: -20%;
+            right: -5%;
+            width: 10%;
+            height: 5%;
+            padding-top: 5%;
+        }
+
+        div.text_container {
+            margin-right: 15px;
+            color: #757575;
+            font-weight: bold;
+            font-size: 25px;
+            text-shadow: -1px 1px 1px #d1d0cc;
+            font-family: 'Dovemayo_gothic';
+        }
+
+        span.point_counter {
+            position: absolute;
+            z-index: 1;
+            font-size: 1vw;
+        }
+
+        .bar_wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .image-container img {
+            display: none;
+            width: 20%;
+
+            height: auto;
+            margin: auto;
+            padding-top: 75px;
+        }
+
+        #sub-explain {
+            width: 40%;
+            margin: auto;
+            margin-top: 20px;
+            color: #616161;
+            font-family: 'Dovemayo_gothic';
+        }
+
+        #main-explain {
+            width: 50%;
+            margin: auto;
+            margin-top: 30px;
+            color: #2a2a2a;
+            font-family: 'Dovemayo_gothic';
+        }
+
+        #page-2 {
+            display: none;
+        }
+
+        #page-1 {
+            display: block;
+        }
+
+        /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
+        @media screen and (max-width: 500px) {
+            #side-menu {
+                width: 100%;
+            }
+
+            .selector:hover {
+                background-color: #efefef;
+            }
+
+            #gauge-container {
+                margin-top: 8%;
+            }
+
+            .image-container img {
+                width: 30%;
+                height: auto;
+                padding-top: 40px;
+                margin-top: 50px;
+            }
+
+            div.loader_container {
+                width: 75%;
+            }
+
+            div#bar_container {
+                height: 13px;
+            }
+
+            div.text_container {
+                margin-right: 15px;
+                font-size: 3.5vw;
+            }
+
+            #upload-area {
+                font-size: 4vw;
+                font-weight: bold;
+                color: #717171;
+                width: 250px;
+                height: 250px;
+            }
+
+            #gender-toggle {
+                padding: 7px;
+            }
+
+            #menu-button {
+                top: 2%;
+                right: 5%;
+            }
+
+            #sub-explain {
+                width: 60%;
+                margin: auto;
+                margin-top: 20px;
+                font-size: 5vw;
+            }
+
+            .selector {
+                font-size: 4.5vw;
+            }
+
+
+            #main-explain {
+                width: 70%;
+                margin: auto;
+                margin-top: 5%;
+                color: #2a2a2a;
+                font-size: 6vw;
+            }
+
+            #tryAgain-button {
+                width: 20%;
+                height: 25px;
+                padding: 5px 15px;
+                border: 4px solid #fb7070;
+                background-color: #ff9c9c;
+                color: #392e2e;
+                border-radius: 21px;
+                font-size: 15px;
+                font-weight: bold;
+                margin-top: 23px;
+                text-align: center;
+                line-height: 25px;
+            }
+
+            .title {
+                font-size: 26px;
+                width: 100%;
+            }
+
+            #gender-toggle span {
+                font-size: 18px;
+                color: #fff;
+                margin: 0 15px;
+            }
+
+            #page-container {
+                margin-top: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -101,13 +666,7 @@
     </div>
 
 </body>
-<script src="index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-<script
-    src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script> -->
+
 
 
 </html>
