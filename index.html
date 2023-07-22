@@ -863,7 +863,7 @@
         document.getElementById("main-explain").style.display = 'block';
         document.getElementById("sub-explain").style.display = 'block';
     }
-    
+
     // SideMenu selector Event
     for (let i = 0; i < sideMenuSelectors.length; i++) {
         console.log(sideMenuSelectors, pages);
@@ -894,7 +894,7 @@
         } else {
             console.log("sideMenu is closing");
             sideMenu.style.height = "0px";
-            menuButton.style.zIndex = "2"; 
+            menuButton.style.zIndex = "2";
             backButton.style.zIndex = "2";
             // pageContainer.style.transform = "translateY(0px)";
         }
@@ -949,12 +949,12 @@
     });
 
     function getCurrentPage() {
-        pages.each(function (i) {
+        for (var i = 0; i < pages.length; i++) {
             console.log("getCurrentPage");
             if (pages[i].style.display === 'block') {
                 return pages[i];
             }
-        });
+        }
         return null;
     }
 
