@@ -586,8 +586,8 @@
         <span></span>
     </div>
     <div id="side-menu" class="side-menu">
-        <div class="selector menu-1">앱 설명</div>
-        <div class="selector menu-2">개발자</div>
+        <div id="menu-1" class="selector">앱 설명</div>
+        <div id="menu-2" class="selector">개발자</div>
     </div>
     <div id="content">
         <div id="mainPage" style="display: block;">
@@ -977,9 +977,8 @@
         var mainPage = document.getElementById("mainPage");
         // Loop through all pages
         console.log(`pages Length : ${pages.length}`)
-        console.log(`pages className : ${page.className}`)
         for (var i = 0; i < pages.length; i++) {
-            if (page.className === 'page-' + (i + 1)) {
+            if (page.attr('id') === 'page-' + (i + 1)) {
                 pages[i].style.display = 'block';
                 mainPage.style.display = 'none';
                 console.log("block");
