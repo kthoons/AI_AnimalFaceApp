@@ -208,7 +208,7 @@
     }
 
     // MenuButton Event
-    document.getElementById("menu-button").addEventListener("click", function (event) {
+    menuButton.addEventListener("click", function (event) {
         event.stopPropagation();
         var pageContainer = document.getElementById("page-container");
         let style = window.getComputedStyle(sideMenu);
@@ -266,7 +266,7 @@
     });
 
     // BackButton Event
-    document.getElementById("back-button").addEventListener("click", function (event) {
+    backButton.addEventListener("click", function (event) {
         event.stopPropagation();
 
         var pageContainer = document.getElementById("page-container");
@@ -291,7 +291,7 @@
         }
     });
     // 다시하기 버튼 이벤트
-    document.getElementById('tryAgain-button').addEventListener('click', function () {
+    tryAgainButton.addEventListener('click', function () {
         location.reload();
     });
 
