@@ -962,6 +962,7 @@
 
     function getCurrentPage() {
         pages.each(function (i) {
+            console.log(`pages' Index : ${i}`);
             console.log(pages[i].style.display);
             if (pages[i].style.display === 'block') {
                 console.log("do it");
