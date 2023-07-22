@@ -678,6 +678,7 @@
 
     var sideMenu = document.getElementById("side-menu");
     var menuButton = document.getElementById("menu-button");
+    var backButton = document.getElementById("back-button");
     var sideMenuSelectors = $('.selector');
     var pages = $('.page');
 
@@ -686,6 +687,7 @@
         console.log(sideMenuSelectors, pages);
         sideMenuSelectors[i].addEventListener("click", function () {
             sideMenu.style.height = "0px";
+            menuButton.style.display = "block";
             loadPage(this.id);
         });
     }
@@ -873,7 +875,7 @@
         document.getElementById("sub-explain").style.display = 'block';
     }
 
-    // 메뉴버튼 이벤트 --> 사이드메뉴 애니메이션
+    // MenuButton Event
     document.getElementById("menu-button").addEventListener("click", function (event) {
         event.stopPropagation();
         var pageContainer = document.getElementById("page-container");
@@ -886,16 +888,18 @@
         if (sideMenu.style.height === "0px") {
             console.log("sideMenu is opening");
             sideMenu.style.height = "100px";
-            menuButton.style.zIndex = "-1"; // Hide the button under the side menu
-            pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
+            menuButton.style.zIndex = "-1";
+            backButton.style.zIndex = "-1";
+            // pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             console.log("sideMenu is closing");
             sideMenu.style.height = "0px";
-            menuButton.style.zIndex = "2"; // Show the button
-            pageContainer.style.transform = "translateY(0px)";
+            menuButton.style.zIndex = "2"; 
+            backButton.style.zIndex = "2";
+            // pageContainer.style.transform = "translateY(0px)";
         }
     });
-    // 사이드메뉴바 외부 클릭시 올라가는 이벤트
+    // SideBar Event
     document.addEventListener('click', function (event) {
 
         // 클릭한 요소가 side-menu 내부에 있는지 확인합니다.
@@ -933,7 +937,7 @@
 
     });
 
-    // 뒤로가기버튼 이벤트
+    // BackButton Event
     document.getElementById("back-button").addEventListener("click", function (event) {
         event.stopPropagation();
 
@@ -947,12 +951,14 @@
         if (sideMenu.style.height === "0px") {
             console.log("sideMenu is opening");
             sideMenu.style.height = "100px";
-            menuButton.style.zIndex = "-1"; // Hide the button under the side menu
+            menuButton.style.zIndex = "-1";
+            backButton.style.zIndex = "-1";
             // pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             console.log("sideMenu is closing");
             sideMenu.style.height = "0px";
-            menuButton.style.zIndex = "2"; // Show the button
+            menuButton.style.zIndex = "2"; 
+            backButton.style.zIndex = "2";
             // pageContainer.style.transform = "translateY(0px)";
         }
     });
