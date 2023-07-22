@@ -1,6 +1,3 @@
-
-
-    // the link to your model provided by Teachable Machine export panel
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
     let URL = URL_Man;
