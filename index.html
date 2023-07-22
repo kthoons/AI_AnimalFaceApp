@@ -646,12 +646,12 @@
 
             </div>
         </div>
-        <div class="page page-1" style="display: none;">
+        <div id="page-1" class="page" style="display: none;">
             <div id="page-container">
                 <h1 class="title">앱 설명</h1>
             </div>
         </div>
-        <div class="page page-2" style="display: none;">
+        <div id="page-2" class="page" style="display: none;">
             <div id="page-container">
                 <h1 class="title">개발자</h1>
             </div>
@@ -679,8 +679,8 @@
     var sideMenu = document.getElementById("side-menu");
     var menuButton = document.getElementById("menu-button");
     var backButton = document.getElementById("back-button");
-    var $sideMenuSelectors = $('.selector');
-    var $pages = $('.page');
+    var sideMenuSelectors = $('.selector');
+    var pages = $('.page');
 
     async function handleFileUpload(event) {
         try {
@@ -864,12 +864,12 @@
     }
     
     // SideMenu selector Event
-    for (let i = 0; i < $sideMenuSelectors.length; i++) {
-        console.log($sideMenuSelectors, $pages);
-        $sideMenuSelectors[i].addEventListener("click", function () {
+    for (let i = 0; i < sideMenuSelectors.length; i++) {
+        console.log(sideMenuSelectors, pages);
+        sideMenuSelectors[i].addEventListener("click", function () {
             sideMenu.style.height = "0px";
             backButton.style.display = "block";
-            loadPage($pages[i]);
+            loadPage(pages[i]);
         });
     }
 
@@ -962,10 +962,10 @@
     });
 
     function getCurrentPage() {
-        $pages.each(function (i) {
+        pages.each(function (i) {
             console.log(`pages' Index : ${i}`);
-            console.log($pages[i].style.display);
-            if ($pages[i].style.display === 'block') {
+            console.log(pages[i].style.display);
+            if (pages[i].style.display === 'block') {
                 console.log("do it");
                 return 'page-' + (i + 1);
             }
@@ -976,14 +976,14 @@
     function loadPage(page) {
         var mainPage = document.getElementById("mainPage");
         // Loop through all pages
-        console.log(`pages Length : ${$pages.length}`)
-        for (var i = 0; i < $pages.length; i++) {
+        console.log(`pages Length : ${pages.length}`)
+        for (var i = 0; i < pages.length; i++) {
             if (page.attr('id') === 'page-' + (i + 1)) {
-                $pages[i].style.display = 'block';
+                pages[i].style.display = 'block';
                 mainPage.style.display = 'none';
                 console.log("block");
             } else {
-                $pages[i].style.display = 'none';
+                pages[i].style.display = 'none';
                 mainPage.style.display = 'none';
                 console.log("none");
             }
