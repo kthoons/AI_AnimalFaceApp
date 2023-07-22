@@ -647,12 +647,12 @@
 
             </div>
         </div>
-        <div id="page-1" style="display: none;">
+        <div id="page" class="page-1"style="display: none;">
             <div id="page-container">
                 <h1 class="title">앱 설명</h1>
             </div>
         </div>
-        <div id="page-2" style="display: none;">
+        <div id="page" class="page-2" style="display: none;">
             <div id="page-container">
                 <h1 class="title">개발자</h1>
             </div>
@@ -681,12 +681,10 @@
     var sideMenu = document.getElementById("side-menu");
     var menuButton = document.getElementById("menu-button");
     var sideMenuSelectors = $("#selector");
-    var pages = [];
+    var pages = $("#page");
 
     // 사이드 메뉴 selector 에 Event 구현
     for (let i = 0; i < sideMenuSelectors.length; i++) {
-        pages[i] = document.getElementById('page-' + (i + 1));;
-
         sideMenuSelectors[i].addEventListener("click", function () {
             sideMenu.style.height = "0px";
             loadPage(this.id);
