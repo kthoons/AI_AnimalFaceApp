@@ -680,7 +680,7 @@
     var menuButton = document.getElementById("menu-button");
     var backButton = document.getElementById("back-button");
     var sideMenuSelectors = $('.selector');
-    var pages = $('.page');
+    var pages = document.getElementsByClassName('page');
 
     async function handleFileUpload(event) {
         try {
@@ -978,7 +978,7 @@
         // Loop through all pages
         console.log(`pages Length : ${pages.length}`)
         for (var i = 0; i < pages.length; i++) {
-            if ($page.attr('id') === 'page-' + (i + 1)) {
+            if (page.id === 'page-' + (i + 1)) {
                 pages[i].style.display = 'block';
                 mainPage.style.display = 'none';
                 console.log("block");
