@@ -869,7 +869,7 @@
         sideMenuSelectors[i].addEventListener("click", function () {
             sideMenu.style.height = "0px";
             backButton.style.display = "block";
-            loadPage(this.id);
+            loadPage(pages[i]);
         });
     }
 
@@ -973,12 +973,12 @@
         return null;
     }
 
-    function loadPage(pageId) {
+    function loadPage(page) {
         var mainPage = document.getElementById("mainPage");
         // Loop through all pages
         console.log(`pages Length : ${pages.length}`)
         for (var i = 0; i < pages.length; i++) {
-            if (pageId === 'page-' + (i + 1)) {
+            if (page.className === 'page-' + (i + 1)) {
                 pages[i].style.display = 'block';
                 mainPage.style.display = 'none';
                 console.log("block");
