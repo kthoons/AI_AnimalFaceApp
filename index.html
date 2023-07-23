@@ -889,13 +889,13 @@
             sideMenu.style.height = "100px";
             menuButton.style.zIndex = "-1";
             backButton.style.zIndex = "-1";
-            // pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
+            pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             console.log("sideMenu is closing");
             sideMenu.style.height = "0px";
             menuButton.style.zIndex = "2";
             backButton.style.zIndex = "2";
-            // pageContainer.style.transform = "translateY(0px)";
+            pageContainer.style.transform = "translateY(0px)";
         }
 
         backButton.style.display = "none";
