@@ -884,7 +884,7 @@
         let sideMenuHeight = style.getPropertyValue("height");
 
         console.log("menuButton clicked");
-        console.log(`Height is ${sideMenu.style.height}`);
+        console.log(`Height is ${typeof sideMenu.style.height}`);
         if (sideMenu.style.height === "0px") {
             console.log("sideMenu is opening");
             sideMenu.style.height = "100px";
