@@ -720,9 +720,9 @@
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
 
-                image.onload = function () {
-                    image.style.display = 'block';
-                }
+                // image.onload = function () {
+                //     image.style.display = 'block';
+                // }
             }
 
             // 로딩 페이지 표시
@@ -754,6 +754,7 @@
 
         var image = document.getElementById("previewImg");
         var gaugeFill = document.getElementsByClassName("gauge_fill");
+
         prediction = await model.predict(image, false);
         createDataList();
         fillGauge();
