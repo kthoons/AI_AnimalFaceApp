@@ -58,7 +58,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #8999e1;
+            background-color: rgb(51, 178, 255);
             padding: 10px;
             border-radius: 50px;
             width: fit-content;
@@ -913,6 +913,7 @@
         createDataList();
         fillGauge();
         fillAnimalExplanation();
+
         console.log("predict End");
     }
 
@@ -992,7 +993,7 @@
     function handleGenderChange(event) {
         let genderToggle = document.getElementById("gender-toggle");
         gender = event.target.checked ? "Female" : "Male";
-        genderToggle.style.backgroundColor = (gender == "Male") ? '#8999e1' : '#f998d8';
+        genderToggle.style.backgroundColor = (gender == "Male") ? 'rgb(51, 178, 255)' : 'rgb(255, 95, 95)';
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
     function CheckExceptionTarget(elem) {
