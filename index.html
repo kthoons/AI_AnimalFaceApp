@@ -468,7 +468,7 @@
             display: block;
         }
 
-        
+
         /* 로딩 애니메이션 */
         .loading {
             width: 100%;
@@ -908,6 +908,7 @@
         var gaugeFill = document.getElementsByClassName("gauge_fill");
 
         prediction = await model.predict(image, false);
+        await sleep(2000);
         createDataList();
         fillGauge();
         fillAnimalExplanation();
@@ -1155,7 +1156,9 @@
             }
         }
     }
-
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
 </script>
 
