@@ -754,7 +754,7 @@
 
         var image = document.getElementById("previewImg");
         var gaugeFill = document.getElementsByClassName("gauge_fill");
-
+        
         prediction = await model.predict(image, false);
         createDataList();
         fillGauge();
@@ -875,6 +875,8 @@
         gaugeData = sortedEntries.slice(0, 3);
     }
     function adjustDisplay() {
+        // 이미지 생성
+        document.getElementById('image-container').style.display = 'block';
         // 게이지 생성
         document.getElementById('gauge-container').style.display = 'block';
         // 로딩 페이지 숨기기
