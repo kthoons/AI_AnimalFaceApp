@@ -1018,7 +1018,7 @@
             speed += 0.1; // Increase speed
 
             loadingProgress.textContent = `${Math.floor(progress)}%`; // Update the loading progress text
-
+            console.log(loadingProgress.textContent);
             // Schedule the next frame
             requestAnimationFrame(animateLoadingProgress);
         } else {
@@ -1026,10 +1026,6 @@
             loadingProgress.textContent = '100%';
         }
     }
-
-    // Start the animation
-    animateLoadingProgress();
-
 </script>
 
 </html>
