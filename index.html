@@ -473,7 +473,7 @@
         .loading {
             width: 100%;
             height: 100%;
-            background: #7c8197;
+            background: #7a8098;
             opacity: 0.9;
             position: fixed;
         }
@@ -879,7 +879,7 @@
 
             // 로딩 페이지 표시
             document.getElementById('loading-page').style.display = 'flex';
-            animateLoadingProgress();
+
             await init();
             Predict();
             adjustDisplay();
@@ -1157,25 +1157,6 @@
     }
 
 
-    let loadingProgress = document.getElementById("loading-progress");
-
-    let progress = 0; // Progress from 0 to 100
-    let speed = 0.1; // Initial speed
-
-    let animateLoadingProgress = () => {
-        if (progress < 100) {
-            progress += speed;
-            speed += 0.1; // Increase speed
-
-            loadingProgress.textContent = `${Math.floor(progress)}%`; // Update the loading progress text
-            console.log(loadingProgress.textContent);
-            // Schedule the next frame
-            requestAnimationFrame(animateLoadingProgress);
-        } else {
-            // Ensure the loading progress is 100% at the end
-            loadingProgress.textContent = '100%';
-        }
-    }
 </script>
 
 </html>
