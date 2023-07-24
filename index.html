@@ -881,6 +881,7 @@
             document.getElementById('loading-page').style.display = 'flex';
 
             await init();
+            await sleep(2000);
             Predict();
             adjustDisplay();
 
@@ -908,7 +909,7 @@
         var gaugeFill = document.getElementsByClassName("gauge_fill");
 
         prediction = await model.predict(image, false);
-        await sleep(2000);
+        
         createDataList();
         fillGauge();
         fillAnimalExplanation();
