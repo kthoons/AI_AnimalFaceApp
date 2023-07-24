@@ -728,7 +728,7 @@
 
             // 로딩 페이지 표시
             document.getElementById('loading-page').style.display = 'flex';
-
+            animateLoadingProgress();
             await init();
             Predict();
             adjustDisplay();
@@ -769,7 +769,6 @@
 
         const pointCounters = $(".point_counter");
         const textContainers = $(".text_container");
-        console.log(gaugeData[1][1]);
         pointCounters.each(function (i, obj) {
             animateValue(obj, 0, gaugeData[i][1], 100);
         });
