@@ -893,7 +893,6 @@
             await init();
             await sleep(1000);
             Predict();
-            adjustDisplay();
         } catch (error) {
             console.error(error);
         }
@@ -922,7 +921,7 @@
         createDataList();
         fillGauge();
         fillAnimalExplanation();
-
+        adjustDisplay();
         console.log("predict End");
     }
 
@@ -1028,7 +1027,7 @@
     }
 
     function createDataList() {
-        console.log("createData");
+        console.log("createDataList");
         for (let i = 0; i < maxPredictions; i++) {
             const key = prediction[i].className;
             const value = prediction[i].probability.toFixed(2) * 100;
