@@ -526,6 +526,13 @@
             animation: spin-d 2s infinite cubic-bezier(0.5, 0, 0.5, 1);
         }
 
+        #overlay,
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
         @keyframes spin-a {
             0% {
                 transform: rotate(90deg);
@@ -755,7 +762,7 @@
         </div>
     </div>
     <div id="back-button">
-        <img src="back-button.png" alt="My Image" width="30" height="30">
+        <img src="back-button.png" alt="btnImage" width="30" height="30">
     </div>
     <div id="menu-button">
         <span></span>
@@ -784,6 +791,7 @@
                 </div>
                 <div class="image-container">
                     <img id="previewImg" alt="" />
+                    <canvas id="faceImg"></canvas>
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
                 <div id="gauge-container" style="display: none;">
@@ -845,6 +853,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="js/face-api.js"></script>
+<script src="js/faceSystem.js"></script>
 <script>
     // the link to your model provided by Teachable Machine export panel
     const URL_Man = "./my_model_male/";
@@ -881,7 +891,7 @@
             document.getElementById('loading-page').style.display = 'flex';
 
             await init();
-            await sleep(2000);
+            await sleep(1000);
             Predict();
             adjustDisplay();
 
@@ -909,7 +919,7 @@
         var gaugeFill = document.getElementsByClassName("gauge_fill");
 
         prediction = await model.predict(image, false);
-        
+        await face();
         createDataList();
         fillGauge();
         fillAnimalExplanation();
@@ -1162,6 +1172,34 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    
+
+    async function face() {
+
+        const MODEL_URL = '/models';
+
+        await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
+        await faceapi.loadFaceLandmarkModel(MODEL_URL);
+        await faceapi.loadFaceRecognitionModel(MODEL_URL);
+        await faceapi.loadFaceExpressionModel(MODEL_URL);
+
+        const img = document.getElementById('previewImg');
+        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions();
+        const canvas = $('#faceImg');
+        faceapi.matchDimensions(canvas, img);
+
+        faceDescriptions = faceapi.resizeResults(faceDescriptions, img);
+
+        faceDescriptions.forEach((faceDescription, i) => {
+            const box = faceDescription.detection.box; // 감지된 얼굴의 bounding box 정보를 가져옵니다.
+            const x = box.x; // 얼굴의 x 좌표
+            const y = box.y; // 얼굴의 y 좌표
+            const width = box.width; // 얼굴의 너비
+            const height = box.height; // 얼굴의 높이
+            console.log(`Face ${i + 1}: x=${x}, y=${y}, width=${width}, height=${height}`);
+        })
+
+    }
 </script>
 
 </html>
