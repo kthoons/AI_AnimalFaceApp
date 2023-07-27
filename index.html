@@ -962,6 +962,7 @@
     }
 
     function fillRandomColors() {
+        console.log("fillRandomColors");
         const progressBar = $(".progress_bar");
         const colors = [
             { start: "rgba(240, 128, 128, 0.5)", end: "rgba(240, 128, 128, 1)" }, // Light Coral
@@ -980,7 +981,6 @@
         }
 
         progressBar.each(function (i) {
-            console.log(this);
             $(this).css(
                 "background",
                 `linear-gradient(to bottom, ${colors[i].start}, ${colors[i].end})`
