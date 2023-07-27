@@ -894,6 +894,7 @@
             await sleep(1000);
             Predict();
             adjustDisplay();
+            face();
 
         } catch (error) {
             console.error(error);
@@ -919,11 +920,11 @@
         var gaugeFill = document.getElementsByClassName("gauge_fill");
 
         prediction = await model.predict(image, false);
-        await face();
+        
         createDataList();
         fillGauge();
         fillAnimalExplanation();
-
+        
         console.log("predict End");
     }
 
