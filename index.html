@@ -1175,37 +1175,37 @@
     }
 
 
-    $(document).ready(function () {
-        async function face() {
 
-            const MODEL_URL = '/models';
+    async function face() {
 
-            await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
-            await faceapi.loadFaceLandmarkModel(MODEL_URL);
-            await faceapi.loadFaceRecognitionModel(MODEL_URL);
-            await faceapi.loadFaceExpressionModel(MODEL_URL);
-            console.log("face1");
-            const img = document.getElementById('previewImg');
-            let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions();
-            const canvas = $('#faceImg').get(0);
-            faceapi.matchDimensions(canvas, img);
-            console.log("face2");
-            faceDescriptions = faceapi.resizeResults(faceDescriptions, img);
+        const MODEL_URL = '/models';
 
-            faceDescriptions.forEach((faceDescription, i) => {
-                const box = faceDescription.detection.box; // 감지된 얼굴의 bounding box 정보를 가져옵니다.
-                const x = box.x; // 얼굴의 x 좌표
-                const y = box.y; // 얼굴의 y 좌표
-                const width = box.width; // 얼굴의 너비
-                const height = box.height; // 얼굴의 높이
-                console.log(`Face ${i + 1}: x=${x}, y=${y}, width=${width}, height=${height}`);
-                console.log("face3");
-            })
-            console.log("face4");
-        }
+        await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
+        await faceapi.loadFaceLandmarkModel(MODEL_URL);
+        await faceapi.loadFaceRecognitionModel(MODEL_URL);
+        await faceapi.loadFaceExpressionModel(MODEL_URL);
+        console.log("face1");
+        const img = document.getElementById('previewImg');
+        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions();
+        const canvas = $('#faceImg').get(0);
+        faceapi.matchDimensions(canvas, img);
+        console.log("face2");
+        faceDescriptions = faceapi.resizeResults(faceDescriptions, img);
 
-        face();
-    })
+        faceDescriptions.forEach((faceDescription, i) => {
+            const box = faceDescription.detection.box; // 감지된 얼굴의 bounding box 정보를 가져옵니다.
+            const x = box.x; // 얼굴의 x 좌표
+            const y = box.y; // 얼굴의 y 좌표
+            const width = box.width; // 얼굴의 너비
+            const height = box.height; // 얼굴의 높이
+            console.log(`Face ${i + 1}: x=${x}, y=${y}, width=${width}, height=${height}`);
+            console.log("face3");
+        })
+        console.log("face4");
+    }
+
+
+
 
 </script>
 
