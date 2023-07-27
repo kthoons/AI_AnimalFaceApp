@@ -1186,7 +1186,7 @@
         console.log("face1");
         const img = document.getElementById('previewImg');
         let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions();
-        const canvas = $('#faceImg');
+        const canvas = $('#faceImg').get(0);
         faceapi.matchDimensions(canvas, img);
         console.log("face2");
         faceDescriptions = faceapi.resizeResults(faceDescriptions, img);
