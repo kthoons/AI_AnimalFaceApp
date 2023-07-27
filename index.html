@@ -1040,6 +1040,7 @@
         gaugeData = sortedEntries.slice(0, 3);
     }
     function adjustDisplay() {
+        console.log("adjustDisplay Done");
         // 이미지 생성
         document.getElementById('previewImg').style.display = 'block';
         // 게이지 생성
@@ -1057,7 +1058,6 @@
         document.getElementById("main-explain").style.display = 'block';
         document.getElementById("sub-explain").style.display = 'block';
 
-        console.log("adjustDisplay Done");
     }
 
     // SideMenu selector Event
