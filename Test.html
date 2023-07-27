@@ -25,13 +25,18 @@
 
     async function MainFunction() {
         console.log("MainFunction Before Sleeping");
-        await sleep(2000);
+        await sleep(1000);
         SubFunction();
         console.log("MainFunction After Sleeping");
+        
     }
     async function SubFunction() {
         console.log("SubFunction Before Sleeping");
-        await sleep(3000);
+        for (i = 0 ; i < 50000 ; i++)
+        {
+            console.log(i);
+        }
+        await sleep(5000);
         console.log("SubFunction After Sleeping");
     }
 
