@@ -1149,7 +1149,7 @@
         console.log("facepit");
         face();
     });
-    
+
     function getCurrentPage() {
         for (var i = 0; i < pages.length; i++) {
             console.log("getCurrentPage");
@@ -1193,9 +1193,9 @@
         console.log("face1");
         const img = document.getElementById('previewImg');
         let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions();
+        console.log("face2");
         const canvas = $('#faceImg').get(0);
         faceapi.matchDimensions(canvas, img);
-        console.log("face2");
         faceDescriptions = faceapi.resizeResults(faceDescriptions, img);
 
         faceDescriptions.forEach((faceDescription, i) => {
