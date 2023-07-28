@@ -828,7 +828,7 @@
                     <h2 id="sub-explain"></h2>
                 </div>
                 <div id="tryAgain-button" style="display: none;">다시하기</div>
-
+                <div id="face-button" style="display: block;">faceapi</div>
 
             </div>
         </div>
@@ -922,7 +922,7 @@
         fillGauge();
         fillAnimalExplanation();
         adjustDisplay();
-        face();
+        
         console.log("predict End");
     }
 
@@ -943,7 +943,7 @@
     }
 
     function fillAnimalExplanation() {
-        console.log("fillAnimaglExplanation");
+        console.log("fillAnimalExplanation");
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
 
@@ -1145,6 +1145,9 @@
         location.reload();
     });
 
+    document.getElementById("face-button").addEventListener("click", function (event) {
+        face();
+    });
     function getCurrentPage() {
         for (var i = 0; i < pages.length; i++) {
             console.log("getCurrentPage");
