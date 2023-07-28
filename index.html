@@ -1185,14 +1185,14 @@
     async function face() {
 
         const MODEL_URL = '/models';
-
+        await faceapi.nets.ssdMobilenetv1.loadFromDisk('./models')
         await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
         await faceapi.loadFaceLandmarkModel(MODEL_URL);
         await faceapi.loadFaceRecognitionModel(MODEL_URL);
         await faceapi.loadFaceExpressionModel(MODEL_URL);
         console.log("face1");
         const img = document.getElementById('previewImg');
-        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions();
+        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().swithFaceExpressions();
         console.log("face2");
         const canvas = $('#faceImg').get(0);
         faceapi.matchDimensions(canvas, img);
