@@ -853,7 +853,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="js/face-api.js"></script>
+<script src="js/face-api.min.js"></script>
 <script src="js/faceSystem.js"></script>
 <script>
     // the link to your model provided by Teachable Machine export panel
@@ -1192,7 +1192,7 @@
         await faceapi.loadFaceExpressionModel(MODEL_URL);
         console.log("face1");
         const img = document.getElementById('previewImg');
-        let faceDescriptions = await faceapi.detectAllFaces(img)
+        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions();
         console.log("face2");
         const canvas = $('#faceImg').get(0);
         faceapi.matchDimensions(canvas, img);
