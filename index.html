@@ -893,6 +893,7 @@
             await init();
             await sleep(1000);
             Predict();
+            face();
         } catch (error) {
             console.error(error);
         }
@@ -1181,7 +1182,6 @@
     }
 
 
-
     async function face() {
 
         const MODEL_URL = '/models';
@@ -1192,7 +1192,7 @@
         await faceapi.loadFaceExpressionModel(MODEL_URL);
         console.log("face1");
         const img = document.getElementById('previewImg');
-        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().swithFaceExpressions();
+        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions();
         console.log("face2");
         const canvas = $('#faceImg').get(0);
         faceapi.matchDimensions(canvas, img);
