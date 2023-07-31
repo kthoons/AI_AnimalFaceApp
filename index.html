@@ -926,17 +926,8 @@
                 console.error(error);
                 reject(error); // 에러가 발생하면 reject 호출
             }
-        });
+        }).then(face());
     }
-
-    // 사용 예:
-    handleFileUpload(event).then(() => {
-        // handleFileUpload가 완료되면 여기 코드 실행
-        face();
-    }).catch((error) => {
-        // 에러 처리
-    });
-
 
 
 
