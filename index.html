@@ -827,7 +827,7 @@
                     <h1 id="main-explain"></h1>
                     <h2 id="sub-explain"></h2>
                 </div>
-                <div id="tryAgain-button" style="display: none;">다시하기</div>        
+                <div id="tryAgain-button" style="display: none;">다시하기</div>
 
             </div>
         </div>
@@ -870,34 +870,76 @@
     var pages = document.getElementsByClassName('page');
     var mainPage = document.getElementById("mainPage");
 
-    async function handleFileUpload(event) {
-        try {
-            const file = event.target.files[0];
-            const fileReader = new FileReader();
-            const image = document.getElementById('previewImg');
-            fileReader.readAsDataURL(file);
+    // async function handleFileUpload(event) {
+    //     try {
+    //         const file = event.target.files[0];
+    //         const fileReader = new FileReader();
+    //         const image = document.getElementById('previewImg');
+    //         fileReader.readAsDataURL(file);
 
-            fileReader.onload = function () {
-                document.getElementById('upload-area').style.display = 'none';
-                image.src = fileReader.result;
+    //         fileReader.onload = function () {
+    //             document.getElementById('upload-area').style.display = 'none';
+    //             image.src = fileReader.result;
 
-                // image.onload = function () {
-                //     image.style.display = 'block';
-                // }
+    //             // image.onload = function () {
+    //             //     image.style.display = 'block';
+    //             // }
+    //         }
+
+    //         // 로딩 페이지 표시
+    //         document.getElementById('loading-page').style.display = 'flex';
+
+    //         await init();
+    //         await sleep(1000);
+    //         Predict();
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+
+    function handleFileUpload(event) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const file = event.target.files[0];
+                // 기타 코드...
+                const fileReader = new FileReader();
+                const image = document.getElementById('previewImg');
+                fileReader.readAsDataURL(file);
+
+                fileReader.onload = function () {
+                    document.getElementById('upload-area').style.display = 'none';
+                    image.src = fileReader.result;
+
+                    // image.onload = function () {
+                    //     image.style.display = 'block';
+                    // }
+                }
+
+                // 로딩 페이지 표시
+                document.getElementById('loading-page').style.display = 'flex';
+                await init();
+                await sleep(1000);
+                Predict();
+
+                resolve(); // 작업이 완료되면 resolve 호출
+            } catch (error) {
+                console.error(error);
+                reject(error); // 에러가 발생하면 reject 호출
             }
-
-            // 로딩 페이지 표시
-            document.getElementById('loading-page').style.display = 'flex';
-
-            await init();
-            await sleep(1000);
-            Predict();
-            face();
-        } catch (error) {
-            console.error(error);
-        }
+        });
     }
-    
+
+    // 사용 예:
+    handleFileUpload(event).then(() => {
+        // handleFileUpload가 완료되면 여기 코드 실행
+        face();
+    }).catch((error) => {
+        // 에러 처리
+    });
+
+
+
+
 
     const img = document.getElementById('previewImg');
 
@@ -932,7 +974,7 @@
             const width = box.width; // 얼굴의 너비
             const height = box.height; // 얼굴의 높이
             console.log(`Face ${i + 1}: x=${x}, y=${y}, width=${width}, height=${height}`);
-            
+
             console.log("face3");
         })
 
