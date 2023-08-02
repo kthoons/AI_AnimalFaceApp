@@ -891,12 +891,10 @@
 
             await init();
             await Predict();
+            await face();
         } catch (error) {
             console.error(error);
         }
-        console.log("handleFileUpload end");
-
-        face();
     }
 
     // function handleFileUpload(event) {
