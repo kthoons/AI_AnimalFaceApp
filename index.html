@@ -919,9 +919,9 @@
                 document.getElementById('loading-page').style.display = 'flex';
                 await init();
                 await sleep(1000);
-                Predict();
-                console.log("end");
-                console.log(resolve()); // 작업이 완료되면 resolve 호출
+                await Predict();
+                
+                resolve(); // 작업이 완료되면 resolve 호출
             } catch (error) {
                 console.error(error);
                 reject(error); // 에러가 발생하면 reject 호출
