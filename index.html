@@ -921,7 +921,7 @@
                 await sleep(1000);
                 Predict();
 
-                resolve(); // 작업이 완료되면 resolve 호출
+                console.log(resolve()); // 작업이 완료되면 resolve 호출
             } catch (error) {
                 console.error(error);
                 reject(error); // 에러가 발생하면 reject 호출
