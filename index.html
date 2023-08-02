@@ -891,8 +891,8 @@
 
             await init();
             await Predict();
-            console.log("end");
-            face();
+            await sleep(1000);
+            await face();
         } catch (error) {
             console.error(error);
         }
