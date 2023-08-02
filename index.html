@@ -945,7 +945,7 @@
 
         const img = document.getElementById('previewImg');
         console.log(img);
-        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
+        let faceDescriptions = await faceapi.detectAllFaces(img);
     
         console.log("face2");
 
