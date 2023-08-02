@@ -853,7 +853,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="js/face-api.min.js"></script>
-<script src="js/faceSystem.js"></script>
+<!-- <script src="js/faceSystem.js"></script> -->
 <script>
     // the link to your model provided by Teachable Machine export panel
     const URL_Man = "./my_model_male/";
@@ -936,19 +936,17 @@
 
         console.log(faceapi);
 
-        // await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL);
-        await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-        await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-        await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-        await faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
-        await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL)
+        await faceapi.loadSsdMobilenetv1Model(MODEL_URL)
+        await faceapi.loadFaceLandmarkModel(MODEL_URL) // model to detect face landmark
+        await faceapi.loadFaceRecognitionModel(MODEL_URL) //model to Recognise Face
+        await faceapi.loadFaceExpressionModel(MODEL_URL) //model to detect face expression
 
         console.log("face1");
 
         const img = document.getElementById('previewImg').src;
-
+        console.log(img);
         let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
-
+    
         console.log("face2");
 
         const canvas = $('#faceImg').get(0);
