@@ -465,14 +465,16 @@
         }
 
         #page-1 {
-            display: block;
-            margin-top: 10%;
-            width: 60%;
-            height: 80%;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
 
         }
 
-
+        #page-1 > h1 {
+            color: #444;
+        }
         /* 로딩 애니메이션 */
         .loading {
             width: 100%;
@@ -647,6 +649,9 @@
             padding: 1.5em;
         }
 
+        .features {
+            margin-top: 20px;
+        }
 
 
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
@@ -836,9 +841,24 @@
             </div>
         </div>
         <div id="page-1" class="page" style="display: none;">
-            <div id="page-container">
-                <h1 class="title">앱 설명</h1>
-            </div>
+            
+                <h1>🦁 당신의 동물상을 찾아보세요! 🐰</h1>
+                <p>"내 동물상 찾기" 앱은 당신이 어떤 동물상을 닮았는지 탐색할 수 있는 참신하고 재미있는 방법을 제공합니다. 궁금하신가요? 지금 바로 알아봅시다!</p>
+
+                <h2>🐼 주요 기능:</h2>
+                <div class="features">
+                    <p>사진 업로드: 간편하게 자신의 사진을 업로드하고, 당신의 동물상을 알아보세요.</p>
+                    <p>데이터 기반 분석: 연예인의 사진 수만 개를 학습시킨 데이터를 통해 정확한 분석 결과를 제공합니다.</p>
+                    <p>다양한 동물상: 고양이상에서부터 사자상까지! 당신이 어떤 동물상을 가졌는지 궁금하신가요? 지금 확인해보세요!</p>
+                </div>
+
+                <h2>🐵 어떻게 사용하나요?</h2>
+                <div class="how-to-use">
+                    <p>앱을 열고 카메라 아이콘을 클릭합니다.</p>
+                    <p>자신의 얼굴 사진을 업로드합니다.</p>
+                    <p>잠시 기다리면 당신의 동물상 결과가 화면에 나타납니다.</p>
+                </div>
+            
         </div>
         <div id="page-2" class="page" style="display: none;">
             <div id="page-container">
@@ -876,7 +896,7 @@
     var mainPage = document.getElementById("mainPage");
 
     window.onload = function () {
-        fetchData().then(fillIntroduction);
+        fetchData();
     };
 
     async function handleFileUpload(event) {
@@ -989,7 +1009,7 @@
     }
 
     async function fetchData() {
-        
+
         try {
             const response = await fetch('animalDiscriptions.json');
             descriptions = await response.json();
@@ -999,15 +1019,15 @@
 
         console.log("fetchData Done");
     }
-    function fillIntroduction() {
-        console.log("fillIntroduction");
-        var appEx = document.getElementById("page-1");
-        var DevEx = document.getElementById("page-2");
+    // function fillIntroduction() {
+    //     console.log("fillIntroduction");
+    //     var appEx = document.getElementById("page-1");
+    //     var DevEx = document.getElementById("page-2");
 
-        let description = descriptions["앱설명"];
+    //     let description = descriptions["앱설명"];
 
-        appEx.textContent = description;
-    }
+    //     appEx.textContent = description;
+    // }
 
     function fillAnimalExplanation() {
         console.log("fillAnimalExplanation");
