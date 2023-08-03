@@ -857,13 +857,13 @@
 <script src="js/face-api.js"></script>
 <!-- <script src="js/faceSystem.js"></script> -->
 <script>
-    // the link to your model provided by Teachable Machine export panel
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
     let URL = URL_Man;
     let gender = "Male";
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
+    let descriptions;
 
     var sideMenu = document.getElementById("side-menu");
     var menuButton = document.getElementById("menu-button");
@@ -871,6 +871,10 @@
     var sideMenuSelectors = $('.selector');
     var pages = document.getElementsByClassName('page');
     var mainPage = document.getElementById("mainPage");
+
+    window.onload = function () {
+        fetchData();
+    };
 
     async function handleFileUpload(event) {
         try {
@@ -898,7 +902,7 @@
             console.error(error);
         }
     }
- 
+
 
     async function face() {
 
@@ -916,7 +920,7 @@
         const img = document.getElementById('previewImg');
         console.log(img);
         let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
-    
+
         console.log("face2");
 
         const canvas = $('#faceImg').get(0);
@@ -933,7 +937,7 @@
 
             console.log("face3");
         })
- 
+
         console.log("face4");
 
     }
@@ -981,23 +985,32 @@
         });
     }
 
+    async function fetchData() {
+        
+        try {
+            const response = await fetch('animalDiscriptions.json');
+            descriptions = await response.json();
+        } catch (error) {
+            console.error('에러 발생:', error);
+        }
+
+        console.log("fetchData Done");
+    }
+
     function fillAnimalExplanation() {
         console.log("fillAnimalExplanation");
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
 
-        fetch('animalDiscriptions.json')
-            .then(response => response.json())
-            .then(descriptions => {
-                let userGender = gender == "Male" ? "남자" : "여자";
-                let userAnimal = gaugeData[0][0].replace(/상/g, "");;
-                let description = descriptions["설명"][userGender][userAnimal];
-                let summary = descriptions["요약"][userGender][userAnimal];
-                let randomColor = getRandomColor();
-                subEx.textContent = description;
-                mainEx.textContent = summary;
-                mainEx.style.color = randomColor;
-            });
+        let userGender = gender == "Male" ? "남자" : "여자";
+        let userAnimal = gaugeData[0][0].replace(/상/g, "");;
+        let description = descriptions["설명"][userGender][userAnimal];
+        let summary = descriptions["요약"][userGender][userAnimal];
+        let randomColor = getRandomColor();
+
+        subEx.textContent = description;
+        mainEx.textContent = summary;
+        mainEx.style.color = randomColor;
     }
 
     function fillRandomColors() {
