@@ -874,6 +874,7 @@
 
     window.onload = function () {
         fetchData();
+        fillIntroduction();
     };
 
     async function handleFileUpload(event) {
@@ -1005,6 +1006,7 @@
 
         appEx.textContent = description;
     }
+
     function fillAnimalExplanation() {
         console.log("fillAnimalExplanation");
         var mainEx = document.getElementById("main-explain");
