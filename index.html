@@ -996,7 +996,15 @@
 
         console.log("fetchData Done");
     }
+    function fillIntroduction() {
+        console.log("fillIntroduction");
+        var appEx = document.getElementById("menu-1");
+        var DevEx = document.getElementById("menu-2");
 
+        let description = descriptions["앱설명"];
+
+        appEx.textContent = description;
+    }
     function fillAnimalExplanation() {
         console.log("fillAnimalExplanation");
         var mainEx = document.getElementById("main-explain");
