@@ -873,8 +873,7 @@
     var mainPage = document.getElementById("mainPage");
 
     window.onload = function () {
-        fetchData();
-        fillIntroduction();
+        fetchData().then(fillIntroduction);
     };
 
     async function handleFileUpload(event) {
