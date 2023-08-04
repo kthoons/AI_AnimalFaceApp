@@ -1128,6 +1128,7 @@
 
     window.onload = function () {
         fetchData();
+        face();
     };
 
     async function handleFileUpload(event) {
@@ -1151,7 +1152,6 @@
 
             await init();
             await Predict();
-            await face();
         } catch (error) {
             console.error(error);
         }
