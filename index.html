@@ -1013,7 +1013,7 @@
             <div id="page-container">
 
                 <h1 class="title">나와 닮은 동물상은 무엇일까요?</h1>
-
+                <img id="myimage" src="MyFace.jpg" alt="" width="300" height="200" style="border: 1px solid black;">
                 <!-- <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
                     <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
@@ -1168,7 +1168,7 @@
 
         console.log("face1");
 
-        const img = document.getElementById('previewImg');
+        const img = document.getElementById('myimage');
         console.log(img);
         let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
 
