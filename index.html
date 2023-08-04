@@ -1014,6 +1014,7 @@
 
                 <h1 class="title">나와 닮은 동물상은 무엇일까요?</h1>
                 <img id="myimage" src="MyFace.jpg" alt="" width="300" height="200" style="border: 1px solid black;">
+                <canvas id="reflay" class="overlay"></canvas>
                 <!-- <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
                     <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
@@ -1107,9 +1108,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="js/face-api.min.js"></script>
-<script src="js/face-api.js"></script>
-<!-- <script src="js/faceSystem.js"></script> -->
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/face-api.js"></script>
+    <script src="js/faceSystem.js"></script>
+
 <script>
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
@@ -1128,6 +1130,7 @@
 
     window.onload = function () {
         fetchData();
+        face();
     };
 
     async function handleFileUpload(event) {
@@ -1151,7 +1154,6 @@
 
             await init();
             await Predict();
-            await face();
         } catch (error) {
             console.error(error);
         }
@@ -1160,39 +1162,56 @@
 
     async function face() {
 
-        const MODEL_URL = '/models';
-
-        console.log(faceapi);
+        const MODEL_URL = '/models'
 
         await faceapi.loadSsdMobilenetv1Model(MODEL_URL)
-        await faceapi.loadFaceLandmarkModel(MODEL_URL) // model to detect face landmark
-        await faceapi.loadFaceRecognitionModel(MODEL_URL) //model to Recognise Face
-        await faceapi.loadFaceExpressionModel(MODEL_URL) //model to detect face expression
+        await faceapi.loadFaceLandmarkModel(MODEL_URL)
+        await faceapi.loadFaceRecognitionModel(MODEL_URL)
+        await faceapi.loadFaceExpressionModel(MODEL_URL)
 
-        console.log("face1");
+        const img = document.getElementById('myimage')
+        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
+        const canvas = $('#reflay').get(0)
+        faceapi.matchDimensions(canvas, img)
 
-        const img = document.getElementById('myimage');
-        console.log(img);
-        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
+        faceDescriptions = faceapi.resizeResults(faceDescriptions, img)
+        faceapi.draw.drawDetections(canvas, faceDescriptions)
+        faceapi.draw.drawFaceLandmarks(canvas, faceDescriptions)
+        faceapi.draw.drawFaceExpressions(canvas, faceDescriptions)
 
-        console.log("face2");
 
-        const canvas = $('#faceImg').get(0);
-        faceapi.matchDimensions(canvas, img);
-        faceDescriptions = faceapi.resizeResults(faceDescriptions, img);
+        const labels = ['ross', 'rachel', 'chandler', 'monica', 'phoebe', 'joey']
 
-        faceDescriptions.forEach((faceDescription, i) => {
-            const box = faceDescription.detection.box; // 감지된 얼굴의 bounding box 정보를 가져옵니다.
-            const x = box.x; // 얼굴의 x 좌표
-            const y = box.y; // 얼굴의 y 좌표
-            const width = box.width; // 얼굴의 너비
-            const height = box.height; // 얼굴의 높이
-            console.log(`Face ${i + 1}: x=${x}, y=${y}, width=${width}, height=${height}`);
+        const labeledFaceDescriptors = await Promise.all(
+            labels.map(async label => {
 
-            console.log("face3");
+                const imgUrl = `images/${label}.jpg`
+                const img = await faceapi.fetchImage(imgUrl)
+
+                const faceDescription = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
+
+                if (!faceDescription) {
+                    throw new Error(`no faces detected for ${label}`)
+                }
+
+                const faceDescriptors = [faceDescription.descriptor]
+                return new faceapi.LabeledFaceDescriptors(label, faceDescriptors)
+            })
+        );
+
+        const threshold = 0.6
+        const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, threshold)
+
+        const results = faceDescriptions.map(fd => faceMatcher.findBestMatch(fd.descriptor))
+
+        results.forEach((bestMatch, i) => {
+            const box = faceDescriptions[i].detection.box
+            const text = bestMatch.toString()
+            const drawBox = new faceapi.draw.DrawBox(box, { label: text })
+            drawBox.draw(canvas)
+
+            console.log(`Face ${i + 1}: x = ${box.x}, y = ${box.y}, width = ${box.width}, height = ${box.height}`);
         })
-
-        console.log("face4");
 
     }
     async function init() {
