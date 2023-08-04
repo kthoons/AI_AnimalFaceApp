@@ -1319,7 +1319,7 @@
     function handleGenderChange(event) {
         let genderToggle = document.getElementById("gender-toggle");
         gender = event.target.checked ? "Female" : "Male";
-        genderToggle.style.backgroundColor = (gender == "Male") ? 'rgb(51, 178, 255)' : 'rgb(255, 95, 95)';
+        console.log(gender);
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
     function CheckExceptionTarget(elem) {
