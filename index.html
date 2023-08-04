@@ -1114,7 +1114,7 @@
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
     let URL = URL_Man;
-    let gender = "Male";
+    let gender = "FeMale";
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
     let descriptions;
@@ -1318,7 +1318,7 @@
     }
     function handleGenderChange(event) {
         let genderToggle = document.getElementById("gender-toggle");
-        gender = event.target.checked ? "Female" : "Male";
+        gender = event.target.checked ? "Male" : "Female";
         console.log(gender);
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
