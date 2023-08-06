@@ -560,8 +560,12 @@
         #overlay,
         .overlay {
             position: absolute;
-            top: 0;
-            left: 0;
+        }
+
+        .image-canvas-container {
+            position: relative;
+            display: inline-flex;
+            /* 이를 통해 컨테이너는 내부 img의 크기에 맞게 조절됩니다. */
         }
 
         @keyframes spin-a {
@@ -1013,6 +1017,9 @@
             <div id="page-container">
 
                 <h1 class="title">나와 닮은 동물상은 무엇일까요?</h1>
+                <!-- <div class="image-canvas-container">
+                    
+                </div> -->
                 <img id="myimage" src="MyFace.jpg" alt="" width="300" height="200" style="border: 1px solid black;">
                 <canvas id="reflay" class="overlay"></canvas>
                 <!-- <div id="gender-toggle" style="margin-bottom: 80px;">
@@ -1099,12 +1106,12 @@
         </div>
 
     </div>
-    
+
 </body>
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/face-api.js"></script>
 <script src="js/faceSystem.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
@@ -1130,7 +1137,7 @@
 
     window.onload = function () {
         // fetchData();
-        
+
     };
 
     async function handleFileUpload(event) {
