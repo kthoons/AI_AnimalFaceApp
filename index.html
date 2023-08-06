@@ -561,12 +561,10 @@
         .overlay {
             position: absolute;
         }
-
         .image-canvas-container {
-            position: relative;
-            display: inline-flex;
-            /* 이를 통해 컨테이너는 내부 img의 크기에 맞게 조절됩니다. */
-        }
+    position: relative;
+    display: inline-flex; /* 이를 통해 컨테이너는 내부 img의 크기에 맞게 조절됩니다. */
+}
 
         @keyframes spin-a {
             0% {
@@ -1017,11 +1015,11 @@
             <div id="page-container">
 
                 <h1 class="title">나와 닮은 동물상은 무엇일까요?</h1>
-                <!-- <div class="image-canvas-container">
-                    
-                </div> -->
-                <img id="myimage" src="MyFace.jpg" alt="" width="300" height="200" style="border: 1px solid black;">
-                <canvas id="reflay" class="overlay"></canvas>
+                <div class="image-canvas-container">
+                    <img id="myimage" src="MyFace.jpg" alt="" width="300" height="200" style="border: 1px solid black;">
+                    <canvas id="reflay" class="overlay"></canvas>
+                </div>
+                
                 <!-- <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
                     <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
@@ -1106,7 +1104,7 @@
         </div>
 
     </div>
-
+    
 </body>
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/face-api.js"></script>
@@ -1137,7 +1135,7 @@
 
     window.onload = function () {
         // fetchData();
-
+        
     };
 
     async function handleFileUpload(event) {
