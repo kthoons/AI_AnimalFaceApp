@@ -1017,10 +1017,10 @@
             <div id="page-container">
 
                 <h1 class="title">나와 닮은 동물상은 무엇일까요?</h1>
-                <div class="image-canvas-container">
+                <!-- <div class="image-canvas-container">
                     <img id="myimage" src="MyFace.jpg" alt="" width="300" height="200" style="border: 1px solid black;">
                     <canvas id="reflay" class="overlay"></canvas>
-                </div>
+                </div> -->
 
                 <!-- <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
@@ -1137,7 +1137,6 @@
 
     window.onload = function () {
         fetchData();
-        face();
     };
 
 
@@ -1162,6 +1161,7 @@
 
             await init();
             await Predict();
+            await face();
         } catch (error) {
             console.error(error);
         }
@@ -1176,9 +1176,9 @@
         await faceapi.loadFaceRecognitionModel(MODEL_URL)
         await faceapi.loadFaceExpressionModel(MODEL_URL)
 
-        const img = document.getElementById('myimage')
+        const img = document.getElementById('previewImg')
         let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
-        const canvas = $('#reflay').get(0)
+        const canvas = $('#faceImg').get(0)
         faceapi.matchDimensions(canvas, img)
 
         faceDescriptions = faceapi.resizeResults(faceDescriptions, img)
