@@ -1142,7 +1142,7 @@
     //     fetchData();
     // };
 
-    // fetchData();
+    fetchData();
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -1175,8 +1175,7 @@
         await faceapi.loadFaceExpressionModel(MODEL_URL)
 
         const img = document.getElementById('previewImg')
-        let faceDescriptions = await faceapi.detectAllFaces(img)
-        // .withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
+        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
         const canvas = $('#faceImg').get(0)
         faceapi.matchDimensions(canvas, img)
 
@@ -1194,8 +1193,8 @@
                 const imgUrl = `images/${label}.jpg`
                 const img = await faceapi.fetchImage(imgUrl)
 
-                const faceDescription = await faceapi.detectSingleFace(img)
-                // .withFaceLandmarks().withFaceDescriptor()
+                const faceDescription = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
+
                 if (!faceDescription) {
                     throw new Error(`no faces detected for ${label}`)
                 }
@@ -1286,9 +1285,7 @@
     //     appEx.textContent = description;
     // }
 
-    async function fillAnimalExplanation() {
-        const response = await fetch('animalDiscriptions.json');
-        descriptions = await response.json();
+    function fillAnimalExplanation() {
         console.log("fillAnimalExplanation");
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
@@ -1297,7 +1294,7 @@
         let description = descriptions["설명"][userGender][userAnimal];
         let summary = descriptions["요약"][userGender][userAnimal];
         let randomColor = getRandomColor();
-        console.log(userAnimal + "\n" + mainEx + "\n" + subEx + "\n" + userGender + "\n" + description + "\n" + summary + "\n" + randomColor);
+        console.log(userAnimal + "\n" + mainEx + "\n" + subEx + "\n"+ userGender + "\n" + description + "\n" +summary+ "\n" + randomColor) ;
 
         subEx.textContent = description;
         mainEx.textContent = summary;
