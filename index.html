@@ -1034,7 +1034,7 @@
                         <span class="knob"><i></i></span>
                     </label>
                 </div>
-                <button class="facebtn" type="button" onclick="face()"> Button </button>
+                <!-- <button class="facebtn" type="button" onclick="face()"> Button </button> -->
                 <div id="upload-area" onclick="document.getElementById('file-input').click();">
                     여기에 사진을 올려주세요!
                 </div>
@@ -1293,8 +1293,7 @@
         let userAnimal = gaugeData[0][0].replace(/상/g, "");;
         let description = descriptions["설명"][userGender][userAnimal];
         let summary = descriptions["요약"][userGender][userAnimal];
-        let randomColor = getRandomColor();
-        console.log(userAnimal + "\n" + mainEx + "\n" + subEx + "\n"+ userGender + "\n" + description + "\n" +summary+ "\n" + randomColor) ;
+        let randomColor = getRandomColor();    
 
         subEx.textContent = description;
         mainEx.textContent = summary;
