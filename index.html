@@ -1193,8 +1193,8 @@
                 const imgUrl = `images/${label}.jpg`
                 const img = await faceapi.fetchImage(imgUrl)
 
-                const faceDescription = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
-
+                const faceDescription = await faceapi.detectSingleFace(img)
+                // .withFaceLandmarks().withFaceDescriptor()
                 if (!faceDescription) {
                     throw new Error(`no faces detected for ${label}`)
                 }
