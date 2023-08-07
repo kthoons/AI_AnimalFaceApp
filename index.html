@@ -1175,7 +1175,8 @@
         await faceapi.loadFaceExpressionModel(MODEL_URL)
 
         const img = document.getElementById('previewImg')
-        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
+        let faceDescriptions = await faceapi.detectAllFaces(img)
+        // .withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
         const canvas = $('#faceImg').get(0)
         faceapi.matchDimensions(canvas, img)
 
