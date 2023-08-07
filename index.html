@@ -1137,13 +1137,13 @@
             fileReader.readAsDataURL(file);
 
             fileReader.onload = function () {
-                document.getElementById('upload-area').style.display = 'none';
-                image.src = fileReader.result;
                 canvas.width = image.width;
                 canvas.height = image.height;
                 ctx.drawImage(image, 0, 0);
                 cropToCircle(ctx, image.width, image.height);
-
+                
+                image.src = fileReader.result;
+                document.getElementById('upload-area').style.display = 'none';
             }
 
             // 로딩 페이지 표시
@@ -1281,7 +1281,7 @@
         mainEx.textContent = summary;
         mainEx.style.color = randomColor;
     }
-
+    
     function fillRandomColors() {
         console.log("fillRandomColors");
         const progressBar = $(".progress_bar");
