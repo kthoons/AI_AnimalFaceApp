@@ -1269,6 +1269,7 @@
         try {
             const response = await fetch('animalDiscriptions.json');
             descriptions = await response.json();
+            console.log(descriptions);
         } catch (error) {
             console.error('에러 발생:', error);
         }
