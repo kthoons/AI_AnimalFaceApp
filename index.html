@@ -1138,8 +1138,8 @@
     var pages = document.getElementsByClassName('page');
     var mainPage = document.getElementById("mainPage");
 
-    window.onload = async function () {
-        await fetchData();
+    window.onload = function () {
+        fetchData();
     };
 
 
@@ -1290,11 +1290,11 @@
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
         let userGender = gender == "Male" ? "남자" : "여자";
-        console.log(userGender);
         let userAnimal = gaugeData[0][0].replace(/상/g, "");;
         let description = descriptions["설명"][userGender][userAnimal];
         let summary = descriptions["요약"][userGender][userAnimal];
         let randomColor = getRandomColor();
+        console.log(description);
 
         subEx.textContent = description;
         mainEx.textContent = summary;
