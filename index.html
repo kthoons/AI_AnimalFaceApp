@@ -1138,11 +1138,11 @@
     var pages = document.getElementsByClassName('page');
     var mainPage = document.getElementById("mainPage");
 
-    window.onload = function () {
-        fetchData();
-    };
+    // window.onload = function () {
+    //     fetchData();
+    // };
 
-
+    fetchData();
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
