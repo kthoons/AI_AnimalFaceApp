@@ -1034,7 +1034,7 @@
                         <span class="knob"><i></i></span>
                     </label>
                 </div>
-                <!-- <button class="facebtn" type="button" onclick="face()"> Button </button> -->
+                <button class="facebtn" type="button" onclick="face()"> Button </button>
                 <div id="upload-area" onclick="document.getElementById('file-input').click();">
                     여기에 사진을 올려주세요!
                 </div>
@@ -1109,14 +1109,15 @@
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
-<!-- <script src="js/jquery-2.1.1.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<!-- <script src="js/jquery-2.1.1.min.js"></script> -->
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-<script src="js/face-api.js"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
+<!-- <script src="js/faceSystem.js"></script> -->
+<script src="js/face-api.js"></script>
 
 
 
@@ -1125,7 +1126,7 @@
 <script>
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
-    let URL = URL_Woman;
+    let URL = URL_Man;
     let gender = "FeMale";
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
@@ -1138,11 +1139,11 @@
     var pages = document.getElementsByClassName('page');
     var mainPage = document.getElementById("mainPage");
 
-    // window.onload = function () {
-    //     fetchData();
-    // };
+    window.onload = function () {
+        fetchData();
+    };
 
-    fetchData();
+
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -1268,7 +1269,7 @@
 
         try {
             const response = await fetch('animalDiscriptions.json');
-            descriptions = await response.json();    
+            descriptions = await response.json();
         } catch (error) {
             console.error('에러 발생:', error);
         }
@@ -1289,11 +1290,12 @@
         console.log("fillAnimalExplanation");
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
-        let userGender = gender == "FeMale" ? "여자" : "남자";
+        console.log(gender);
+        let userGender = gender == "Male" ? "남자" : "여자";
         let userAnimal = gaugeData[0][0].replace(/상/g, "");;
         let description = descriptions["설명"][userGender][userAnimal];
         let summary = descriptions["요약"][userGender][userAnimal];
-        let randomColor = getRandomColor();    
+        let randomColor = getRandomColor();
 
         subEx.textContent = description;
         mainEx.textContent = summary;
