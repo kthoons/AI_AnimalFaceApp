@@ -1017,10 +1017,10 @@
             <div id="page-container">
 
                 <h1 class="title">나와 닮은 동물상은 무엇일까요?</h1>
-                <!-- <div class="image-canvas-container">
+                <div class="image-canvas-container">
                     <img id="myimage" src="MyFace.jpg" alt="" width="300" height="200" style="border: 1px solid black;">
                     <canvas id="reflay" class="overlay"></canvas>
-                </div> -->
+                </div>
 
                 <!-- <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
@@ -1034,7 +1034,7 @@
                         <span class="knob"><i></i></span>
                     </label>
                 </div>
-                <button class="facebtn" type="button" onclick="face()"> Button </button>
+
                 <div id="upload-area" onclick="document.getElementById('file-input').click();">
                     여기에 사진을 올려주세요!
                 </div>
@@ -1108,19 +1108,15 @@
     </div>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<!-- <script src="js/jquery-2.1.1.min.js"></script> -->
-
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/face-api.js"></script>
+<script src="js/faceSystem.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
-<!-- <script src="js/faceSystem.js"></script> -->
-<script src="js/face-api.js"></script>
-
-
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script> -->
 
 
 <script>
@@ -1141,6 +1137,7 @@
 
     window.onload = function () {
         fetchData();
+        face();
     };
 
 
@@ -1155,6 +1152,9 @@
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
 
+                // image.onload = function () {
+                //     image.style.display = 'block';
+                // }
             }
 
             // 로딩 페이지 표시
@@ -1166,6 +1166,7 @@
             console.error(error);
         }
     }
+
     async function face() {
 
         const MODEL_URL = '/models'
@@ -1175,9 +1176,9 @@
         await faceapi.loadFaceRecognitionModel(MODEL_URL)
         await faceapi.loadFaceExpressionModel(MODEL_URL)
 
-        const img = document.getElementById('previewImg')
+        const img = document.getElementById('myimage')
         let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
-        const canvas = $('#faceImg').get(0)
+        const canvas = $('#reflay').get(0)
         faceapi.matchDimensions(canvas, img)
 
         faceDescriptions = faceapi.resizeResults(faceDescriptions, img)
@@ -1290,7 +1291,7 @@
         console.log("fillAnimalExplanation");
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
-        console.log(gender);
+
         let userGender = gender == "Male" ? "남자" : "여자";
         let userAnimal = gaugeData[0][0].replace(/상/g, "");;
         let description = descriptions["설명"][userGender][userAnimal];
@@ -1440,7 +1441,6 @@
 
         backButton.style.display = "none";
     });
-    
     // SideBar Animation
     document.addEventListener('click', function (event) {
 
