@@ -1142,7 +1142,7 @@
     //     fetchData();
     // };
 
-    fetchData();
+    // fetchData();
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
@@ -1286,7 +1286,9 @@
     //     appEx.textContent = description;
     // }
 
-    function fillAnimalExplanation() {
+    async function fillAnimalExplanation() {
+        const response = await fetch('animalDiscriptions.json');
+        descriptions = await response.json();
         console.log("fillAnimalExplanation");
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
@@ -1295,7 +1297,7 @@
         let description = descriptions["설명"][userGender][userAnimal];
         let summary = descriptions["요약"][userGender][userAnimal];
         let randomColor = getRandomColor();
-        console.log(userAnimal + "\n" + mainEx + "\n" + subEx + "\n"+ userGender + "\n" + description + "\n" +summary+ "\n" + randomColor) ;
+        console.log(userAnimal + "\n" + mainEx + "\n" + subEx + "\n" + userGender + "\n" + description + "\n" + summary + "\n" + randomColor);
 
         subEx.textContent = description;
         mainEx.textContent = summary;
