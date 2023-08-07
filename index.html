@@ -1015,10 +1015,6 @@
             <div id="page-container">
 
                 <h1 class="title">나와 닮은 동물상은 무엇일까요?</h1>
-                <div class="image-canvas-container">
-                    <img id="myimage" src="MyFace.jpg" alt="" width="300" height="200" style="border: 1px solid black;">
-                    <canvas id="reflay" class="overlay"></canvas>
-                </div>
 
                 <!-- <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
@@ -1119,7 +1115,7 @@
 <script>
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
-    let URL = URL_Man;
+    let URL = URL_Woman;
     let gender = "FeMale";
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
