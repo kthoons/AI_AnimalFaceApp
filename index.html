@@ -1290,8 +1290,8 @@
         console.log("fillAnimalExplanation");
         var mainEx = document.getElementById("main-explain");
         var subEx = document.getElementById("sub-explain");
-        console.log(gender);
         let userGender = gender == "Male" ? "남자" : "여자";
+        console.log(userGender);
         let userAnimal = gaugeData[0][0].replace(/상/g, "");;
         let description = descriptions["설명"][userGender][userAnimal];
         let summary = descriptions["요약"][userGender][userAnimal];
