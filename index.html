@@ -1034,7 +1034,7 @@
                         <span class="knob"><i></i></span>
                     </label>
                 </div>
-
+                <button class="facebtn" type="button" onclick="face()"> Button </button>
                 <div id="upload-area" onclick="document.getElementById('file-input').click();">
                     여기에 사진을 올려주세요!
                 </div>
@@ -1161,7 +1161,6 @@
 
             await init();
             await Predict();
-            await face();
         } catch (error) {
             console.error(error);
         }
