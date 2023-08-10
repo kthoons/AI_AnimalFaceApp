@@ -1139,7 +1139,7 @@
             fileReader.readAsDataURL(file);
 
             fileReader.onload = function () {
-                // image.src = fileReader.result;
+                image.src = fileReader.result;
 
                 image.onload = function () {
                     canvas.width = image.width;
