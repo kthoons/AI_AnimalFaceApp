@@ -1111,6 +1111,7 @@
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
     const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById('canvas');
 
     let URL = URL_Woman;
     let gender = "Male";
@@ -1134,16 +1135,18 @@
             const file = event.target.files[0];
             const fileReader = new FileReader();
             const image = document.getElementById('previewImg');
+
             fileReader.readAsDataURL(file);
 
             fileReader.onload = function () {
-                canvas.width = image.width;
-                canvas.height = image.height;
-                ctx.drawImage(image, 0, 0);
-                cropToCircle(ctx, image.width, image.height);
-                
                 image.src = fileReader.result;
-                document.getElementById('upload-area').style.display = 'none';
+
+                image.onload = function () {
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    cropToCircle(ctx, image);
+                    document.getElementById('upload-area').style.display = 'none';
+                }
             }
 
             // 로딩 페이지 표시
@@ -1156,15 +1159,21 @@
         }
     }
 
-    function cropToCircle(ctx, width, height) {
+    function cropToCircle(ctx, image) {
+        const width = image.width;
+        const height = image.height;
+
         ctx.save();
         ctx.beginPath();
         ctx.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, Math.PI * 2, false);
         ctx.clip();
-        ctx.clearRect(0, 0, width, height);
+        ctx.drawImage(image, 0, 0, width, height);
         ctx.restore();
         console.log("croptocricle");
     }
+
+
+
     // async function face() {
 
     //     const MODEL_URL = '/models';
@@ -1282,7 +1291,7 @@
         mainEx.textContent = summary;
         mainEx.style.color = randomColor;
     }
-    
+
     function fillRandomColors() {
         console.log("fillRandomColors");
         const progressBar = $(".progress_bar");
