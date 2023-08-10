@@ -1139,7 +1139,7 @@
             fileReader.readAsDataURL(file);
 
             fileReader.onload = function () {
-                image.src = fileReader.result;
+                // image.src = fileReader.result;
 
                 image.onload = function () {
                     canvas.width = image.width;
@@ -1165,7 +1165,7 @@
 
         ctx.save();
         ctx.beginPath();
-        ctx.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, Math.PI * 2, false);
+        ctx.arc(width / 5, height / 5, Math.min(width, height) / 2, 0, Math.PI * 2, false);
         ctx.clip();
         ctx.drawImage(image, 0, 0, width, height);
         ctx.restore();
