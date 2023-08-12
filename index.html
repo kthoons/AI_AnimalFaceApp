@@ -1149,7 +1149,7 @@
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
-                cropToCircle(image);
+                
                 // image.onload = function () {
                 //     image.style.display = 'block';
                 // }
@@ -1160,6 +1160,7 @@
 
             await init();
             await Predict();
+            cropToCircle(image);
         } catch (error) {
             console.error(error);
         }
