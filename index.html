@@ -1037,7 +1037,7 @@
                 </div>
                 <div class="image-container">
                     <img id="previewImg" alt="" />
-                    <!-- <canvas id="faceImg" class="overlay"></canvas> -->
+                    <canvas id="faceImg" class="overlay"></canvas>
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
                 <div id="gauge-container" style="display: none;">
@@ -1118,6 +1118,9 @@
 <script>
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
+    const canvas = document.getElementById("faceImg");
+    const ctx = canvas.getContext("2d");
+
     let URL = URL_Woman;
     let gender = "FeMale";
     let model, webcam, guageContainer, maxPredictions, prediction;
@@ -1146,7 +1149,7 @@
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
-
+                cropToCircle(image);
                 // image.onload = function () {
                 //     image.style.display = 'block';
                 // }
@@ -1161,61 +1164,78 @@
             console.error(error);
         }
     }
+    function cropToCircle(img) {
+        // canvas의 크기를 이미지 크기에 맞게 설정합니다.
+        canvas.width = img.width;
+        canvas.height = img.height;
 
-    async function face() {
+        // 원의 중심과 반지름을 정의합니다.
+        const centerX = img.width / 2;
+        const centerY = img.height / 2;
+        const radius = Math.min(centerX, centerY) - 10; // 이미지의 절반 크기에서 10픽셀 빼서 반지름으로 설정
 
-        const MODEL_URL = '/models'
+        // 원형 영역을 클립합니다.
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctx.clip();
 
-        await faceapi.loadSsdMobilenetv1Model(MODEL_URL)
-        await faceapi.loadFaceLandmarkModel(MODEL_URL)
-        await faceapi.loadFaceRecognitionModel(MODEL_URL)
-        await faceapi.loadFaceExpressionModel(MODEL_URL)
-
-        const img = document.getElementById('myimage')
-        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
-        const canvas = $('#reflay').get(0)
-        faceapi.matchDimensions(canvas, img)
-
-        faceDescriptions = faceapi.resizeResults(faceDescriptions, img)
-        faceapi.draw.drawDetections(canvas, faceDescriptions)
-        faceapi.draw.drawFaceLandmarks(canvas, faceDescriptions)
-        faceapi.draw.drawFaceExpressions(canvas, faceDescriptions)
-
-
-        const labels = ['ross', 'rachel', 'chandler', 'monica', 'phoebe', 'joey']
-
-        const labeledFaceDescriptors = await Promise.all(
-            labels.map(async label => {
-
-                const imgUrl = `images/${label}.jpg`
-                const img = await faceapi.fetchImage(imgUrl)
-
-                const faceDescription = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
-
-                if (!faceDescription) {
-                    throw new Error(`no faces detected for ${label}`)
-                }
-
-                const faceDescriptors = [faceDescription.descriptor]
-                return new faceapi.LabeledFaceDescriptors(label, faceDescriptors)
-            })
-        );
-
-        const threshold = 0.6
-        const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, threshold)
-
-        const results = faceDescriptions.map(fd => faceMatcher.findBestMatch(fd.descriptor))
-
-        results.forEach((bestMatch, i) => {
-            const box = faceDescriptions[i].detection.box
-            const text = bestMatch.toString()
-            const drawBox = new faceapi.draw.DrawBox(box, { label: text })
-            drawBox.draw(canvas)
-
-            console.log(`Face ${i + 1}: x = ${box.x}, y = ${box.y}, width = ${box.width}, height = ${box.height}`);
-        })
-
+        // 이미지를 캔버스에 그립니다.
+        ctx.drawImage(img, 0, 0);
     }
+    //  async function face() {
+
+    //     const MODEL_URL = '/models'
+
+    //     await faceapi.loadSsdMobilenetv1Model(MODEL_URL)
+    //     await faceapi.loadFaceLandmarkModel(MODEL_URL)
+    //     await faceapi.loadFaceRecognitionModel(MODEL_URL)
+    //     await faceapi.loadFaceExpressionModel(MODEL_URL)
+
+    //     const img = document.getElementById('myimage')
+    //     let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
+    //     const canvas = $('#reflay').get(0)
+    //     faceapi.matchDimensions(canvas, img)
+
+    //     faceDescriptions = faceapi.resizeResults(faceDescriptions, img)
+    //     faceapi.draw.drawDetections(canvas, faceDescriptions)
+    //     faceapi.draw.drawFaceLandmarks(canvas, faceDescriptions)
+    //     faceapi.draw.drawFaceExpressions(canvas, faceDescriptions)
+
+
+    //     const labels = ['ross', 'rachel', 'chandler', 'monica', 'phoebe', 'joey']
+
+    //     const labeledFaceDescriptors = await Promise.all(
+    //         labels.map(async label => {
+
+    //             const imgUrl = `images/${label}.jpg`
+    //             const img = await faceapi.fetchImage(imgUrl)
+
+    //             const faceDescription = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
+
+    //             if (!faceDescription) {
+    //                 throw new Error(`no faces detected for ${label}`)
+    //             }
+
+    //             const faceDescriptors = [faceDescription.descriptor]
+    //             return new faceapi.LabeledFaceDescriptors(label, faceDescriptors)
+    //         })
+    //     );
+
+    //     const threshold = 0.6
+    //     const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, threshold)
+
+    //     const results = faceDescriptions.map(fd => faceMatcher.findBestMatch(fd.descriptor))
+
+    //     results.forEach((bestMatch, i) => {
+    //         const box = faceDescriptions[i].detection.box
+    //         const text = bestMatch.toString()
+    //         const drawBox = new faceapi.draw.DrawBox(box, { label: text })
+    //         drawBox.draw(canvas)
+
+    //         console.log(`Face ${i + 1}: x = ${box.x}, y = ${box.y}, width = ${box.width}, height = ${box.height}`);
+    //     })
+
+    // }
 
     async function init() {
         console.log("Init..");
