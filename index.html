@@ -434,12 +434,6 @@
             flex-direction: column;
         }
 
-        .image-container {
-            width: 400px;
-            height: 400px;
-            border-radius: 70%;
-            overflow: hidden;
-        }
 
         .image-container img {
             display: none;
@@ -448,7 +442,6 @@
             height: auto;
             margin: auto;
             padding-top: 75px;
-            object-fit: cover;
         }
 
         #sub-explain {
@@ -574,7 +567,6 @@
         #canvas {
             display: none;
         }
-
         @keyframes spin-a {
             0% {
                 transform: rotate(90deg);
@@ -1040,12 +1032,12 @@
                 <div id="upload-area" onclick="document.getElementById('file-input').click();">
                     여기에 사진을 올려주세요!
                 </div>
-                <div class="image-container" id="image-container">
+                <div class="image-container">
                     <img id="previewImg" alt="" />
-                    <!-- <canvas id="faceImg" class="overlay"></canvas> -->
+                    <canvas id="faceImg" class="overlay"></canvas>
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-                <!-- <canvas id="canvas"></canvas> -->
+                <canvas id="canvas"></canvas>
                 <div id="gauge-container" style="display: none;">
                     <div id="loader_container1" class="loader_container">
                         <div class="text_container">
@@ -1122,7 +1114,7 @@
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
     const canvas = document.getElementById('canvas');
-    // const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
 
     let URL = URL_Woman;
     let gender = "Male";
@@ -1153,9 +1145,9 @@
                 image.src = fileReader.result;
 
                 image.onload = function () {
-                    // canvas.width = image.width / 4;
-                    // canvas.height = image.height / 4;
-                    // cropToCircle(ctx, image, 200, 200);
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    cropToCircle(ctx, image);
                     document.getElementById('upload-area').style.display = 'none';
                 }
             }
@@ -1170,31 +1162,18 @@
         }
     }
 
-    // function cropToCircle(ctx, image, desiredWidth, desiredHeight) {
-    //     const width = image.width;
-    //     const height = image.height;
+    function cropToCircle(ctx, image) {
+        const width = image.width;
+        const height = image.height;
 
-    //     // 1. 원 모양으로 이미지 자르기
-    //     ctx.save();  // 현재의 그래픽 상태를 저장
-    //     ctx.beginPath();
-    //     ctx.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, Math.PI * 2, false);
-    //     ctx.clip();  // 원 모양의 클리핑 영역을 설정
-    //     ctx.drawImage(image, 0, 0, width, height);  // 원 모양 클리핑 영역에 이미지 그리기
-    //     ctx.restore();  // 저장된 그래픽 상태를 복원
-
-    //     // 2. 크기 조정: 임시 캔버스를 사용하여 크기를 조정
-    //     const tempCanvas = document.createElement('canvas');  // 임시 캔버스 생성
-    //     tempCanvas.width = desiredWidth;
-    //     tempCanvas.height = desiredHeight;
-    //     const tempCtx = tempCanvas.getContext('2d');  // 임시 캔버스의 컨텍스트 얻기
-    //     tempCtx.drawImage(ctx.canvas, 0, 0, width, height, 0, 0, desiredWidth, desiredHeight);  // 원래 캔버스의 내용을 임시 캔버스에 크기를 조정하여 그림
-
-    //     // 원래 캔버스를 클리어하고, 임시 캔버스의 내용을 원래 캔버스에 그립니다.
-    //     ctx.clearRect(0, 0, width, height);  // 원래 캔버스의 내용을 지움
-    //     ctx.drawImage(tempCanvas, 0, 0, desiredWidth, desiredHeight);  // 임시 캔버스의 내용을 원래 캔버스에 그림
-    // }
-
-
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(width / 5, height / 5, Math.min(width, height) / 2, 0, Math.PI * 2, false);
+        ctx.clip();
+        ctx.drawImage(image, 0, 0, width, height);
+        ctx.restore();
+        console.log("croptocricle");
+    }
 
 
 
