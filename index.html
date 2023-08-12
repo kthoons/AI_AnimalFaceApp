@@ -567,6 +567,7 @@
         #canvas {
             display: none;
         }
+
         @keyframes spin-a {
             0% {
                 transform: rotate(90deg);
@@ -1162,17 +1163,28 @@
         }
     }
 
-    function cropToCircle(ctx, image) {
+    function cropToCircle(ctx, image, desiredWidth, desiredHeight) {
         const width = image.width;
         const height = image.height;
 
+        // 1. 원 모양으로 이미지 자르기
         ctx.save();
         ctx.beginPath();
-        ctx.arc(width / 5, height / 5, Math.min(width, height) / 2, 0, Math.PI * 2, false);
+        ctx.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, Math.PI * 2, false);
         ctx.clip();
         ctx.drawImage(image, 0, 0, width, height);
         ctx.restore();
-        console.log("croptocricle");
+
+        // 2. 크기 조정: 임시 캔버스를 생성하여 크기를 조정하고 다시 원래 캔버스에 그립니다.
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = desiredWidth;
+        tempCanvas.height = desiredHeight;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.drawImage(ctx.canvas, 0, 0, width, height, 0, 0, desiredWidth, desiredHeight);
+
+        // 원래 캔버스를 클리어하고 임시 캔버스의 내용을 그립니다.
+        ctx.clearRect(0, 0, width, height);
+        ctx.drawImage(tempCanvas, 0, 0, desiredWidth, desiredHeight);
     }
 
 
