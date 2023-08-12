@@ -1045,7 +1045,7 @@
                     <!-- <canvas id="faceImg" class="overlay"></canvas> -->
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-                <canvas id="canvas"></canvas>
+                <!-- <canvas id="canvas"></canvas> -->
                 <div id="gauge-container" style="display: none;">
                     <div id="loader_container1" class="loader_container">
                         <div class="text_container">
@@ -1155,7 +1155,7 @@
                 image.onload = function () {
                     canvas.width = image.width / 4;
                     canvas.height = image.height / 4;
-                    cropToCircle(ctx, image, 200, 200);
+                    // cropToCircle(ctx, image, 200, 200);
                     document.getElementById('upload-area').style.display = 'none';
                 }
             }
@@ -1398,7 +1398,7 @@
     function adjustDisplay() {
         console.log("adjustDisplay Done");
         // 이미지 생성
-        document.getElementById('canvas').style.display = 'block';
+        document.getElementById('image-container').style.display = 'block';
         // 게이지 생성
         document.getElementById('gauge-container').style.display = 'block';
         // 로딩 페이지 숨기기
