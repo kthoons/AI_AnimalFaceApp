@@ -1176,7 +1176,7 @@
         ctx.restore();
 
         // 2. 크기 조정: 임시 캔버스를 생성하여 크기를 조정하고 다시 원래 캔버스에 그립니다.
-        const tempCanvas = document.createElement('canvas');
+        const tempCanvas = document.getElementById("canvas");
         tempCanvas.width = desiredWidth;
         tempCanvas.height = desiredHeight;
         const tempCtx = tempCanvas.getContext('2d');
