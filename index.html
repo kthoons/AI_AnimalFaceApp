@@ -30,8 +30,6 @@
 
         #loading-page {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             background: rgba(255, 255, 255, 0.8);
@@ -39,6 +37,8 @@
             justify-content: center;
             align-items: center;
             z-index: 10000;
+            margin: 0;
+            padding: 0;
             /* 로딩 페이지가 다른 요소 위에 나타나도록 함 */
         }
 
@@ -175,9 +175,9 @@
             margin: 20px;
         }
 
-        /* #animalface-explain>h2 {
+        #animalface-explain>h2 {
             color: #CCC;
-        } */
+        }
 
         a {
             text-decoration: none;
@@ -560,13 +560,14 @@
         #overlay,
         .overlay {
             position: absolute;
-            top: 0;
-            left: 0;
         }
 
-        #canvas {
-            display: none;
+        .image-canvas-container {
+            position: relative;
+            display: inline-flex;
+            /* 이를 통해 컨테이너는 내부 img의 크기에 맞게 조절됩니다. */
         }
+
         @keyframes spin-a {
             0% {
                 transform: rotate(90deg);
@@ -985,6 +986,7 @@
         }
     </style>
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <body>
     <div id="loading-page" style="display: none;">
@@ -1016,6 +1018,7 @@
             <div id="page-container">
 
                 <h1 class="title">나와 닮은 동물상은 무엇일까요?</h1>
+
                 <!-- <div id="gender-toggle" style="margin-bottom: 80px;">
                     <span>남자</span>
                     <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
@@ -1023,8 +1026,8 @@
                     <span>여자</span>
                 </div> -->
                 <div id="gender-toggle" style="margin-bottom: 80px;">
-                    <input type="checkbox" id="gender">
-                    <label for="gender">
+                    <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
+                    <label for="gender-switch">
                         <span class="knob"><i></i></span>
                     </label>
                 </div>
@@ -1037,7 +1040,6 @@
                     <canvas id="faceImg" class="overlay"></canvas>
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
-                <canvas id="canvas"></canvas>
                 <div id="gauge-container" style="display: none;">
                     <div id="loader_container1" class="loader_container">
                         <div class="text_container">
@@ -1103,21 +1105,21 @@
     </div>
 
 </body>
+<script src="js/jquery-2.1.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">//JQuery 라이브러리 로드</script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-<!-- <script src="js/face-api.js"></script> -->
+<script src="js/face-api.js"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"> // Teachable Machine 로드</script>
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script> -->
+
+
 <script>
     const URL_Man = "./my_model_male/";
     const URL_Woman = "./my_model_female/";
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-
     let URL = URL_Woman;
-    let gender = "Male";
+    let gender = "FeMale";
     let model, webcam, guageContainer, maxPredictions, prediction;
     let gaugeData = {};
     let descriptions;
@@ -1133,23 +1135,21 @@
         fetchData();
     };
 
+
     async function handleFileUpload(event) {
         try {
             const file = event.target.files[0];
             const fileReader = new FileReader();
             const image = document.getElementById('previewImg');
-
             fileReader.readAsDataURL(file);
 
             fileReader.onload = function () {
+                document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
 
-                image.onload = function () {
-                    canvas.width = image.width;
-                    canvas.height = image.height;
-                    cropToCircle(ctx, image);
-                    document.getElementById('upload-area').style.display = 'none';
-                }
+                // image.onload = function () {
+                //     image.style.display = 'block';
+                // }
             }
 
             // 로딩 페이지 표시
@@ -1162,58 +1162,61 @@
         }
     }
 
-    function cropToCircle(ctx, image) {
-        const width = image.width;
-        const height = image.height;
+    async function face() {
 
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(width / 5, height / 5, Math.min(width, height) / 2, 0, Math.PI * 2, false);
-        ctx.clip();
-        ctx.drawImage(image, 0, 0, width, height);
-        ctx.restore();
-        console.log("croptocricle");
+        const MODEL_URL = '/models'
+
+        await faceapi.loadSsdMobilenetv1Model(MODEL_URL)
+        await faceapi.loadFaceLandmarkModel(MODEL_URL)
+        await faceapi.loadFaceRecognitionModel(MODEL_URL)
+        await faceapi.loadFaceExpressionModel(MODEL_URL)
+
+        const img = document.getElementById('myimage')
+        let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors().withFaceExpressions()
+        const canvas = $('#reflay').get(0)
+        faceapi.matchDimensions(canvas, img)
+
+        faceDescriptions = faceapi.resizeResults(faceDescriptions, img)
+        faceapi.draw.drawDetections(canvas, faceDescriptions)
+        faceapi.draw.drawFaceLandmarks(canvas, faceDescriptions)
+        faceapi.draw.drawFaceExpressions(canvas, faceDescriptions)
+
+
+        const labels = ['ross', 'rachel', 'chandler', 'monica', 'phoebe', 'joey']
+
+        const labeledFaceDescriptors = await Promise.all(
+            labels.map(async label => {
+
+                const imgUrl = `images/${label}.jpg`
+                const img = await faceapi.fetchImage(imgUrl)
+
+                const faceDescription = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
+
+                if (!faceDescription) {
+                    throw new Error(`no faces detected for ${label}`)
+                }
+
+                const faceDescriptors = [faceDescription.descriptor]
+                return new faceapi.LabeledFaceDescriptors(label, faceDescriptors)
+            })
+        );
+
+        const threshold = 0.6
+        const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, threshold)
+
+        const results = faceDescriptions.map(fd => faceMatcher.findBestMatch(fd.descriptor))
+
+        results.forEach((bestMatch, i) => {
+            const box = faceDescriptions[i].detection.box
+            const text = bestMatch.toString()
+            const drawBox = new faceapi.draw.DrawBox(box, { label: text })
+            drawBox.draw(canvas)
+
+            console.log(`Face ${i + 1}: x = ${box.x}, y = ${box.y}, width = ${box.width}, height = ${box.height}`);
+        })
+
     }
 
-
-
-    // async function face() {
-
-    //     const MODEL_URL = '/models';
-
-    //     console.log(faceapi);
-
-    //     await faceapi.loadSsdMobilenetv1Model(MODEL_URL)
-    //     await faceapi.loadFaceLandmarkModel(MODEL_URL) // model to detect face landmark
-    //     await faceapi.loadFaceRecognitionModel(MODEL_URL) //model to Recognise Face
-    //     await faceapi.loadFaceExpressionModel(MODEL_URL) //model to detect face expression
-
-    //     console.log("face1");
-
-    //     const img = document.getElementById('myimage');
-    //     console.log(img);
-    //     let faceDescriptions = await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
-
-    //     console.log("face2");
-
-    //     const canvas = $('#faceImg').get(0);
-    //     faceapi.matchDimensions(canvas, img);
-    //     faceDescriptions = faceapi.resizeResults(faceDescriptions, img);
-
-    //     faceDescriptions.forEach((faceDescription, i) => {
-    //         const box = faceDescription.detection.box; // 감지된 얼굴의 bounding box 정보를 가져옵니다.
-    //         const x = box.x; // 얼굴의 x 좌표
-    //         const y = box.y; // 얼굴의 y 좌표
-    //         const width = box.width; // 얼굴의 너비
-    //         const height = box.height; // 얼굴의 높이
-    //         console.log(`Face ${i + 1}: x=${x}, y=${y}, width=${width}, height=${height}`);
-
-    //         console.log("face3");
-    //     })
-
-    //     console.log("face4");
-
-    // }
     async function init() {
         console.log("Init..");
 
@@ -1337,8 +1340,8 @@
     }
     function handleGenderChange(event) {
         let genderToggle = document.getElementById("gender-toggle");
-        gender = event.target.checked ? "Female" : "Male";
-        genderToggle.style.backgroundColor = (gender == "Male") ? 'rgb(51, 178, 255)' : 'rgb(255, 95, 95)';
+        gender = event.target.checked ? "Male" : "Female";
+        console.log(gender);
         URL = (gender == 'Male') ? URL_Man : URL_Woman;
     }
     function CheckExceptionTarget(elem) {
