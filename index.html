@@ -1149,7 +1149,7 @@
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
-                cropToCircle(image);
+                cropToCircle(fileReader.result);
                 // image.onload = function () {
                 //     image.style.display = 'block';
                 // }
