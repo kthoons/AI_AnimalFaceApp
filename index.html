@@ -1148,7 +1148,7 @@
                 image.onload = function () {
                     canvas.width = image.width / 4;
                     canvas.height = image.height / 4;
-                    cropToCircle(ctx, image);
+                    cropToCircle(ctx, image, 200, 200);
                     document.getElementById('upload-area').style.display = 'none';
                 }
             }
