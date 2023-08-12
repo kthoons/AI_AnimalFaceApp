@@ -434,6 +434,12 @@
             flex-direction: column;
         }
 
+        .image-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 70%;
+            overflow: hidden;
+        }
 
         .image-container img {
             display: none;
@@ -442,6 +448,7 @@
             height: auto;
             margin: auto;
             padding-top: 75px;
+            object-fit: cover;
         }
 
         #sub-explain {
@@ -1035,7 +1042,7 @@
                 </div>
                 <div class="image-container">
                     <img id="previewImg" alt="" />
-                    <canvas id="faceImg" class="overlay"></canvas>
+                    <!-- <canvas id="faceImg" class="overlay"></canvas> -->
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
                 <canvas id="canvas"></canvas>
@@ -1163,29 +1170,30 @@
         }
     }
 
-    function cropToCircle(ctx, image, desiredWidth, desiredHeight) {
-        const width = image.width;
-        const height = image.height;
+    // function cropToCircle(ctx, image, desiredWidth, desiredHeight) {
+    //     const width = image.width;
+    //     const height = image.height;
 
-        // 1. 원 모양으로 이미지 자르기
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, Math.PI * 2, false);
-        ctx.clip();
-        ctx.drawImage(image, 0, 0, width, height);
-        ctx.restore();
+    //     // 1. 원 모양으로 이미지 자르기
+    //     ctx.save();  // 현재의 그래픽 상태를 저장
+    //     ctx.beginPath();
+    //     ctx.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, Math.PI * 2, false);
+    //     ctx.clip();  // 원 모양의 클리핑 영역을 설정
+    //     ctx.drawImage(image, 0, 0, width, height);  // 원 모양 클리핑 영역에 이미지 그리기
+    //     ctx.restore();  // 저장된 그래픽 상태를 복원
 
-        // 2. 크기 조정: 임시 캔버스를 생성하여 크기를 조정하고 다시 원래 캔버스에 그립니다.
-        const tempCanvas = document.getElementById("faceImg");
-        tempCanvas.width = desiredWidth;
-        tempCanvas.height = desiredHeight;
-        const tempCtx = tempCanvas.getContext('2d');
-        tempCtx.drawImage(ctx.canvas, 0, 0, width, height, 0, 0, desiredWidth, desiredHeight);
+    //     // 2. 크기 조정: 임시 캔버스를 사용하여 크기를 조정
+    //     const tempCanvas = document.createElement('canvas');  // 임시 캔버스 생성
+    //     tempCanvas.width = desiredWidth;
+    //     tempCanvas.height = desiredHeight;
+    //     const tempCtx = tempCanvas.getContext('2d');  // 임시 캔버스의 컨텍스트 얻기
+    //     tempCtx.drawImage(ctx.canvas, 0, 0, width, height, 0, 0, desiredWidth, desiredHeight);  // 원래 캔버스의 내용을 임시 캔버스에 크기를 조정하여 그림
 
-        // 원래 캔버스를 클리어하고 임시 캔버스의 내용을 그립니다.
-        ctx.clearRect(0, 0, width, height);
-        ctx.drawImage(tempCanvas, 0, 0, desiredWidth, desiredHeight);
-    }
+    //     // 원래 캔버스를 클리어하고, 임시 캔버스의 내용을 원래 캔버스에 그립니다.
+    //     ctx.clearRect(0, 0, width, height);  // 원래 캔버스의 내용을 지움
+    //     ctx.drawImage(tempCanvas, 0, 0, desiredWidth, desiredHeight);  // 임시 캔버스의 내용을 원래 캔버스에 그림
+    // }
+
 
 
 
