@@ -1149,7 +1149,7 @@
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
-                cropToCircle(fileReader.result);
+                cropToCircle(image);
                 // image.onload = function () {
                 //     image.style.display = 'block';
                 // }
@@ -1172,6 +1172,7 @@
         // 원의 중심과 반지름을 정의합니다.
         const centerX = img.width / 2;
         const centerY = img.height / 2;
+        console.log(centerX, centerY);
         const radius = Math.min(centerX, centerY) - 10; // 이미지의 절반 크기에서 10픽셀 빼서 반지름으로 설정
 
         // 원형 영역을 클립합니다.
