@@ -434,6 +434,7 @@
             flex-direction: column;
         }
 
+        .image-container {}
 
         .image-container img {
             display: none;
@@ -559,6 +560,8 @@
 
         #overlay,
         .overlay {
+            width: 20%;
+            margin-top: 100px;
         }
 
         .image-canvas-container {
@@ -812,6 +815,11 @@
                 color: #333;
             }
 
+            #overlay,
+            .overlay {
+                width: 50%;
+                margin-top: 20%;
+            }
         }
     </style>
     <!-- gender toggle -->
@@ -1148,7 +1156,7 @@
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
-                
+
                 // image.onload = function () {
                 //     image.style.display = 'block';
                 // }
