@@ -560,13 +560,26 @@
 
         #overlay,
         .overlay {
-            width: 20%;            
+            width: 20%;
         }
 
         .image-canvas-container {
             position: relative;
             display: inline-flex;
             /* 이를 통해 컨테이너는 내부 img의 크기에 맞게 조절됩니다. */
+        }
+
+        .icon {
+            position: absolute;
+            /* 아이콘의 절대적인 위치를 설정 */
+            top: 50%;
+            /* 상위 컨테이너의 중앙으로부터 상단에 50% 위치 */
+            left: 50%;
+            /* 상위 컨테이너의 중앙으로부터 왼쪽에 50% 위치 */
+            transform: translate(-50%, -50%);
+            /* 아이콘의 중심을 기준으로 위치 조정 */
+            font-size: 24px;
+            /* 아이콘 크기 조정 */
         }
 
         @keyframes spin-a {
@@ -1044,6 +1057,7 @@
                 <div class="image-container">
                     <img id="previewImg" alt="" />
                     <canvas id="faceImg" class="overlay"></canvas>
+                    <img class="icon" src="icons/cat.png" alt="Description of icon">
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
                 <div id="gauge-container" style="display: none;">
