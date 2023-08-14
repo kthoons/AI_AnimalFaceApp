@@ -438,7 +438,6 @@
 
         .image-container img {
             display: none;
-            width: 20%;
 
             height: auto;
             margin: auto;
@@ -570,16 +569,12 @@
         }
 
         .icon {
+            width: 5%;
             position: absolute;
-            /* 아이콘의 절대적인 위치를 설정 */
-            top: 50%;
-            /* 상위 컨테이너의 중앙으로부터 상단에 50% 위치 */
-            left: 50%;
-            /* 상위 컨테이너의 중앙으로부터 왼쪽에 50% 위치 */
+            top: 16%;
+            left: 55%;
             transform: translate(-50%, -50%);
-            /* 아이콘의 중심을 기준으로 위치 조정 */
             font-size: 24px;
-            /* 아이콘 크기 조정 */
         }
 
         @keyframes spin-a {
@@ -708,10 +703,10 @@
             }
 
             .image-container img {
-                width: 30%;
+                width: 15%;
                 height: auto;
-                padding-top: 40px;
-                margin-top: 50px;
+                top: 25%;
+                left: 60%;
             }
 
             div.loader_container {
@@ -1185,6 +1180,8 @@
             console.error(error);
         }
     }
+
+
     function cropToCircle(img) {
         // canvas의 크기를 이미지 크기에 맞게 설정합니다.
         canvas.width = img.width;
@@ -1204,6 +1201,8 @@
         // 이미지를 캔버스에 그립니다.
         ctx.drawImage(img, 0, 0);
     }
+
+
     //  async function face() {
 
     //     const MODEL_URL = '/models'
