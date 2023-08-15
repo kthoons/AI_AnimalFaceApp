@@ -430,17 +430,7 @@
             flex-direction: column;
         }
 
-        .image-container {
-            position: relative;
-        }
-
-        /* .image-container img {
-            display: none;
-
-            height: auto;
-            margin: auto;
-            padding-top: 75px;
-        } */
+        
 
         #sub-explain {
             width: 40%;
@@ -555,16 +545,6 @@
             animation: spin-d 2s infinite cubic-bezier(0.5, 0, 0.5, 1);
         }
 
-        #overlay,
-        .overlay {
-            width: 20%;
-        }
-
-        .image-canvas-container {
-            position: relative;
-            display: inline-flex;
-            /* 이를 통해 컨테이너는 내부 img의 크기에 맞게 조절됩니다. */
-        }
 
         /* .icon {
             width: 5%;
@@ -580,10 +560,9 @@
             /* 상위 요소 (.image-container)를 기준으로 절대적인 위치를 설정 */
             bottom: 0;
             /* 아래쪽에서 0px 위치 */
+            width: 20%;
             right: 0;
             /* 오른쪽에서 0px 위치 */
-            width: 50px;
-            /* 원하는 canvas의 너비를 지정 */
             height: 50px;
             /* 원하는 canvas의 높이를 지정 */
             background: rgba(255, 255, 255, 0.5);
@@ -598,7 +577,17 @@
             height: 100%;
             /* .image-container의 높이에 맞게 이미지를 늘림 */
         }
+        .image-container {
+            position: relative;
+        }
 
+        /* .image-container img {
+            display: none;
+
+            height: auto;
+            margin: auto;
+            padding-top: 75px;
+        } */
         @keyframes spin-a {
             0% {
                 transform: rotate(90deg);
