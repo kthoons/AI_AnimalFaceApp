@@ -357,7 +357,7 @@
             margin-top: 3%;
         }
 
-        i.icon {
+        i.icon {            
             color: #919191 !important;
             font-size: 2em !important;
         }
@@ -570,7 +570,7 @@
         }
 
         .icon {
-            display: block;
+            display: none;
             /* 이미지를 블록 요소로 설정하여 너비와 높이를 적용 */
             width: 5%;
             /* .image-container의 너비에 맞게 이미지를 늘림 */
@@ -1440,6 +1440,7 @@
         console.log("adjustDisplay Done");
         // 이미지 생성
         // document.getElementById('previewImg').style.display = 'block';
+        document.querySelector('.icon').style.display = 'block';
         // 게이지 생성
         document.getElementById('gauge-container').style.display = 'block';
         // 로딩 페이지 숨기기
