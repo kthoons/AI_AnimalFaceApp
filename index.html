@@ -430,7 +430,7 @@
             flex-direction: column;
         }
 
-        
+
 
         #sub-explain {
             width: 40%;
@@ -555,13 +555,18 @@
             font-size: 24px;
         } */
 
-        .overlay {            
-            position: absolute; /* 상위 요소 (.image-container)를 기준으로 절대적인 위치를 설정 */
-            bottom: 0; /* 아래쪽에서 0px 위치 */
-            right: 0; /* 오른쪽에서 0px 위치 */
+        .overlay {
+            position: absolute;
+            /* 상위 요소 (.image-container)를 기준으로 절대적인 위치를 설정 */
+            bottom: 0;
+            /* 아래쪽에서 0px 위치 */
+            right: 0;
+            /* 오른쪽에서 0px 위치 */
             width: 20%;
-            height: auto; /* 원하는 canvas의 높이를 지정 */
-            background: rgba(255, 255, 255, 0.5); /* canvas의 배경색을 투명하게 지정하여 위치 확인 (필요에 따라 제거) */
+            height: auto;
+            /* 원하는 canvas의 높이를 지정 */
+            background: rgba(255, 255, 255, 0.5);
+            /* canvas의 배경색을 투명하게 지정하여 위치 확인 (필요에 따라 제거) */
         }
 
         .icon {
@@ -572,11 +577,18 @@
             height: 100%;
             /* .image-container의 높이에 맞게 이미지를 늘림 */
         }
-        
+
         .image-container {
             position: relative;
-            width: 200px;        /* 원하는 이미지 컨테이너의 너비를 지정 */
-    height: 200px;       /* 원하는 이미지 컨테이너의 높이를 지정 */
+            width: 200px;
+            /* 원하는 이미지 컨테이너의 너비를 지정 */
+            height: 200px;
+            /* 원하는 이미지 컨테이너의 높이를 지정 */
+        }
+
+
+        #previewImg {
+            display: none;
         }
 
         /* .image-container img {
@@ -1173,10 +1185,7 @@
             fileReader.onload = function () {
                 document.getElementById('upload-area').style.display = 'none';
                 image.src = fileReader.result;
-
-                // image.onload = function () {
-                //     image.style.display = 'block';
-                // }
+            
             }
 
             // 로딩 페이지 표시
