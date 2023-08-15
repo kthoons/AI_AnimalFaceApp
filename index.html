@@ -560,7 +560,7 @@
             bottom: 0; /* 아래쪽에서 0px 위치 */
             right: 0; /* 오른쪽에서 0px 위치 */
             width: 20%;
-            height: 50px; /* 원하는 canvas의 높이를 지정 */
+            height: auto; /* 원하는 canvas의 높이를 지정 */
             background: rgba(255, 255, 255, 0.5); /* canvas의 배경색을 투명하게 지정하여 위치 확인 (필요에 따라 제거) */
         }
 
@@ -572,8 +572,11 @@
             height: 100%;
             /* .image-container의 높이에 맞게 이미지를 늘림 */
         }
+        
         .image-container {
             position: relative;
+            width: 200px;        /* 원하는 이미지 컨테이너의 너비를 지정 */
+    height: 200px;       /* 원하는 이미지 컨테이너의 높이를 지정 */
         }
 
         /* .image-container img {
@@ -1057,10 +1060,8 @@
                 </div>
                 <div class="image-container">
                     <img id="previewImg" alt="" />
-                    <canvas id="faceImg" class="overlay">
-                        <img class="icon" src="icons/cat.png" alt="Description of icon">
-                    </canvas>
-                    
+                    <canvas id="faceImg" class="overlay"></canvas>
+                    <img class="icon" src="icons/cat.png" alt="Description of icon">
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
                 <div id="gauge-container" style="display: none;">
