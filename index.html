@@ -555,31 +555,27 @@
             font-size: 24px;
         } */
 
-        .overlay {
-            position: absolute;
-            /* 상위 요소 (.image-container)를 기준으로 절대적인 위치를 설정 */
-            top: 0;
-            left: 0;
-            z-index: 1;
-            width: 100%;
-            height: auto;
-            /* 원하는 canvas의 높이를 지정 */
-            background: rgba(114, 109, 255, 0.5);
-            /* canvas의 배경색을 투명하게 지정하여 위치 확인 (필요에 따라 제거) */
-        }
-
-        .icon {
-            display: none;
-            /* 이미지를 블록 요소로 설정하여 너비와 높이를 적용 */
-            width: 10%;
-            /* .image-container의 너비에 맞게 이미지를 늘림 */
-            height: auto;
-            /* .image-container의 높이에 맞게 이미지를 늘림 */
-            z-index: 2;
-        }
-
         .image-container {
             position: relative;
+            /* 상대적 위치 지정 */
+        }
+
+        canvas.overlay {
+            display: block;
+            /* block 으로 설정하여 실제 크기가 적용될 수 있게 합니다. */
+        }
+
+        img.icon {
+            position: absolute;
+            /* 절대적 위치 지정 */
+            bottom: 0;
+            /* 아래에서 0px 위치 */
+            right: 0;
+            /* 오른쪽에서 0px 위치 */
+            width: 50px;
+            /* 원하는 아이콘 이미지 너비 설정 (예시로 50px 사용) */
+            height: 50px;
+            /* 원하는 아이콘 이미지 높이 설정 (예시로 50px 사용) */
         }
 
 
@@ -587,13 +583,7 @@
             display: none;
         }
 
-        /* .image-container img {
-            display: none;
 
-            height: auto;
-            margin: auto;
-            padding-top: 75px;
-        } */
         @keyframes spin-a {
             0% {
                 transform: rotate(90deg);
