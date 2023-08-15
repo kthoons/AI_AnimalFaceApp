@@ -555,8 +555,7 @@
             font-size: 24px;
         } */
 
-        .overlay {
-            position: absolute;
+        .overlay {            
             /* 상위 요소 (.image-container)를 기준으로 절대적인 위치를 설정 */
             bottom: 0;
             /* 아래쪽에서 0px 위치 */
@@ -1062,8 +1061,10 @@
                 </div>
                 <div class="image-container">
                     <img id="previewImg" alt="" />
-                    <canvas id="faceImg" class="overlay"></canvas>
-                    <img class="icon" src="icons/cat.png" alt="Description of icon">
+                    <canvas id="faceImg" class="overlay">
+                        <img class="icon" src="icons/cat.png" alt="Description of icon">
+                    </canvas>
+                    
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
                 <div id="gauge-container" style="display: none;">
