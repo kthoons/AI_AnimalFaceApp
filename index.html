@@ -557,25 +557,31 @@
 
         .image-container {
             position: relative;
-            /* 상대적 위치 지정 */
+            width: 400px;
+            /* 예시 너비 */
+            height: 400px;
+            /* 예시 높이 */
+            display: flex;
+            justify-content: center;
+            /* 수평 중앙 정렬 */
+            align-items: center;
+            /* 수직 중앙 정렬 */
         }
 
         canvas.overlay {
-            display: block;
-            /* block 으로 설정하여 실제 크기가 적용될 수 있게 합니다. */
+            /* canvas의 크기를 설정하면 가운데 정렬될 때 그 크기를 기준으로 중앙에 위치하게 됩니다. */
+            width: 200px;
+            /* 예시 너비 */
+            height: 200px;
+            /* 예시 높이 */
         }
 
         img.icon {
             position: absolute;
-            /* 절대적 위치 지정 */
             bottom: 0;
-            /* 아래에서 0px 위치 */
             right: 0;
-            /* 오른쪽에서 0px 위치 */
             width: 50px;
-            /* 원하는 아이콘 이미지 너비 설정 (예시로 50px 사용) */
             height: 50px;
-            /* 원하는 아이콘 이미지 높이 설정 (예시로 50px 사용) */
         }
 
 
