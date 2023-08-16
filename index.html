@@ -106,7 +106,7 @@
             width: 400px;
             height: 300px;
             border: 2px dashed #4a4a4a;
-            font-size: 1vw;
+            font-size: 25px;
             font-weight: bold;
             color: #818181;
             margin-right: auto;
@@ -697,6 +697,9 @@
             padding: 1.5em;
         }
 
+        #gender-toggle {
+            margin-bottom: 25%;
+        }
 
         /* 브라우저 창의 너비가 600px 미만일 때 적용되는 스타일 */
         @media screen and (max-width: 500px) {
@@ -732,10 +735,6 @@
                 width: 250px;
                 height: 250px;
             }
-
-            /* #gender-toggle {
-                padding: 7px;
-            } */
 
             #menu-button {
                 top: 2%;
@@ -863,7 +862,7 @@
             box-shadow: 0 0 0 8px #e5e9ea inset;
             border-radius: 60px;
             position: relative;
-            margin-bottom: 100px;
+            margin-bottom: 40%;
         }
 
         .knob {
@@ -1059,7 +1058,7 @@
                     <label for="gender-switch"></label>
                     <span>여자</span>
                 </div> -->
-                <div id="gender-toggle" style="margin-bottom: 80px;">
+                <div id="gender-toggle">
                     <input type="checkbox" id="gender-switch" onchange="handleGenderChange(event)">
                     <label for="gender-switch">
                         <span class="knob"><i></i></span>
