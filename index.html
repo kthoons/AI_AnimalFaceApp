@@ -1077,7 +1077,7 @@
                 <div class="image-container">
                     <img id="previewImg" alt="" />
                     <canvas id="faceImg" class="overlay"></canvas>
-                    <img class="icon" src="icons/cat.png" alt="Description of icon">
+                    <img class="icon" src="" alt="Description of icon">
                 </div>
                 <input type="file" id="file-input" accept="image/*" onchange="handleFileUpload(event)">
                 <div id="gauge-container" style="display: none;">
@@ -1160,11 +1160,16 @@
     const URL_Woman = "./my_model_female/";
     const canvas = document.getElementById("faceImg");
     const ctx = canvas.getContext("2d");
+    const icons = {
+    condition1: 'icons/icon1.png',
+    condition2: 'icons/icon2.png',
+    // ... 추가 조건
+};
 
     let URL = URL_Woman;
     let gender = "FeMale";
     let model, webcam, guageContainer, maxPredictions, prediction;
-    let gaugeData = {};
+    let gaugeData = {}; // key : 동물이름, value : 퍼센트 값
     let descriptions;
 
     var sideMenu = document.getElementById("side-menu");
@@ -1198,11 +1203,16 @@
             await init();
             await Predict();
             cropToCircle(image);
+            
         } catch (error) {
             console.error(error);
         }
     }
+    function SetIcon() {
+        const icon = document.querySelector("img.icon");
 
+        icon.src = gaugeData[0] in icons ? icons[gaugeData[0]] : 'icons/default.png';
+    }
 
     function cropToCircle(img) {
         // canvas의 크기를 이미지 크기에 맞게 설정합니다.
@@ -1303,6 +1313,7 @@
         createDataList();
         fillGauge();
         fillAnimalExplanation();
+        SetIcon();
         adjustDisplay();
 
         console.log("predict End");
@@ -1413,7 +1424,6 @@
 
         return array.includes(elem);
     }
-
     function animateValue(obj, start, end, duration) {
         let startTimestamp = null;
         const step = (timestamp) => {
@@ -1426,20 +1436,18 @@
         };
         window.requestAnimationFrame(step);
     }
-
     function createDataList() {
         console.log("createDataList");
         for (let i = 0; i < maxPredictions; i++) {
             const key = prediction[i].className;
             const value = prediction[i].probability.toFixed(2) * 100;
-            gaugeData[key] = value;
+            gaugeData[key] = value;            
         }
 
         // predict 결과값의 크기에 따라 내림차순으로 정렬
         const sortedEntries = Object.entries(gaugeData).sort((a, b) => b[1] - a[1]);
         gaugeData = sortedEntries.slice(0, 3);
     }
-
     function adjustDisplay() {
         console.log("adjustDisplay Done");
         // 이미지 생성
