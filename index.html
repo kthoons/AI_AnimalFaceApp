@@ -849,8 +849,8 @@
             }
 
             #gender-toggle {
-            margin-bottom: 20%;
-        }
+                margin-bottom: 20%;
+            }
         }
     </style>
     <!-- gender toggle -->
@@ -1161,10 +1161,8 @@
     const canvas = document.getElementById("faceImg");
     const ctx = canvas.getContext("2d");
     const icons = {
-    "고양이": 'icons/cat.png',
-    condition2: 'icons/icon2.png',
-    // ... 추가 조건
-};
+        "고양이상": 'icons/cat.png',
+    };
 
     let URL = URL_Woman;
     let gender = "FeMale";
@@ -1203,7 +1201,7 @@
             await init();
             await Predict();
             cropToCircle(image);
-            
+
         } catch (error) {
             console.error(error);
         }
@@ -1441,7 +1439,7 @@
         for (let i = 0; i < maxPredictions; i++) {
             const key = prediction[i].className;
             const value = prediction[i].probability.toFixed(2) * 100;
-            gaugeData[key] = value;            
+            gaugeData[key] = value;
         }
 
         // predict 결과값의 크기에 따라 내림차순으로 정렬
