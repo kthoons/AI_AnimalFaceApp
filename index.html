@@ -1208,8 +1208,9 @@
     }
     function SetIcon() {
         const icon = document.querySelector("img.icon");
-        console.log(gaugeData[0][0]);
-        icon.src = gaugeData[0][0] in icons ? icons[gaugeData[0][0]] : 'icons/default.png';
+        const animalName = gaugeData[0][0];
+    
+        icon.src = animalName in icons ? icons[animalName] : 'icons/default.png';
     }
 
     function cropToCircle(img) {
