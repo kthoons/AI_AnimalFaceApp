@@ -318,6 +318,17 @@
 
         }
 
+        #adress-container {
+            width: 100%;
+            height: 80%;
+            transition: transform 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
         #tryAgain-button {
             width: 100px;
             padding: 10px 20px;
@@ -453,7 +464,6 @@
         #page-2 {
             display: none;
             line-height: 1.6;
-            padding: 15%;
             background-color: #f9f9f9;
             color: #333;
         }
@@ -474,20 +484,22 @@
 
         #page-1>p {
             font-size: 1.35em;
-
+            margin-top: 60px;
+            margin-bottom: 20px;
         }
 
         #content {
             font-family: 'Dovemayo_gothic';
         }
 
-        #page-1>h2 {
-            margin-top: 60px;
-            margin-bottom: 20px;
+
+        #adress-container>h1 {
+            margin-top: 12vh;
+            font-size: 3vw;
         }
 
-        #page-2>h2 {
-            margin-top: 20px;
+        #adress-container>p {
+            margin-top: 3vw;
         }
 
         /* 로딩 애니메이션 */
@@ -821,7 +833,6 @@
             #page-2 {
                 display: none;
                 line-height: 1.6;
-                padding: 15%;
                 background-color: #f9f9f9;
                 color: #333;
             }
@@ -851,6 +862,26 @@
 
             #gender-toggle {
                 margin-bottom: 20%;
+            }
+
+            #adress-container {
+                width: 100%;
+                height: 80%;
+                transition: transform 0.5s;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: 4vw;
+            }
+
+            #adress-container>h1 {
+                margin-top: 12vh;
+                font-size: 8vw;
+            }
+
+            #adress-container>p {
+                margin-top: 16vw;
             }
         }
     </style>
@@ -1138,8 +1169,13 @@
 
         </div>
         <div id="page-2" class="page" style="display: none;">
-            <div id="page-container">
-                <h1 class="title">개발자</h1>
+            <div id="adress-container">
+
+                <h1>&lt;HoonCode&gt;</h1>
+                <p>
+                    <strong><span style="white-space: nowrap;">주소 : kth9987992@gmail.com</span></strong>
+                </p>
+
             </div>
         </div>
 
@@ -1162,17 +1198,17 @@
     const canvas = document.getElementById("faceImg");
     const ctx = canvas.getContext("2d");
     const icons = {
-    "고양이상": 'icons/cat.png',
-    "강아지상": 'icons/dog.png',
-    "여우상": 'icons/fox.png',
-    "토끼상": 'icons/rabbit.png',
-    "뱀상": 'icons/snake.png', 
-    "꼬부기상": 'icons/ggobuk.png',
-    "곰상": 'icons/bear.png',
-    "공룡상": 'icons/dinosaur.png',
-    "원숭이상": 'icons/monkey.png',
-    // 추가 아이콘을 이어서 계속 나열하세요
-};
+        "고양이상": 'icons/cat.png',
+        "강아지상": 'icons/dog.png',
+        "여우상": 'icons/fox.png',
+        "토끼상": 'icons/rabbit.png',
+        "뱀상": 'icons/snake.png',
+        "꼬부기상": 'icons/ggobuk.png',
+        "곰상": 'icons/bear.png',
+        "공룡상": 'icons/dinosaur.png',
+        "원숭이상": 'icons/monkey.png',
+        // 추가 아이콘을 이어서 계속 나열하세요
+    };
 
     let URL = URL_Woman;
     let gender = "FeMale";
@@ -1219,7 +1255,7 @@
     function SetIcon() {
         const icon = document.querySelector("img.icon");
         const animalName = gaugeData[0][0];
-    
+
         icon.src = animalName in icons ? icons[animalName] : 'icons/default.png';
     }
 
