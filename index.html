@@ -1209,7 +1209,7 @@
     function SetIcon() {
         const icon = document.querySelector("img.icon");
         console.log(gaugeData[0][0]);
-        icon.src = gaugeData[0][0] in icons ? icons[gaugeData[0]] : 'icons/default.png';
+        icon.src = gaugeData[0][0] in icons ? icons[gaugeData[0][0]] : 'icons/default.png';
     }
 
     function cropToCircle(img) {
