@@ -139,6 +139,7 @@
             background-color: #efefef;
             align-items: center;
             justify-content: center;
+            z-index: 3;
         }
 
         .selector {
@@ -1223,6 +1224,7 @@
     var pages = document.getElementsByClassName('page');
     var mainPage = document.getElementById("mainPage");
 
+
     window.onload = function () {
         fetchData();
     };
@@ -1517,11 +1519,10 @@
 
     // SideMenu selector Event
     for (let i = 0; i < sideMenuSelectors.length; i++) {
-        console.log(sideMenuSelectors, pages);
         sideMenuSelectors[i].addEventListener("click", function () {
             sideMenu.style.height = "0px";
-            backButton.style.display = "block";
-            backButton.style.zIndex = "2";
+            let computedDisplay = window.getComputedStyle(backButton).display;
+            backButton.style.display = (computedDisplay === "none") ? "block" : computedDisplay;
             loadPage(pages[i]);
         });
     }
@@ -1540,18 +1541,14 @@
         if (sideMenu.style.height === "0px" || sideMenu.style.height === "") {
             console.log("sideMenu is opening");
             sideMenu.style.height = "100px";
-            menuButton.style.zIndex = "-1";
-            backButton.style.zIndex = "-1";
             pageContainer.style.transform = "translateY(" + sideMenuHeight + ")";
         } else {
             console.log("sideMenu is closing");
             sideMenu.style.height = "0px";
-            menuButton.style.zIndex = "2";
-            backButton.style.zIndex = "2";
             pageContainer.style.transform = "translateY(0px)";
         }
 
-        backButton.style.display = "none";
+
     });
     // SideBar Animation
     document.addEventListener('click', function (event) {
@@ -1594,7 +1591,9 @@
         backButton.style.display = "none";
 
         console.log("backButton click");
+
     });
+
     // 다시하기 버튼 이벤트
     document.getElementById('tryAgain-button').addEventListener('click', function () {
         location.reload();
